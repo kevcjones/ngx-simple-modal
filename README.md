@@ -1,4 +1,4 @@
-#Angular2 Bootstrap Modal Service
+# AngularX Bootstrap Modal Service
 
 It is a library to make usage of bootstrap modal plugin easier in Angular2. 
 Create clear and reusable modal components.
@@ -8,15 +8,19 @@ Library does not use bootstrap js, only css.
 
 Compatible with bootstrap 3 and bootstrap 4.
 
+## Disclaimer
+I forked and publised this as a personal copy that others might find useful. Until the original repo's author surfaces.. i'm happy to 
+maintain this one and invite others to maintain with me. I couldn't wait for the PR's to be merged.
 
 
-##Installation
+
+## Installation
 ```npm
-npm install ng2-bootstrap-modal
+npm install angularx-bootstrap-modal
 ```
 See [Live Demo](https://plnkr.co/edit/MB6NnzfhicMyAiMJy6YM?p=preview) 
 
-###Without bootstrap?
+### Without bootstrap?
 Yes, you can create your own CSS. Just write css for .modal and .modal-dialog classes.
 
 ```css
@@ -96,7 +100,7 @@ app.module.ts:
 import { NgModule} from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { BrowserModule } from '@angular/platform-browser';
-import { BootstrapModalModule } from 'ng2-bootstrap-modal';
+import { BootstrapModalModule } from 'angularx-bootstrap-modal';
 import { AppComponent } from './app.component';
 @NgModule({
   declarations: [
@@ -132,7 +136,7 @@ Therefore **DialogService** is supposed to be a constructor argument of **Dialog
 confirm.component.ts:
 ```typescript
 import { Component } from '@angular/core';
-import { DialogComponent, DialogService } from "ng2-bootstrap-modal";
+import { DialogComponent, DialogService } from "angularx-bootstrap-modal";
 export interface ConfirmModel {
   title:string;
   message:string;
@@ -179,7 +183,7 @@ app.module.ts:
     import { NgModule} from '@angular/core';
     import { CommonModule } from "@angular/common";
     import { BrowserModule } from '@angular/platform-browser';
-    import { BootstrapModalModule } from 'ng2-bootstrap-modal';
+    import { BootstrapModalModule } from 'angularx-bootstrap-modal';
     import { ConfirmComponent } from './confirm.component';
     import { AppComponent } from './app.component';
     @NgModule({
@@ -207,7 +211,7 @@ app.component.ts
 ```typescript
     import { Component } from '@angular/core';
     import { ConfirmComponent } from './confirm.component';
-    import { DialogService } from "ng2-bootstrap-modal";
+    import { DialogService } from "angularx-bootstrap-modal";
     
     @Component({
       selector: 'app',
