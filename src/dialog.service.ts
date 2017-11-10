@@ -84,7 +84,7 @@ export class DialogService {
     let componentRef = componentFactory.create(this.injector);
     let componentRootNode = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
     if(!this.container) {
-      let componentRootViewContainer = this.applicationRef['_rootComponents'][0];
+      let componentRootViewContainer = this.applicationRef['components'][0];
       this.container = (componentRootViewContainer.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
     }
     this.applicationRef.attachView(componentRef.hostView);
