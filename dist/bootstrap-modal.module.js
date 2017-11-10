@@ -15,9 +15,10 @@ function dialogServiceFactory(resolver, applicationRef, injector, options) {
     return new dialog_service_1.DialogService(resolver, applicationRef, injector, options);
 }
 exports.dialogServiceFactory = dialogServiceFactory;
-var BootstrapModalModule = BootstrapModalModule_1 = (function () {
+var BootstrapModalModule = (function () {
     function BootstrapModalModule() {
     }
+    BootstrapModalModule_1 = BootstrapModalModule;
     BootstrapModalModule.forRoot = function (config) {
         return {
             ngModule: BootstrapModalModule_1,
@@ -31,26 +32,26 @@ var BootstrapModalModule = BootstrapModalModule_1 = (function () {
             ]
         };
     };
+    BootstrapModalModule = BootstrapModalModule_1 = __decorate([
+        core_1.NgModule({
+            declarations: [
+                dialog_holder_component_1.DialogHolderComponent,
+                dialog_wrapper_component_1.DialogWrapperComponent
+            ],
+            providers: [
+                dialog_service_1.DialogService
+            ],
+            imports: [
+                common_1.CommonModule
+            ],
+            entryComponents: [
+                dialog_holder_component_1.DialogHolderComponent,
+                dialog_wrapper_component_1.DialogWrapperComponent
+            ]
+        })
+    ], BootstrapModalModule);
     return BootstrapModalModule;
+    var BootstrapModalModule_1;
 }());
-BootstrapModalModule = BootstrapModalModule_1 = __decorate([
-    core_1.NgModule({
-        declarations: [
-            dialog_holder_component_1.DialogHolderComponent,
-            dialog_wrapper_component_1.DialogWrapperComponent
-        ],
-        providers: [
-            dialog_service_1.DialogService
-        ],
-        imports: [
-            common_1.CommonModule
-        ],
-        entryComponents: [
-            dialog_holder_component_1.DialogHolderComponent,
-            dialog_wrapper_component_1.DialogWrapperComponent
-        ]
-    })
-], BootstrapModalModule);
 exports.BootstrapModalModule = BootstrapModalModule;
-var BootstrapModalModule_1;
 //# sourceMappingURL=bootstrap-modal.module.js.map
