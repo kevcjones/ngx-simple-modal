@@ -78,7 +78,7 @@ Yes, you can create your own CSS. Just write css for .modal and .modal-dialog cl
 }
 ```
 
-##Quickstart
+## Quickstart
 
 ### Step 1. add bootstrap CSS  
 You can add bootstrap CSS from CDN
@@ -125,7 +125,7 @@ imports: [
 ```
 
 
-###Step 2. Create your modal dialog component 
+### Step 2. Create your modal dialog component 
 Your modal dialog is expected to be extended from **DialogComponent**.
 **DialogService** is generic class with two arguments:
 1) input dialog data type (data to initialize component);
@@ -174,7 +174,7 @@ export class ConfirmComponent extends DialogComponent<ConfirmModel, boolean> imp
 }
 ```
 
-###Step 3. Register created component to module
+### Step 3. Register created component to module
 Add component to **declarations** and **entryComponents** section, because the component
 will be created dynamically.
 
@@ -205,7 +205,7 @@ app.module.ts:
     export class AppModule {}
 ```
 
-###Step 4. Usage
+### Step 4. Usage
 
 app.component.ts
 ```typescript
@@ -245,11 +245,11 @@ app.component.ts
     }
 ```
 
-##Documentation
+## Documentation
 
-###DialogComponent
+### DialogComponent
 Super class of all modal components.
-####Class Overview
+#### Class Overview
 ```typescript
 /**
 * Dialog abstract class
@@ -276,7 +276,7 @@ abstract class DialogComponent<T1, T2> implements T1 {
 }
 ```
 
-###DialogOptions 
+### DialogOptions 
 ```typescript
 interface DialogOptions {
   /**
@@ -306,10 +306,10 @@ interface DialogOptions {
 }
 ```
 
-###DialogService 
+### DialogService 
 Service to show dialogs
 
-###Class Overview
+### Class Overview
 ```typescript
 class DialogService {
     /**
