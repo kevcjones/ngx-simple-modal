@@ -41,6 +41,9 @@ var DialogService = (function () {
         this.dialogHolderComponent.removeDialog(component);
     };
     DialogService.prototype.removeAll = function () {
+        if (!this.dialogHolderComponent) {
+            return;
+        }
         this.dialogHolderComponent.clear();
     };
     DialogService.prototype.createDialogHolder = function () {
