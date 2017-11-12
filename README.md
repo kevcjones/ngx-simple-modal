@@ -80,7 +80,7 @@ Yes, you can create your own CSS. Just write css for .modal and .modal-dialog cl
 
 ## Quickstart
 
-### Step 1. add bootstrap CSS  
+### Step 0. add bootstrap CSS  
 You can add bootstrap CSS from CDN
 ```html
 <!-- Bootstrap 3.x -->
