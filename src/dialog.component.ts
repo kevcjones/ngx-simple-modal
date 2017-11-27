@@ -1,6 +1,6 @@
-import { OnDestroy
-} from '@angular/core';
-import {Observable, Observer} from 'rxjs';
+import {OnDestroy} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import {Observer} from 'rxjs/Observer';
 import {DialogWrapperComponent} from "./dialog-wrapper.component";
 import {DialogService} from "./dialog.service";
 
