@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var rxjs_1 = require("rxjs");
+var Observable_1 = require("rxjs/Observable");
 var DialogComponent = (function () {
     function DialogComponent(dialogService) {
         this.dialogService = dialogService;
@@ -13,7 +13,7 @@ var DialogComponent = (function () {
             var key = keys[i];
             this[key] = data[key];
         }
-        return rxjs_1.Observable.create(function (observer) {
+        return Observable_1.Observable.create(function (observer) {
             _this.observer = observer;
             return function () {
                 _this.close();

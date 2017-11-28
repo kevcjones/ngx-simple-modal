@@ -1,6 +1,6 @@
 {
   "name": "angularx-bootstrap-modal",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "It is a library to make managment of bootstrap modal dialogs easier in Angular2 - forked from ng-bootstrap-modal which seems abandoned.",
   "main": "index.js",
   "scripts": {
