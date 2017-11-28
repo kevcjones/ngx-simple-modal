@@ -35,6 +35,7 @@ var DialogHolderComponent = (function () {
         if (options.backdropColor) {
             dialogWrapper.container.nativeElement.style.backgroundColor = options.backdropColor;
         }
+        this.updateBodyClass();
         return _component.fillData(data);
     };
     DialogHolderComponent.prototype.removeDialog = function (component) {
@@ -46,12 +47,23 @@ var DialogHolderComponent = (function () {
             _this._removeElement(component);
         }, 300);
     };
+    DialogHolderComponent.prototype.updateBodyClass = function () {
+        var bodyClass = 'modal-open';
+        var body = document.getElementsByTagName('body')[0];
+        if (this.dialogs.length == 0) {
+            body.classList.remove(bodyClass);
+        }
+        else {
+            body.classList.add(bodyClass);
+        }
+    };
     DialogHolderComponent.prototype._removeElement = function (component) {
         var index = this.dialogs.indexOf(component);
         if (index > -1) {
             this.element.remove(index);
             this.dialogs.splice(index, 1);
         }
+        this.updateBodyClass();
     };
     DialogHolderComponent.prototype.clear = function () {
         this.element.clear();

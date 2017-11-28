@@ -9,6 +9,7 @@ export declare class DialogHolderComponent {
     constructor(resolver: ComponentFactoryResolver);
     addDialog<T, T1>(component: Type<DialogComponent<T, T1>>, data?: T, options?: DialogOptions): Observable<T1>;
     removeDialog(component: DialogComponent<any, any>): void;
+    private updateBodyClass();
     private _removeElement(component);
     clear(): void;
 }
