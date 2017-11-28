@@ -31,7 +31,7 @@ export class DialogComponent<T, T1> implements OnDestroy {
   /**
    * Callback to the holders close function
    */
-  closerCallback: (component) => void;
+  private closerCallback: (component) => void;
 
   /**
    * Constructor
@@ -66,6 +66,15 @@ export class DialogComponent<T, T1> implements OnDestroy {
     if (!!this.closerCallback) {
       this.closerCallback(this);
     }
+  }
+
+  /**
+   * Defines what happens when close is called - default this
+   * will just call the default remove dialog process
+   * @param callback
+   */
+  onClose(callback: (component) => void): void {
+    this.closerCallback = callback;
   }
 
   /**

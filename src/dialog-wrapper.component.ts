@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, ReflectiveInjector, Type, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentFactoryResolver, OnDestroy, ReflectiveInjector, Type, ViewChild, ViewContainerRef } from '@angular/core';
 
 import { DialogComponent } from './dialog.component';
 
@@ -13,7 +13,7 @@ import { DialogComponent } from './dialog.component';
     </div>
 `
 })
-export class DialogWrapperComponent {
+export class DialogWrapperComponent implements OnDestroy {
 
   /**
    * Target viewContainer to insert dialog content component
@@ -30,6 +30,11 @@ export class DialogWrapperComponent {
    * @type {DialogComponent}
    */
   content: DialogComponent<any, any>;
+
+  /**
+   * Click outside callback
+   */
+  clickOutsideCallback: () => void;
 
   /**
    * Constructor
@@ -50,6 +55,26 @@ export class DialogWrapperComponent {
     this.content =  <DialogComponent<T, T1>> componentRef.instance;
     this.content.wrapper = this.wrapper;
     return this.content;
+  }
+
+  onClickOutsideModalContent( callback: () => void) {
+    this.clickOutsideCallback = callback;
+    const containerEl = this.wrapper.nativeElement;
+    containerEl.querySelector(':first-child').addEventListener('click', this.stopEventPropagation);
+    containerEl.addEventListener('click', this.clickOutsideCallback, false);
+  }
+
+  private stopEventPropagation(event) {
+    event.stopPropagation();
+  }
+
+  ngOnDestroy() {
+    if (this.clickOutsideCallback) {
+      const containerEl = this.wrapper.nativeElement;
+      containerEl.querySelector(':first-child').removeEventListener('click', this.stopEventPropagation);
+      containerEl.removeEventListener('click', this.clickOutsideCallback, false);
+      this.clickOutsideCallback = null;
+    }
   }
 }
 

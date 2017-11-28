@@ -58,16 +58,18 @@ export class DialogHolderComponent {
       }, options.autoCloseTimeout);
     }
     if (options.closeByClickingOutside) {
-      this.addClickOutsideHandlersToWrapper(dialogWrapper);
+      dialogWrapper.onClickOutsideModalContent( () => {
+        this.removeDialog(dialogWrapper.content);
+      });
     }
     if (options.backdropColor) {
       dialogWrapper.wrapper.nativeElement.style.backgroundColor = options.backdropColor;
     }
     // to avoid circular references hand the dialog a callback for it to self close
-    _component.closerCallback = this.removeDialog.bind(this);
+    _component.onClose(this.removeDialog.bind(this));
 
     // update the body class depending on the count
-    this.updateBodyClass();
+    this.toggleModalOpenClassOnBody();
 
     return _component.fillData(data);
   }
@@ -98,25 +100,10 @@ export class DialogHolderComponent {
   }
 
   /**
-   * Registers event handler to close dialog by click on backdrop
-   */
-  addClickOutsideHandlersToWrapper(dialogWrapper: DialogWrapperComponent) {
-    const containerEl = dialogWrapper.wrapper.nativeElement;
-    containerEl.querySelector('.modal-content').addEventListener('click', (event) => {
-      event.stopPropagation();
-    });
-    containerEl.addEventListener('click', () => {
-        this.removeDialog(dialogWrapper.content);
-    }, false);
-  }
-
-
-
-  /**
    * Bind a body class 'modal-open' to a condition of dialogs in pool > 0
    */
 
-  private updateBodyClass() {
+  private toggleModalOpenClassOnBody() {
     const bodyClass = 'modal-open';
     const body = document.getElementsByTagName('body')[0];
     if (!this.dialogs.length) {
@@ -137,7 +124,7 @@ export class DialogHolderComponent {
       this.viewContainer.remove(index);
       this.dialogs.splice(index, 1);
     }
-    this.updateBodyClass();
+    this.toggleModalOpenClassOnBody();
   }
 
 }
