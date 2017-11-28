@@ -89,7 +89,7 @@ export class DialogHolderComponent {
   private updateBodyClass() {
     const bodyClass = 'modal-open';
     const body = document.getElementsByTagName('body')[0];
-    if(this.dialogs.length == 0) {
+    if(!this.dialogs.length) {
       body.classList.remove(bodyClass);
     } else {
       body.classList.add(bodyClass);
