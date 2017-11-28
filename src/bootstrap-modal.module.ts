@@ -1,19 +1,10 @@
-import { NgModule, ModuleWithProviders, ComponentFactoryResolver, ApplicationRef, Injector } from '@angular/core';
-import { CommonModule } from "@angular/common";
-import { DialogHolderComponent } from "./dialog-holder.component";
-import { DialogWrapperComponent } from "./dialog-wrapper.component";
-import { DialogService, DialogServiceConfig } from "./dialog.service";
-/**
- * Dialog service factory. Creates dialog service with options
- * @param { ComponentFactoryResolver } resolver
- * @param { ApplicationRef } applicationRef
- * @param { Injector } injector
- * @param { DialogServiceConfig } options
- * @return { DialogService }
- */
-export function dialogServiceFactory(resolver: ComponentFactoryResolver, applicationRef: ApplicationRef, injector: Injector, options: DialogServiceConfig) {
-    return new DialogService(resolver, applicationRef, injector, options);
-}
+import { CommonModule } from '@angular/common';
+import { ApplicationRef, ComponentFactoryResolver, Injector, ModuleWithProviders, NgModule } from '@angular/core';
+
+import { DialogHolderComponent } from './dialog-holder.component';
+import { DialogWrapperComponent } from './dialog-wrapper.component';
+import { DialogService, DialogServiceConfig } from './dialog.service';
+import { dialogServiceFactory } from './dialog-service.factory';
 
 @NgModule({
     declarations: [
@@ -36,7 +27,7 @@ export class BootstrapModalModule {
         return {
             ngModule: BootstrapModalModule,
             providers: [
-                {provide: DialogServiceConfig, useValue:config},
+                {provide: DialogServiceConfig, useValue: config},
                 {
                     provide: DialogService,
                     useFactory: dialogServiceFactory,
