@@ -22,10 +22,10 @@ import { dialogServiceFactory } from './dialog-service.factory';
         DialogWrapperComponent
     ]
 })
-export class BootstrapModalModule {
+export class DialogModalModule {
     static forRoot(config: DialogServiceConfig): ModuleWithProviders {
         return {
-            ngModule: BootstrapModalModule,
+            ngModule: DialogModalModule,
             providers: [
                 {provide: DialogServiceConfig, useValue: config},
                 {
