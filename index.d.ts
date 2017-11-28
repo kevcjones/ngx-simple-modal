@@ -1,1 +1,1 @@
-export { DialogService, BootstrapModalModule, DialogOptions, DialogComponent, DialogServiceConfig } from './dist/index';
+export { DialogService, DialogModalModule, DialogOptions, DialogComponent, DialogServiceConfig } from './dist/index';
