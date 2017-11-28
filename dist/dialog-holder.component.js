@@ -1,13 +1,4 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var dialog_wrapper_component_1 = require("./dialog-wrapper.component");
@@ -44,6 +35,7 @@ var DialogHolderComponent = (function () {
         if (options.backdropColor) {
             dialogWrapper.container.nativeElement.style.backgroundColor = options.backdropColor;
         }
+        this.updateBodyClass();
         return _component.fillData(data);
     };
     DialogHolderComponent.prototype.removeDialog = function (component) {
@@ -55,29 +47,41 @@ var DialogHolderComponent = (function () {
             _this._removeElement(component);
         }, 300);
     };
+    DialogHolderComponent.prototype.updateBodyClass = function () {
+        var bodyClass = 'modal-open';
+        var body = document.getElementsByTagName('body')[0];
+        if (!this.dialogs.length) {
+            body.classList.remove(bodyClass);
+        }
+        else {
+            body.classList.add(bodyClass);
+        }
+    };
     DialogHolderComponent.prototype._removeElement = function (component) {
         var index = this.dialogs.indexOf(component);
         if (index > -1) {
             this.element.remove(index);
             this.dialogs.splice(index, 1);
         }
+        this.updateBodyClass();
     };
     DialogHolderComponent.prototype.clear = function () {
         this.element.clear();
         this.dialogs = [];
     };
-    __decorate([
-        core_1.ViewChild('element', { read: core_1.ViewContainerRef }),
-        __metadata("design:type", core_1.ViewContainerRef)
-    ], DialogHolderComponent.prototype, "element", void 0);
-    DialogHolderComponent = __decorate([
-        core_1.Component({
-            selector: 'dialog-holder',
-            template: '<ng-template #element></ng-template>',
-        }),
-        __metadata("design:paramtypes", [core_1.ComponentFactoryResolver])
-    ], DialogHolderComponent);
     return DialogHolderComponent;
 }());
+DialogHolderComponent.decorators = [
+    { type: core_1.Component, args: [{
+                selector: 'dialog-holder',
+                template: '<ng-template #element></ng-template>',
+            },] },
+];
+DialogHolderComponent.ctorParameters = function () { return [
+    { type: core_1.ComponentFactoryResolver, },
+]; };
+DialogHolderComponent.propDecorators = {
+    'element': [{ type: core_1.ViewChild, args: ['element', { read: core_1.ViewContainerRef },] },],
+};
 exports.DialogHolderComponent = DialogHolderComponent;
 //# sourceMappingURL=dialog-holder.component.js.map

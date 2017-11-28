@@ -1,11 +1,9 @@
-import {
-  Component, ViewChild, ViewContainerRef, ComponentFactoryResolver,
-  Type
-} from "@angular/core";
-import {DialogComponent} from "./dialog.component";
-import {DialogWrapperComponent} from "./dialog-wrapper.component";
-import {Observable} from 'rxjs/Observable';
-import {DialogOptions} from "./dialog.service";
+import { Component, ComponentFactoryResolver, Type, ViewChild, ViewContainerRef } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+
+import { DialogWrapperComponent } from './dialog-wrapper.component';
+import { DialogComponent } from './dialog.component';
+import { DialogOptions } from './dialog.service';
 
 @Component({
   selector: 'dialog-holder',
@@ -64,6 +62,9 @@ export class DialogHolderComponent {
     if(options.backdropColor) {
       dialogWrapper.container.nativeElement.style.backgroundColor = options.backdropColor;
     }
+    
+    this.updateBodyClass();
+
     return _component.fillData(data);
   }
 
@@ -81,12 +82,27 @@ export class DialogHolderComponent {
     }, 300);
   }
 
+  /**
+   * Bind a body class 'modal-open' to a condition of dialogs in pool > 0
+   */
+  
+  private updateBodyClass() {
+    const bodyClass = 'modal-open';
+    const body = document.getElementsByTagName('body')[0];
+    if(!this.dialogs.length) {
+      body.classList.remove(bodyClass);
+    } else {
+      body.classList.add(bodyClass);
+    }
+  }
+
   private _removeElement(component) {
     let index = this.dialogs.indexOf(component);
     if(index>-1) {
       this.element.remove(index);
       this.dialogs.splice(index, 1);
     }
+    this.updateBodyClass();
   }
 
   clear() {

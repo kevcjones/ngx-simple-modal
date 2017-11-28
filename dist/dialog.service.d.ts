@@ -1,6 +1,6 @@
 import { ComponentFactoryResolver, ApplicationRef, Injector, Type } from "@angular/core";
 import { DialogComponent } from "./dialog.component";
-import { Observable } from "rxjs";
+import { Observable } from "rxjs/Observable";
 export interface DialogOptions {
     index?: number;
     autoCloseTimeout?: number;

@@ -1,5 +1,5 @@
 import { OnDestroy } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { DialogWrapperComponent } from "./dialog-wrapper.component";
 import { DialogService } from "./dialog.service";
 export declare class DialogComponent<T, T1> implements OnDestroy {
