@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DialogComponent, DialogService } from "ng2-bootstrap-modal";
+import { DialogComponent, DialogService } from "angularx-bootstrap-modal";
 
 export interface PromptModel {
   title:string;
