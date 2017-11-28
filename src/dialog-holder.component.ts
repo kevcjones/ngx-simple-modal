@@ -66,6 +66,9 @@ export class DialogHolderComponent {
     // to avoid circular references hand the dialog a callback for it to self close
     _component.closerCallback = this.removeDialog.bind(this);
 
+    // update the body class depending on the count
+    this.updateBodyClass();
+
     return _component.fillData(data);
   }
 
@@ -107,6 +110,22 @@ export class DialogHolderComponent {
     }, false);
   }
 
+
+
+  /**
+   * Bind a body class 'modal-open' to a condition of dialogs in pool > 0
+   */
+
+  private updateBodyClass() {
+    const bodyClass = 'modal-open';
+    const body = document.getElementsByTagName('body')[0];
+    if (!this.dialogs.length) {
+      body.classList.remove(bodyClass);
+    } else {
+      body.classList.add(bodyClass);
+    }
+  }
+
   /**
    * Instructs the holder to remove the dialog and
    * removes this component from the collection
@@ -118,6 +137,7 @@ export class DialogHolderComponent {
       this.viewContainer.remove(index);
       this.dialogs.splice(index, 1);
     }
+    this.updateBodyClass();
   }
 
 }
