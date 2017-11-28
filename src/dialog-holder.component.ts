@@ -1,11 +1,9 @@
-import {
-  Component, ViewChild, ViewContainerRef, ComponentFactoryResolver,
-  Type
-} from "@angular/core";
-import {DialogComponent} from "./dialog.component";
-import {DialogWrapperComponent} from "./dialog-wrapper.component";
-import {Observable} from 'rxjs/Observable';
-import {DialogOptions} from "./dialog.service";
+import { Component, ComponentFactoryResolver, Type, ViewChild, ViewContainerRef } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+
+import { DialogWrapperComponent } from './dialog-wrapper.component';
+import { DialogComponent } from './dialog.component';
+import { DialogOptions } from './dialog.service';
 
 @Component({
   selector: 'dialog-holder',
