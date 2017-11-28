@@ -62,6 +62,9 @@ export class DialogHolderComponent {
     if(options.backdropColor) {
       dialogWrapper.container.nativeElement.style.backgroundColor = options.backdropColor;
     }
+    
+    this.updateBodyClass();
+
     return _component.fillData(data);
   }
 
@@ -79,12 +82,27 @@ export class DialogHolderComponent {
     }, 300);
   }
 
+  /**
+   * Bind a body class 'modal-open' to a condition of dialogs in pool > 0
+   */
+  
+  private updateBodyClass() {
+    const bodyClass = 'modal-open';
+    const body = document.getElementsByTagName('body')[0];
+    if(this.dialogs.length == 0) {
+      body.classList.remove(bodyClass);
+    } else {
+      body.classList.add(bodyClass);
+    }
+  }
+
   private _removeElement(component) {
     let index = this.dialogs.indexOf(component);
     if(index>-1) {
       this.element.remove(index);
       this.dialogs.splice(index, 1);
     }
+    this.updateBodyClass();
   }
 
   clear() {
