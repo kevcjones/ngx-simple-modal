@@ -50,7 +50,7 @@ var DialogHolderComponent = (function () {
     DialogHolderComponent.prototype.updateBodyClass = function () {
         var bodyClass = 'modal-open';
         var body = document.getElementsByTagName('body')[0];
-        if (this.dialogs.length == 0) {
+        if (!this.dialogs.length) {
             body.classList.remove(bodyClass);
         }
         else {
