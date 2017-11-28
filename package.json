@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "tslint src/*",
-    "build": "rm -rf dist && npm run lint &&  ngc",
+    "build": "rm -rf dist && npm run lint && ngc",
     "win-build": "(if exist rd /s /q dist) && npm run lint && ngc"
   },
   "repository": {
@@ -38,6 +38,6 @@
     "@angular/compiler-cli": "4.4.6",
     "@angular/platform-browser": "4.4.6",
     "@angular/platform-server": "4.4.6",
-    "typescript": "2.3.4"
+    "typescript": "^2.3.4"
   }
 }
