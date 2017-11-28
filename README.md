@@ -93,14 +93,14 @@ or
 ```
 
 
-### Step 1. import '**BootstrapModalModule**' module
+### Step 1. import '**DialogModalModule**' module
 
 app.module.ts:
 ```typescript
 import { NgModule} from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { BrowserModule } from '@angular/platform-browser';
-import { BootstrapModalModule } from 'angularx-bootstrap-modal';
+import { DialogModalModule } from 'angularx-bootstrap-modal';
 import { AppComponent } from './app.component';
 @NgModule({
   declarations: [
@@ -109,7 +109,7 @@ import { AppComponent } from './app.component';
   imports: [
     CommonModule,
     BrowserModule,
-    BootstrapModalModule
+    DialogModalModule
   ],
   bootstrap: [AppComponent]
 })
@@ -120,7 +120,7 @@ But you can select custom placeholder (i.e. document body):
 ```typescript
 imports: [
     ...
-    BootstrapModalModule.forRoot({container:document.body})
+    DialogModalModule.forRoot({container:document.body})
   ]
 ```
 
@@ -183,7 +183,7 @@ app.module.ts:
     import { NgModule} from '@angular/core';
     import { CommonModule } from "@angular/common";
     import { BrowserModule } from '@angular/platform-browser';
-    import { BootstrapModalModule } from 'angularx-bootstrap-modal';
+    import { DialogModalModule } from 'angularx-bootstrap-modal';
     import { ConfirmComponent } from './confirm.component';
     import { AppComponent } from './app.component';
     @NgModule({
@@ -194,7 +194,7 @@ app.module.ts:
       imports: [
         CommonModule,
         BrowserModule,
-        BootstrapModalModule
+        DialogModalModule
       ],
       //Don't forget to add the component to entryComponents section
       entryComponents: [
