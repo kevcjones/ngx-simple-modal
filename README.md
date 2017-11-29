@@ -1,106 +1,37 @@
-# AngularX Bootstrap Modal Service
+# NGX Simple Modal
 
-It is a library to make usage of bootstrap modal plugin easier in Angular2. 
+* In development - moving over from angularx-bootstrap-modal *
+
+It is a library to make usage modal easier in Angular2, has no dependencies, but plays well with bootstrap or other frameworks. 
 Create clear and reusable modal components.
 It makes managing dialogs painless and clearer. 
-
-Library does not use bootstrap js, only css.
-
-Compatible with bootstrap 3 and bootstrap 4.
-
-## Disclaimer
-I forked and publised this as a personal copy that others might find useful. Until the original repo's author surfaces.. i'm happy to 
-maintain this one and invite others to maintain with me. I couldn't wait for the PR's to be merged.
-
-
+Extend the ModalComponent class and implement any content you want. 
 
 ## Installation
 ```npm
-npm install angularx-bootstrap-modal
+npm install ngx-simple-modal
 ```
-See [Live Demo](https://plnkr.co/edit/MB6NnzfhicMyAiMJy6YM?p=preview) 
-
-### Without bootstrap?
-Yes, you can create your own CSS. Just write css for .modal and .modal-dialog classes.
-
-```css
-.modal {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1050;
-    overflow: hidden;
-    -webkit-overflow-scrolling: touch;
-    outline: 0;
-}
-
-.fade {
-    opacity: 0;
-    -webkit-transition: opacity .15s linear;
-    -o-transition: opacity .15s linear;
-    transition: opacity .15s linear;
-}
-
-.fade.in {
-    opacity: 1;
-}
-
-.modal-dialog {
-    position: relative;
-    width: auto;
-    margin: 10px;
-}
-
-.modal.in .modal-dialog {
-    -webkit-transform: translate(0,0);
-    -ms-transform: translate(0,0);
-    -o-transform: translate(0,0);
-    transform: translate(0,0);
-}
-
-.modal.fade .modal-dialog {
-    -webkit-transition: -webkit-transform .3s ease-out;
-    -o-transition: -o-transform .3s ease-out;
-    transition: transform .3s ease-out;
-    -webkit-transform: translate(0,-25%);
-    -ms-transform: translate(0,-25%);
-    -o-transform: translate(0,-25%);
-    transform: translate(0,-25%);
-}
-
-@media (min-width: 768px) {
-    .modal-dialog {
-        width: 600px;
-        margin: 30px auto;
-    }
-}
-```
+TODO - add demo link
+TODO - add css usage 
 
 ## Quickstart
 
-### Step 0. add bootstrap CSS  
-You can add bootstrap CSS from CDN
-```html
-<!-- Bootstrap 3.x -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-```
-or 
-```html
-<!-- Bootstrap 4.x -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+### Step 0. add CSS  
+You can add CSS from component
+
+TODO show how to include the css file via the angular config file
+```json
+
 ```
 
-
-### Step 1. import '**DialogModalModule**' module
+### Step 1. import '**SimpleModalModule**' module
 
 app.module.ts:
 ```typescript
 import { NgModule} from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { BrowserModule } from '@angular/platform-browser';
-import { DialogModalModule } from 'angularx-bootstrap-modal';
+import { NGXSimpleModalModule } from 'ngx-simple-modal';
 import { AppComponent } from './app.component';
 @NgModule({
   declarations: [
@@ -109,7 +40,7 @@ import { AppComponent } from './app.component';
   imports: [
     CommonModule,
     BrowserModule,
-    DialogModalModule
+    NGXSimpleModalModule
   ],
   bootstrap: [AppComponent]
 })
@@ -121,25 +52,33 @@ But you can select custom placeholder (i.e. document body):
 ```typescript
 imports: [
     ...
-    DialogModalModule.forRoot({container:document.body})
+    NGXSimpleModalModule.forRoot({container:document.body})
   ]
 ```
 
-New - You can also pass in a promise, for when you need to delay because the container has not been rendered yet
+If you want a container that is not yet in the DOM during the intial load you can pass a promiseLike function instead to container e.g. 
 
+```typescript
+imports: [
+    ...
+    NGXSimpleModalModule.forRoot({container: elementPromisingFn()})
+  ]
+```
 
-### Step 2. Create your modal dialog component 
-Your modal dialog is expected to be extended from **DialogComponent**.
-**DialogService** is generic class with two arguments:
+where `elementPromisingFn` is anything you want as long as its resolvement returns a nativeElement node from the DOM.
+
+### Step 2. Create your modal component 
+Your modal is expected to be extended from **SimpleModalComponent**.
+**SimpleModalService** is generic class with two arguments:
 1) input dialog data type (data to initialize component);
 2) dialog result type;
 
-Therefore **DialogService** is supposed to be a constructor argument of **DialogComponent**.
+Therefore **SimpleModalService** is supposed to be a constructor argument of **SimpleModalComponent**.
 
 confirm.component.ts:
 ```typescript
 import { Component } from '@angular/core';
-import { DialogComponent } from "angularx-bootstrap-modal";
+import { SimpleModalComponent } from "ngx-simple-modal";
 export interface ConfirmModel {
   title:string;
   message:string;
@@ -162,7 +101,7 @@ export interface ConfirmModel {
                  </div>
               </div>`
 })
-export class ConfirmComponent extends DialogComponent<ConfirmModel, boolean> implements ConfirmModel {
+export class ConfirmComponent extends SimpleModalComponent<ConfirmModel, boolean> implements ConfirmModel {
   title: string;
   message: string;
   constructor() {
@@ -186,7 +125,7 @@ app.module.ts:
     import { NgModule} from '@angular/core';
     import { CommonModule } from "@angular/common";
     import { BrowserModule } from '@angular/platform-browser';
-    import { DialogModalModule } from 'angularx-bootstrap-modal';
+    import { NGXSimpleModalModule } from 'ngx-simple-modal';
     import { ConfirmComponent } from './confirm.component';
     import { AppComponent } from './app.component';
     @NgModule({
@@ -197,7 +136,7 @@ app.module.ts:
       imports: [
         CommonModule,
         BrowserModule,
-        DialogModalModule
+        NGXSimpleModalModule
       ],
       //Don't forget to add the component to entryComponents section
       entryComponents: [
@@ -214,7 +153,7 @@ app.component.ts
 ```typescript
     import { Component } from '@angular/core';
     import { ConfirmComponent } from './confirm.component';
-    import { DialogService } from "angularx-bootstrap-modal";
+    import { SimpleModalService } from "ngx-simple-modal";
     
     @Component({
       selector: 'app',
@@ -225,11 +164,12 @@ app.component.ts
       `
     })
     export class AppComponent {
-        constructor(private dialogService:DialogService) {}
+        constructor(private simpleModalService:SimpleModalService) {}
         showConfirm() {
-            let disposable = this.dialogService.addDialog(ConfirmComponent, {
-                title:'Confirm title', 
-                message:'Confirm message'})
+            let disposable = this.simpleModalService.addDialog(ConfirmComponent, {
+                  title: 'Confirm title', 
+                  message: 'Confirm message'
+                })
                 .subscribe((isConfirmed)=>{
                     //We get dialog result
                     if(isConfirmed) {
@@ -250,7 +190,7 @@ app.component.ts
 
 ## Documentation
 
-### DialogComponent
+### SimpleModalComponent
 Super class of all modal components.
 #### Class Overview
 ```typescript
@@ -259,12 +199,12 @@ Super class of all modal components.
 * @template T1 - input dialog data
 * @template T2 - dialog result
 */
-abstract abstract class DialogComponent<T1, T2> implements T1 {
+abstract abstract class SimpleModalComponent<T1, T2> implements T1 {
     /**
     * Constructor
-    * @param {DialogService} dialogService - instance of DialogService
+    * @param {SimpleModalService} simpleModalService - instance of SimpleModalService
     */
-    constructor(dialogService: DialogService)
+    constructor(simpleModalService: SimpleModalService)
     
     /**
     * Dialog result 
@@ -279,9 +219,9 @@ abstract abstract class DialogComponent<T1, T2> implements T1 {
 }
 ```
 
-### DialogOptions 
+### SimpleModalOptions 
 ```typescript
-interface DialogOptions {
+interface SimpleModalOptions {
   /**
   * Dialog index (optional) to set order of modals
   * @type {number}
@@ -299,36 +239,29 @@ interface DialogOptions {
   * @type {boolean}
   */
   closeByClickingOutside?: boolean;
-  
-  /**
-   * Custom backdrop color
-   * Default backdrop color you can set via css (.modal {backgroundColor:...})
-   * @type {string}
-   */
-  backdropColor?: string;
 }
 ```
 
-### DialogService 
+### SimpleModalService 
 Service to show and hide dialogs
 
 ### Class Overview
 ```typescript
-class DialogService {
+class SimpleModalService {
     /**
     * Adds dialog
-    * @param {Type<DialogComponent<T1, T2>} component - Modal dialog component
+    * @param {Type<SimpleModalComponent<T1, T2>} component - Modal dialog component
     * @param {T1?} data - Initialization data for component (optional) to add to component instance and can be used in component code or template 
-    * @param {DialogOptions?} Dialog options
+    * @param {SimpleModalOptions?} Dialog options
     * @return {Observable<T2>} - returns Observable to get dialog result
     */
-    public addDialog<T1, T2>(component:Type<DialogComponent<T1, T2>>, data?:T1, options: DialogOptions): Observable<T2> => {}
+    public addDialog<T1, T2>(component:Type<SimpleModalComponent<T1, T2>>, data?:T1, options: SimpleModalOptions): Observable<T2> => {}
     
     /**
      * Remove a dialog externally 
-     * @param [DialogComponent} component
+     * @param [SimpleModalComponent} component
      */
-    public removeDialog(component: DialogComponent<any, any>): void;
+    public removeDialog(component: SimpleModalComponent<any, any>): void;
     
     /**
      * Removes all open dialogs in one go

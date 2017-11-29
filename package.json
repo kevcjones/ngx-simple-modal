@@ -1,7 +1,7 @@
 {
-  "name": "angularx-bootstrap-modal",
+  "name": "ngx-simple-modal",
   "version": "1.1.0",
-  "description": "It is a library to make managment of bootstrap modal dialogs easier in Angular2 - forked from ng-bootstrap-modal which seems abandoned.",
+  "description": "A simple unopinionated framework to implement simple modal based behaviour in angular (v2+) projects.",
   "main": "index.js",
   "scripts": {
     "lint": "tslint src/*",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kevcjones/angularx-bootstrap-modal.git"
+    "url": "git+https://github.com/kevcjones/ngx-simple-modal.git"
   },
   "keywords": [
     "angular2",
@@ -21,9 +21,9 @@
   "author": "Kevin Jones <him@kevincjones.co.uk> (kevcjones)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kevcjones/angularx-bootstrap-modal/issues"
+    "url": "https://github.com/kevcjones/ngx-simple-modal/issues"
   },
-  "homepage": "https://github.com/kevcjones/angularx-bootstrap-modal#readme",
+  "homepage": "https://github.com/kevcjones/ngx-simple-modal#readme",
   "dependencies": {
   },
   "devDependencies": {
