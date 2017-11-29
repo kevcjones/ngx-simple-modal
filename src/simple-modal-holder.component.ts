@@ -1,15 +1,15 @@
 import { Component, ComponentFactoryResolver, Type, ViewChild, ViewContainerRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { DialogWrapperComponent } from './simple-modal-wrapper.component';
+import { SimpleModalWrapperComponent } from './simple-modal-wrapper.component';
 import { SimpleModalComponent } from './simple-modal.component';
 import { SimpleModalOptions } from './simple-modal-options';
 
 @Component({
-  selector: 'dialog-holder',
+  selector: 'simple-modal-holder',
   template: '<ng-template #viewContainer></ng-template>',
 })
-export class DialogHolderComponent {
+export class SimpleModalHolderComponent {
 
   /**
    * Target viewContainer to insert dialogs
@@ -17,7 +17,7 @@ export class DialogHolderComponent {
   @ViewChild('viewContainer', {read: ViewContainerRef}) public viewContainer: ViewContainerRef;
 
   /**
-   * Dialog collection, maintained by addDialog and removeDialog
+   * Dialog collection, maintained by addModal and removeModal
    * @type {Array<SimpleModalComponent> }
    */
   dialogs: Array<SimpleModalComponent<any, any>> = [];
@@ -35,12 +35,12 @@ export class DialogHolderComponent {
    * @param {SimpleModalOptions?} options
    * @return {Observable<*>}
    */
-  addDialog<T, T1>(component: Type<SimpleModalComponent<T, T1>>, data?: T, options?: SimpleModalOptions): Observable<T1> {
+  addModal<T, T1>(component: Type<SimpleModalComponent<T, T1>>, data?: T, options?: SimpleModalOptions): Observable<T1> {
     options = options || <SimpleModalOptions>{};
 
-    const factory = this.resolver.resolveComponentFactory(DialogWrapperComponent);
+    const factory = this.resolver.resolveComponentFactory(SimpleModalWrapperComponent);
     const componentRef = this.viewContainer.createComponent(factory, options.index);
-    const dialogWrapper: DialogWrapperComponent = <DialogWrapperComponent> componentRef.instance;
+    const dialogWrapper: SimpleModalWrapperComponent = <SimpleModalWrapperComponent> componentRef.instance;
     const _component: SimpleModalComponent<T, T1> =  dialogWrapper.addComponent(component);
 
     if (typeof(options.index) !== 'undefined') {
@@ -54,19 +54,19 @@ export class DialogHolderComponent {
     });
     if (options.autoCloseTimeout) {
       setTimeout(() => {
-        this.removeDialog(_component);
+        this.removeModal(_component);
       }, options.autoCloseTimeout);
     }
     if (options.closeByClickingOutside) {
       dialogWrapper.onClickOutsideModalContent( () => {
-        this.removeDialog(dialogWrapper.content);
+        this.removeModal(dialogWrapper.content);
       });
     }
     if (options.backdropColor) {
       dialogWrapper.wrapper.nativeElement.style.backgroundColor = options.backdropColor;
     }
     // to avoid circular references hand the dialog a callback for it to self close
-    _component.onClose(this.removeDialog.bind(this));
+    _component.onClose(this.removeModal.bind(this));
 
     // update the body class depending on the count
     this.toggleModalOpenClassOnBody();
@@ -80,7 +80,7 @@ export class DialogHolderComponent {
    * to take effect
    * @param {SimpleModalComponent} component
    */
-  removeDialog(component: SimpleModalComponent<any, any>) {
+  removeModal(component: SimpleModalComponent<any, any>) {
     const containerEl = component.wrapper.nativeElement;
     containerEl.classList.remove('show');
     containerEl.classList.remove('in');
@@ -94,7 +94,7 @@ export class DialogHolderComponent {
    * Insructs the holder element to remove all dialogs,
    * and flushes the collections
    */
-  removeAllDialogs() {
+  removeAllModals() {
     this.viewContainer.clear();
     this.dialogs = [];
   }
