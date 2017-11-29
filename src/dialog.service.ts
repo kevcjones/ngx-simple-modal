@@ -3,16 +3,11 @@ import { Observable } from 'rxjs/Observable';
 
 import { DialogHolderComponent } from './dialog-holder.component';
 import { DialogComponent } from './dialog.component';
+import { DialogOptions } from './dialog-options';
 
-export interface DialogOptions {
-  index?: number;
-  autoCloseTimeout?: number;
-  closeByClickingOutside?: boolean;
-  backdropColor?: string;
-}
 
 export class DialogServiceConfig {
-  container: HTMLElement = null;
+  container: HTMLElement | PromiseLike<HTMLElement> = null;
 }
 
 @Injectable()
@@ -41,7 +36,9 @@ export class DialogService {
     private applicationRef: ApplicationRef,
     private injector: Injector,
     @Optional() config: DialogServiceConfig) {
-      this.container = config && config.container;
+      Promise.resolve(config && config.container).then(container => {
+        this.container = container;
+      });
   }
 
   /**
@@ -89,6 +86,7 @@ export class DialogService {
 
     const componentRef = componentFactory.create(this.injector);
     const componentRootNode = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
+
     if (!this.container) {
       const componentRootViewContainer = this.applicationRef['components'][0];
       this.container = (componentRootViewContainer.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
@@ -102,4 +100,5 @@ export class DialogService {
 
     return componentRef.instance;
   }
+
 }

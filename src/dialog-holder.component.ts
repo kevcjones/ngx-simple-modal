@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { DialogWrapperComponent } from './dialog-wrapper.component';
 import { DialogComponent } from './dialog.component';
-import { DialogOptions } from './dialog.service';
+import { DialogOptions } from './dialog-options';
 
 @Component({
   selector: 'dialog-holder',
