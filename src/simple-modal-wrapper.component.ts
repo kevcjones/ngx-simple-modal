@@ -1,6 +1,6 @@
 import { Component, ComponentFactoryResolver, OnDestroy, ReflectiveInjector, Type, ViewChild, ViewContainerRef } from '@angular/core';
 
-import { DialogComponent } from './dialog.component';
+import { SimpleModalComponent } from './simple-modal.component';
 
 /**
  * The modal backdrop wrapping wrapper to the modal
@@ -27,9 +27,9 @@ export class DialogWrapperComponent implements OnDestroy {
 
   /**
    * Dialog content componet
-   * @type {DialogComponent}
+   * @type {SimpleModalComponent}
    */
-  content: DialogComponent<any, any>;
+  content: SimpleModalComponent<any, any>;
 
   /**
    * Click outside callback
@@ -44,15 +44,15 @@ export class DialogWrapperComponent implements OnDestroy {
 
   /**
    * Adds content dialog component to wrapper
-   * @param {Type<DialogComponent>} component
-   * @return {DialogComponent}
+   * @param {Type<SimpleModalComponent>} component
+   * @return {SimpleModalComponent}
    */
-  addComponent<T, T1>(component: Type<DialogComponent<T, T1>>) {
+  addComponent<T, T1>(component: Type<SimpleModalComponent<T, T1>>) {
     const factory = this.resolver.resolveComponentFactory(component);
     const injector = ReflectiveInjector.fromResolvedProviders([], this.viewContainer.injector);
     const componentRef = factory.create(injector);
     this.viewContainer.insert(componentRef.hostView);
-    this.content =  <DialogComponent<T, T1>> componentRef.instance;
+    this.content =  <SimpleModalComponent<T, T1>> componentRef.instance;
     this.content.wrapper = this.wrapper;
     return this.content;
   }

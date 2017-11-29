@@ -1,17 +1,17 @@
 import { ApplicationRef, ComponentFactoryResolver, EmbeddedViewRef, Injectable, Injector, Optional, Type } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { DialogHolderComponent } from './dialog-holder.component';
-import { DialogComponent } from './dialog.component';
-import { DialogOptions } from './dialog-options';
+import { DialogHolderComponent } from './simple-modal-holder.component';
+import { SimpleModalComponent } from './simple-modal.component';
+import { SimpleModalOptions } from './simple-modal-options';
 
 
-export class DialogServiceConfig {
+export class SimpleModalServiceConfig {
   container: HTMLElement | PromiseLike<HTMLElement> = null;
 }
 
 @Injectable()
-export class DialogService {
+export class SimpleModalService {
 
   /**
    * Placeholder of modal dialogs
@@ -29,13 +29,13 @@ export class DialogService {
    * @param {ComponentFactoryResolver} resolver
    * @param {ApplicationRef} applicationRef
    * @param {Injector} injector
-   * @param {DialogServiceConfig} config
+   * @param {SimpleModalServiceConfig} config
    */
   constructor(
     private resolver: ComponentFactoryResolver,
     private applicationRef: ApplicationRef,
     private injector: Injector,
-    @Optional() config: DialogServiceConfig) {
+    @Optional() config: SimpleModalServiceConfig) {
       Promise.resolve(config && config.container).then(container => {
         this.container = container;
       });
@@ -43,12 +43,12 @@ export class DialogService {
 
   /**
    * Adds dialog
-   * @param {Type<DialogComponent<T, T1>>} component
+   * @param {Type<SimpleModalComponent<T, T1>>} component
    * @param {T?} data
-   * @param {DialogOptions?} options
+   * @param {SimpleModalOptions?} options
    * @return {Observable<T1>}
    */
-  addDialog<T, T1>(component: Type<DialogComponent<T, T1>>, data?: T, options?: DialogOptions): Observable<T1> {
+  addDialog<T, T1>(component: Type<SimpleModalComponent<T, T1>>, data?: T, options?: SimpleModalOptions): Observable<T1> {
     if (!this.dialogHolderComponent) {
       this.dialogHolderComponent = this.createDialogHolder();
     }
@@ -57,9 +57,9 @@ export class DialogService {
 
   /**
    * Hides and removes dialog from DOM
-   * @param {DialogComponent} component
+   * @param {SimpleModalComponent} component
    */
-  removeDialog(component: DialogComponent<any, any>): void {
+  removeDialog(component: SimpleModalComponent<any, any>): void {
     if (!this.dialogHolderComponent) {
       return;
     }

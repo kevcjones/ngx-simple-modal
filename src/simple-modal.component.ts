@@ -2,15 +2,15 @@ import { ElementRef, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 
-import { DialogWrapperComponent } from './dialog-wrapper.component';
-import { DialogService } from './dialog.service';
+import { DialogWrapperComponent } from './simple-modal-wrapper.component';
+import { SimpleModalService } from './simple-modal.service';
 
 /**
  * Abstract dialog
  * @template T - dialog data;
  * @template T1 - dialog result
  */
-export abstract class DialogComponent<T, T1> implements OnDestroy {
+export abstract class SimpleModalComponent<T, T1> implements OnDestroy {
 
   /**
    * Observer to return result from dialog
@@ -35,7 +35,7 @@ export abstract class DialogComponent<T, T1> implements OnDestroy {
 
   /**
    * Constructor
-   * @param {DialogService} dialogService - instance of DialogService
+   * @param {SimpleModalService} SimpleModalService - instance of SimpleModalService
    */
   constructor() {}
 

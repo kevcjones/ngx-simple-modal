@@ -1,9 +1,9 @@
 import { Component, ComponentFactoryResolver, Type, ViewChild, ViewContainerRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { DialogWrapperComponent } from './dialog-wrapper.component';
-import { DialogComponent } from './dialog.component';
-import { DialogOptions } from './dialog-options';
+import { DialogWrapperComponent } from './simple-modal-wrapper.component';
+import { SimpleModalComponent } from './simple-modal.component';
+import { SimpleModalOptions } from './simple-modal-options';
 
 @Component({
   selector: 'dialog-holder',
@@ -18,9 +18,9 @@ export class DialogHolderComponent {
 
   /**
    * Dialog collection, maintained by addDialog and removeDialog
-   * @type {Array<DialogComponent> }
+   * @type {Array<SimpleModalComponent> }
    */
-  dialogs: Array<DialogComponent<any, any>> = [];
+  dialogs: Array<SimpleModalComponent<any, any>> = [];
 
   /**
    * Constructor
@@ -30,18 +30,18 @@ export class DialogHolderComponent {
 
   /**
    * Configures then adds dialog to the dialogs array, and populates with data passed in
-   * @param {Type<DialogComponent>} component
+   * @param {Type<SimpleModalComponent>} component
    * @param {object?} data
-   * @param {DialogOptions?} options
+   * @param {SimpleModalOptions?} options
    * @return {Observable<*>}
    */
-  addDialog<T, T1>(component: Type<DialogComponent<T, T1>>, data?: T, options?: DialogOptions): Observable<T1> {
-    options = options || <DialogOptions>{};
+  addDialog<T, T1>(component: Type<SimpleModalComponent<T, T1>>, data?: T, options?: SimpleModalOptions): Observable<T1> {
+    options = options || <SimpleModalOptions>{};
 
     const factory = this.resolver.resolveComponentFactory(DialogWrapperComponent);
     const componentRef = this.viewContainer.createComponent(factory, options.index);
     const dialogWrapper: DialogWrapperComponent = <DialogWrapperComponent> componentRef.instance;
-    const _component: DialogComponent<T, T1> =  dialogWrapper.addComponent(component);
+    const _component: SimpleModalComponent<T, T1> =  dialogWrapper.addComponent(component);
 
     if (typeof(options.index) !== 'undefined') {
       this.dialogs.splice(options.index, 0, _component);
@@ -78,9 +78,9 @@ export class DialogHolderComponent {
    * Initiates the removal of a dialog from the collection,
    * removal is deferred by 300ms to give classList updates enough
    * to take effect
-   * @param {DialogComponent} component
+   * @param {SimpleModalComponent} component
    */
-  removeDialog(component: DialogComponent<any, any>) {
+  removeDialog(component: SimpleModalComponent<any, any>) {
     const containerEl = component.wrapper.nativeElement;
     containerEl.classList.remove('show');
     containerEl.classList.remove('in');
@@ -116,7 +116,7 @@ export class DialogHolderComponent {
   /**
    * Instructs the holder to remove the dialog and
    * removes this component from the collection
-   * @param {DialogComponent} component
+   * @param {SimpleModalComponent} component
    */
   private _removeElement(component) {
     const index = this.dialogs.indexOf(component);

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { DialogService } from 'angularx-bootstrap-modal';
+import { SimpleModalService } from 'ngx-simple-modal';
 import { AlertComponent } from "./alert/alert.component";
 import { ConfirmComponent } from "./confirm/confirm.component";
 import { PromptComponent } from "./prompt/prompt.component";
-import { ParentDialogComponent } from "./parent-dialog/parent-dialog.component";
+import { ParentSimpleModalComponent } from "./parent-dialog/parent-dialog.component";
 
 @Component({
   selector: 'app-root',
@@ -14,14 +14,14 @@ export class AppComponent {
   confirmResult:boolean = null;
   promptMessage:string = '';
 
-  constructor(private dialogService:DialogService) {}
+  constructor(private SimpleModalService:SimpleModalService) {}
 
   showAlert() {
-    this.dialogService.addDialog(AlertComponent, {title:'Alert title!', message:'Alert message!!!'});
+    this.SimpleModalService.addDialog(AlertComponent, {title:'Alert title!', message:'Alert message!!!'});
   }
 
   showConfirm() {
-    this.dialogService.addDialog(ConfirmComponent, {
+    this.SimpleModalService.addDialog(ConfirmComponent, {
       title:'Confirmation',
       message:'Bla bla confirm some action?'})
       .subscribe((isConfirmed)=>{
@@ -31,7 +31,7 @@ export class AppComponent {
   }
 
   showPrompt() {
-    this.dialogService.addDialog(PromptComponent, {
+    this.SimpleModalService.addDialog(PromptComponent, {
       title:'Name dialog',
       question:'What is your name?: '})
       .subscribe((message)=>{
@@ -41,17 +41,17 @@ export class AppComponent {
   }
 
   showAlert2() {
-    this.dialogService.addDialog(AlertComponent, { message:'Click outside to close dialog' }, { closeByClickingOutside:true });
+    this.SimpleModalService.addDialog(AlertComponent, { message:'Click outside to close dialog' }, { closeByClickingOutside:true });
   }
 
   showAlert3() {
-    this.dialogService.addDialog(AlertComponent, { message:'Wait 5 seconds and dialog will be closed automatically' }, { autoCloseTimeout:5000 });
+    this.SimpleModalService.addDialog(AlertComponent, { message:'Wait 5 seconds and dialog will be closed automatically' }, { autoCloseTimeout:5000 });
   }
 
   showAlert4() {
-    this.dialogService.addDialog(AlertComponent, { message:'Dialog with red backdrop' }, { backdropColor: 'rgba(255, 0, 0, 0.5)' });
+    this.SimpleModalService.addDialog(AlertComponent, { message:'Dialog with red backdrop' }, { backdropColor: 'rgba(255, 0, 0, 0.5)' });
   }
   showParentDialog() {
-    this.dialogService.addDialog(ParentDialogComponent);
+    this.SimpleModalService.addDialog(ParentSimpleModalComponent);
   }
 }

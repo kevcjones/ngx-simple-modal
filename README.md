@@ -1,6 +1,6 @@
 # NGX Simple Modal
 
-* In development - moving over from angularx-bootstrap-modal *
+* In development - moving over from ngx-simple-modal *
 
 It is a library to make usage modal easier in Angular2, has no dependencies, but plays well with bootstrap or other frameworks. 
 Create clear and reusable modal components.

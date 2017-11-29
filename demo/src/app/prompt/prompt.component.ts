@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DialogComponent } from 'angularx-bootstrap-modal';
+import { SimpleModalComponent } from 'ngx-simple-modal';
 
 export interface PromptModel {
   title:string;
@@ -24,7 +24,7 @@ export interface PromptModel {
                  </div>
                 </div>`
 })
-export class PromptComponent extends DialogComponent<PromptModel, string> implements PromptModel {
+export class PromptComponent extends SimpleModalComponent<PromptModel, string> implements PromptModel {
   title: string;
   question: string;
   message: string = '';

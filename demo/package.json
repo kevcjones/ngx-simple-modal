@@ -24,7 +24,7 @@
     "core-js": "2.4.1",
     "rxjs": "5.4.1",
     "zone.js": "0.8.14",
-    "angularx-bootstrap-modal": "file:../"
+    "ngx-simple-modal": "file:../"
   },
   "devDependencies": {
     "@angular/cli": "1.2.4",

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DialogComponent } from 'angularx-bootstrap-modal';
+import { SimpleModalComponent } from 'ngx-simple-modal';
 
 export interface ConfirmModel {
   title:string;
@@ -24,7 +24,7 @@ export interface ConfirmModel {
                  </div>
                 </div>`
 })
-export class ConfirmComponent extends DialogComponent<ConfirmModel, boolean> implements ConfirmModel {
+export class ConfirmComponent extends SimpleModalComponent<ConfirmModel, boolean> implements ConfirmModel {
   title: string;
   message: string;
   constructor() {
