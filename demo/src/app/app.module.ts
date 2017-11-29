@@ -2,13 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { DialogModalModule } from 'angularx-bootstrap-modal';
+import { SimpleModalModule } from 'ngx-simple-modal';
 
 import { AppComponent } from './app.component';
 import { AlertComponent } from './alert/alert.component';
 import { ConfirmComponent } from "./confirm/confirm.component";
 import { PromptComponent } from "./prompt/prompt.component";
-import { ParentDialogComponent } from "./parent-dialog/parent-dialog.component";
+import { ParentDialogModalComponent } from "./parent-dialog/parent-dialog.component";
 
 @NgModule({
   declarations: [
@@ -16,19 +16,19 @@ import { ParentDialogComponent } from "./parent-dialog/parent-dialog.component";
     AlertComponent,
     ConfirmComponent,
     PromptComponent,
-    ParentDialogComponent
+    ParentDialogModalComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    DialogModalModule
+    SimpleModalModule
   ],
   entryComponents: [
     AlertComponent,
     ConfirmComponent,
     PromptComponent,
-    ParentDialogComponent
+    ParentDialogModalComponent
   ],
   bootstrap: [AppComponent]
 })

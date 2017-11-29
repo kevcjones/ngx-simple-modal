@@ -1,26 +1,26 @@
 import { ApplicationRef, ComponentFactoryResolver, EmbeddedViewRef, Injectable, Injector, Optional, Type } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { DialogHolderComponent } from './dialog-holder.component';
-import { DialogComponent } from './dialog.component';
-import { DialogOptions } from './dialog-options';
+import { SimpleModalHolderComponent } from './simple-modal-holder.component';
+import { SimpleModalComponent } from './simple-modal.component';
+import { SimpleModalOptions } from './simple-modal-options';
 
 
-export class DialogServiceConfig {
+export class SimpleModalServiceConfig {
   container: HTMLElement | PromiseLike<HTMLElement> = null;
 }
 
 @Injectable()
-export class DialogService {
+export class SimpleModalService {
 
   /**
-   * Placeholder of modal dialogs
-   * @type {DialogHolderComponent}
+   * Placeholder of modals
+   * @type {SimpleModalHolderComponent}
    */
-  private dialogHolderComponent: DialogHolderComponent;
+  private modalHolderComponent: SimpleModalHolderComponent;
 
   /**
-   * HTML container for dialogs
+   * HTML container for modals
    * type {HTMLElement}
    */
   private container: HTMLElement;
@@ -29,60 +29,60 @@ export class DialogService {
    * @param {ComponentFactoryResolver} resolver
    * @param {ApplicationRef} applicationRef
    * @param {Injector} injector
-   * @param {DialogServiceConfig} config
+   * @param {SimpleModalServiceConfig} config
    */
   constructor(
     private resolver: ComponentFactoryResolver,
     private applicationRef: ApplicationRef,
     private injector: Injector,
-    @Optional() config: DialogServiceConfig) {
+    @Optional() config: SimpleModalServiceConfig) {
       Promise.resolve(config && config.container).then(container => {
         this.container = container;
       });
   }
 
   /**
-   * Adds dialog
-   * @param {Type<DialogComponent<T, T1>>} component
+   * Adds modal
+   * @param {Type<SimpleModalComponent<T, T1>>} component
    * @param {T?} data
-   * @param {DialogOptions?} options
+   * @param {SimpleModalOptions?} options
    * @return {Observable<T1>}
    */
-  addDialog<T, T1>(component: Type<DialogComponent<T, T1>>, data?: T, options?: DialogOptions): Observable<T1> {
-    if (!this.dialogHolderComponent) {
-      this.dialogHolderComponent = this.createDialogHolder();
+  addModal<T, T1>(component: Type<SimpleModalComponent<T, T1>>, data?: T, options?: SimpleModalOptions): Observable<T1> {
+    if (!this.modalHolderComponent) {
+      this.modalHolderComponent = this.createSimpleModalHolder();
     }
-    return this.dialogHolderComponent.addDialog<T, T1>(component, data, options);
+    return this.modalHolderComponent.addModal<T, T1>(component, data, options);
   }
 
   /**
-   * Hides and removes dialog from DOM
-   * @param {DialogComponent} component
+   * Hides and removes modal from DOM
+   * @param {SimpleModalComponent} component
    */
-  removeDialog(component: DialogComponent<any, any>): void {
-    if (!this.dialogHolderComponent) {
+  removeModal(component: SimpleModalComponent<any, any>): void {
+    if (!this.modalHolderComponent) {
       return;
     }
-    this.dialogHolderComponent.removeDialog(component);
+    this.modalHolderComponent.removeModal(component);
   }
 
   /**
-   * Closes all dialogs
+   * Closes all modals
    */
   removeAll(): void {
-    if (!this.dialogHolderComponent) {
+    if (!this.modalHolderComponent) {
       return;
     }
-    this.dialogHolderComponent.removeAllDialogs();
+    this.modalHolderComponent.removeAllModals();
   }
 
   /**
-   * Creates and add to DOM dialog holder component
-   * @return {DialogHolderComponent}
+   * Creates and add to DOM modal holder component
+   * @return {SimpleModalHolderComponent}
    */
-  private createDialogHolder(): DialogHolderComponent {
+  private createSimpleModalHolder(): SimpleModalHolderComponent {
 
-    const componentFactory = this.resolver.resolveComponentFactory(DialogHolderComponent);
+    const componentFactory = this.resolver.resolveComponentFactory(SimpleModalHolderComponent);
 
     const componentRef = componentFactory.create(this.injector);
     const componentRootNode = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;

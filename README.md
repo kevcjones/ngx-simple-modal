@@ -1,10 +1,10 @@
 # NGX Simple Modal
 
-* In development - moving over from angularx-bootstrap-modal *
+* In development - moving over from ngx-simple-modal *
 
 It is a library to make usage modal easier in Angular2, has no dependencies, but plays well with bootstrap or other frameworks. 
 Create clear and reusable modal components.
-It makes managing dialogs painless and clearer. 
+It makes managing modals painless and clearer. 
 Extend the ModalComponent class and implement any content you want. 
 
 ## Installation
@@ -46,7 +46,7 @@ import { AppComponent } from './app.component';
 })
 export class AppModule {}
 ```
-By default, dialog placeholder will be added to AppComponent.
+By default, modal placeholder will be added to AppComponent.
 But you can select custom placeholder (i.e. document body):
 
 ```typescript
@@ -70,8 +70,8 @@ where `elementPromisingFn` is anything you want as long as its resolvement retur
 ### Step 2. Create your modal component 
 Your modal is expected to be extended from **SimpleModalComponent**.
 **SimpleModalService** is generic class with two arguments:
-1) input dialog data type (data to initialize component);
-2) dialog result type;
+1) input modal data type (data to initialize component);
+2) modal result type;
 
 Therefore **SimpleModalService** is supposed to be a constructor argument of **SimpleModalComponent**.
 
@@ -85,7 +85,7 @@ export interface ConfirmModel {
 }
 @Component({  
     selector: 'confirm',
-    template: `<div class="modal-dialog">
+    template: `<div class="modal-modal">
                 <div class="modal-content">
                    <div class="modal-header">
                      <button type="button" class="close" (click)="close()" >&times;</button>
@@ -108,8 +108,8 @@ export class ConfirmComponent extends SimpleModalComponent<ConfirmModel, boolean
     super();
   }
   confirm() {
-    // we set dialog result as true on click on confirm button, 
-    // then we can get dialog result from caller code 
+    // we set modal result as true on click on confirm button, 
+    // then we can get modal result from caller code 
     this.result = true;
     this.close();
   }
@@ -166,12 +166,12 @@ app.component.ts
     export class AppComponent {
         constructor(private simpleModalService:SimpleModalService) {}
         showConfirm() {
-            let disposable = this.simpleModalService.addDialog(ConfirmComponent, {
+            let disposable = this.simpleModalService.addModal(ConfirmComponent, {
                   title: 'Confirm title', 
                   message: 'Confirm message'
                 })
                 .subscribe((isConfirmed)=>{
-                    //We get dialog result
+                    //We get modal result
                     if(isConfirmed) {
                         alert('accepted');
                     }
@@ -179,8 +179,8 @@ app.component.ts
                         alert('declined');
                     }
                 });
-            //We can close dialog calling disposable.unsubscribe();
-            //If dialog was not closed manually close it by timeout
+            //We can close modal calling disposable.unsubscribe();
+            //If modal was not closed manually close it by timeout
             setTimeout(()=>{
                 disposable.unsubscribe();
             },10000);
@@ -196,8 +196,8 @@ Super class of all modal components.
 ```typescript
 /**
 * Dialog abstract class
-* @template T1 - input dialog data
-* @template T2 - dialog result
+* @template T1 - input modal data
+* @template T2 - modal result
 */
 abstract abstract class SimpleModalComponent<T1, T2> implements T1 {
     /**
@@ -213,7 +213,7 @@ abstract abstract class SimpleModalComponent<T1, T2> implements T1 {
     protected result:T2
     
     /**
-    * Closes dialog
+    * Closes modal
     */
     public close:Function
 }
@@ -229,13 +229,13 @@ interface SimpleModalOptions {
   index?: number;
  
   /**
-  * Timestamp to close dialog automatically after timeout (in msec)
+  * Timestamp to close modal automatically after timeout (in msec)
   * @type {number}
   */
   autoCloseTimeout?: number;
   
   /**
-  * Flag to close dialog by click on backdrop (outside dialog)
+  * Flag to close modal by click on backdrop (outside modal)
   * @type {boolean}
   */
   closeByClickingOutside?: boolean;
@@ -243,28 +243,28 @@ interface SimpleModalOptions {
 ```
 
 ### SimpleModalService 
-Service to show and hide dialogs
+Service to show and hide modals
 
 ### Class Overview
 ```typescript
 class SimpleModalService {
     /**
-    * Adds dialog
-    * @param {Type<SimpleModalComponent<T1, T2>} component - Modal dialog component
+    * Adds modal
+    * @param {Type<SimpleModalComponent<T1, T2>} component - modal component
     * @param {T1?} data - Initialization data for component (optional) to add to component instance and can be used in component code or template 
     * @param {SimpleModalOptions?} Dialog options
-    * @return {Observable<T2>} - returns Observable to get dialog result
+    * @return {Observable<T2>} - returns Observable to get modal result
     */
-    public addDialog<T1, T2>(component:Type<SimpleModalComponent<T1, T2>>, data?:T1, options: SimpleModalOptions): Observable<T2> => {}
+    public addModal<T1, T2>(component:Type<SimpleModalComponent<T1, T2>>, data?:T1, options: SimpleModalOptions): Observable<T2> => {}
     
     /**
-     * Remove a dialog externally 
+     * Remove a modal externally 
      * @param [SimpleModalComponent} component
      */
-    public removeDialog(component: SimpleModalComponent<any, any>): void;
+    public removeModal(component: SimpleModalComponent<any, any>): void;
     
     /**
-     * Removes all open dialogs in one go
+     * Removes all open modals in one go
      */
     public removeAll(): void {
 

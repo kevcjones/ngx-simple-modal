@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { DialogComponent, DialogService } from 'angularx-bootstrap-modal';
+import { SimpleModalComponent, SimpleModalService } from 'ngx-simple-modal';
 
 import { ConfirmComponent } from '../confirm/confirm.component';
 
 
 @Component({
-  selector: 'parent-dialog',
+  selector: 'parent-modal',
   template: `<div class="modal-dialog" style="width: 800px;">
                 <div class="modal-content" >
                    <div class="modal-header">
@@ -23,14 +23,14 @@ import { ConfirmComponent } from '../confirm/confirm.component';
                 </div>
              </div>`
 })
-export class ParentDialogComponent extends DialogComponent<null, null>  {
+export class ParentDialogModalComponent extends SimpleModalComponent<null, null>  {
 
-  constructor(private dialogService: DialogService) {
+  constructor(private SimpleModalService: SimpleModalService) {
     super();
   }
 
   confirm() {
-    this.dialogService.addDialog(ConfirmComponent, {
+    this.SimpleModalService.addModal(ConfirmComponent, {
       title: 'Confirm',
       message: 'Are you sure you want close dialog?'
     }).subscribe((isConfirmed) => {

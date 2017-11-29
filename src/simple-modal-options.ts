@@ -1,4 +1,4 @@
-export interface DialogOptions {
+export interface SimpleModalOptions {
   index?: number;
   autoCloseTimeout?: number;
   closeByClickingOutside?: boolean;

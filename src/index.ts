@@ -1,4 +1,4 @@
-export { DialogModalModule } from './dialog-modal.module';
-export { DialogComponent } from './dialog.component';
-export { DialogOptions }  from './dialog-options';
-export { DialogService, DialogServiceConfig } from './dialog.service';
+export { SimpleModalModule } from './simple-modal.module';
+export { SimpleModalComponent } from './simple-modal.component';
+export { SimpleModalOptions }  from './simple-modal-options';
+export { SimpleModalService, SimpleModalServiceConfig } from './simple-modal.service';

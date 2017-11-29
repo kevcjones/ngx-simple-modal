@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { DialogService } from 'angularx-bootstrap-modal';
+import { SimpleModalService } from 'ngx-simple-modal';
 import { AlertComponent } from "./alert/alert.component";
 import { ConfirmComponent } from "./confirm/confirm.component";
 import { PromptComponent } from "./prompt/prompt.component";
-import { ParentDialogComponent } from "./parent-dialog/parent-dialog.component";
+import { ParentDialogModalComponent } from "./parent-dialog/parent-dialog.component";
 
 @Component({
   selector: 'app-root',
@@ -12,46 +12,46 @@ import { ParentDialogComponent } from "./parent-dialog/parent-dialog.component";
 })
 export class AppComponent {
   confirmResult:boolean = null;
-  promptMessage:string = '';
+  promptMessage: string = '';
 
-  constructor(private dialogService:DialogService) {}
+  constructor(private SimpleModalService:SimpleModalService) {}
 
   showAlert() {
-    this.dialogService.addDialog(AlertComponent, {title:'Alert title!', message:'Alert message!!!'});
+    this.SimpleModalService.addModal(AlertComponent, {title:'Alert title!', message:'Alert message!!!'});
   }
 
   showConfirm() {
-    this.dialogService.addDialog(ConfirmComponent, {
+    this.SimpleModalService.addModal(ConfirmComponent, {
       title:'Confirmation',
       message:'Bla bla confirm some action?'})
       .subscribe((isConfirmed)=>{
-        //Get dialog result
+        // Get modal result
         this.confirmResult = isConfirmed;
     });
   }
 
   showPrompt() {
-    this.dialogService.addDialog(PromptComponent, {
-      title:'Name dialog',
-      question:'What is your name?: '})
-      .subscribe((message)=>{
-        //We get dialog result
+    this.SimpleModalService.addModal(PromptComponent, {
+      title: 'Name dialog',
+      question: 'What is your name?: '})
+      .subscribe((message) => {
+        // We get modal result
         this.promptMessage = message;
       });
   }
 
   showAlert2() {
-    this.dialogService.addDialog(AlertComponent, { message:'Click outside to close dialog' }, { closeByClickingOutside:true });
+    this.SimpleModalService.addModal(AlertComponent, { message: 'Click outside to close dialog' }, { closeByClickingOutside: true });
   }
 
   showAlert3() {
-    this.dialogService.addDialog(AlertComponent, { message:'Wait 5 seconds and dialog will be closed automatically' }, { autoCloseTimeout:5000 });
+    this.SimpleModalService.addModal(AlertComponent, { message: 'Wait 5 seconds and dialog will be closed automatically' }, { autoCloseTimeout: 5000 });
   }
 
   showAlert4() {
-    this.dialogService.addDialog(AlertComponent, { message:'Dialog with red backdrop' }, { backdropColor: 'rgba(255, 0, 0, 0.5)' });
+    this.SimpleModalService.addModal(AlertComponent, { message: 'Dialog with red backdrop' }, { backdropColor: 'rgba(255, 0, 0, 0.5)' });
   }
   showParentDialog() {
-    this.dialogService.addDialog(ParentDialogComponent);
+    this.SimpleModalService.addModal(ParentDialogModalComponent);
   }
 }

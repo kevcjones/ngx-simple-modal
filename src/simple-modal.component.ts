@@ -2,18 +2,18 @@ import { ElementRef, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 
-import { DialogWrapperComponent } from './dialog-wrapper.component';
-import { DialogService } from './dialog.service';
+import { SimpleModalWrapperComponent } from './simple-modal-wrapper.component';
+import { SimpleModalService } from './simple-modal.service';
 
 /**
- * Abstract dialog
- * @template T - dialog data;
- * @template T1 - dialog result
+ * Abstract modal
+ * @template T - modal data;
+ * @template T1 - modal result
  */
-export abstract class DialogComponent<T, T1> implements OnDestroy {
+export abstract class SimpleModalComponent<T, T1> implements OnDestroy {
 
   /**
-   * Observer to return result from dialog
+   * Observer to return result from modal
    */
   private observer: Observer<T1>;
 
@@ -35,7 +35,7 @@ export abstract class DialogComponent<T, T1> implements OnDestroy {
 
   /**
    * Constructor
-   * @param {DialogService} dialogService - instance of DialogService
+   * @param {SimpleModalService} SimpleModalService - instance of SimpleModalService
    */
   constructor() {}
 
@@ -60,7 +60,7 @@ export abstract class DialogComponent<T, T1> implements OnDestroy {
   }
 
   /**
-   * Closes dialog
+   * Closes modal
    */
   close(): void {
     if (!!this.closerCallback) {
@@ -70,7 +70,7 @@ export abstract class DialogComponent<T, T1> implements OnDestroy {
 
   /**
    * Defines what happens when close is called - default this
-   * will just call the default remove dialog process
+   * will just call the default remove modal process
    * @param callback
    */
   onClose(callback: (component) => void): void {
@@ -79,7 +79,7 @@ export abstract class DialogComponent<T, T1> implements OnDestroy {
 
   /**
    * OnDestroy handler
-   * Sends dialog result to observer
+   * Sends modal result to observer
    */
   ngOnDestroy(): void {
     if (this.observer) {

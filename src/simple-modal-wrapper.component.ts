@@ -1,22 +1,22 @@
 import { Component, ComponentFactoryResolver, OnDestroy, ReflectiveInjector, Type, ViewChild, ViewContainerRef } from '@angular/core';
 
-import { DialogComponent } from './dialog.component';
+import { SimpleModalComponent } from './simple-modal.component';
 
 /**
  * The modal backdrop wrapping wrapper to the modal
  */
 @Component({
-  selector: 'dialog-wrapper',
+  selector: 'simple-modal-wrapper',
   template: `
     <div #wrapper class="modal fade" style="display:block !important;" role="dialog">
         <ng-template #viewContainer></ng-template>
     </div>
 `
 })
-export class DialogWrapperComponent implements OnDestroy {
+export class SimpleModalWrapperComponent implements OnDestroy {
 
   /**
-   * Target viewContainer to insert dialog content component
+   * Target viewContainer to insert modal content component
    */
   @ViewChild('viewContainer', {read: ViewContainerRef}) public viewContainer: ViewContainerRef;
 
@@ -27,9 +27,9 @@ export class DialogWrapperComponent implements OnDestroy {
 
   /**
    * Dialog content componet
-   * @type {DialogComponent}
+   * @type {SimpleModalComponent}
    */
-  content: DialogComponent<any, any>;
+  content: SimpleModalComponent<any, any>;
 
   /**
    * Click outside callback
@@ -43,16 +43,16 @@ export class DialogWrapperComponent implements OnDestroy {
   constructor(private resolver: ComponentFactoryResolver) {}
 
   /**
-   * Adds content dialog component to wrapper
-   * @param {Type<DialogComponent>} component
-   * @return {DialogComponent}
+   * Adds content modal component to wrapper
+   * @param {Type<SimpleModalComponent>} component
+   * @return {SimpleModalComponent}
    */
-  addComponent<T, T1>(component: Type<DialogComponent<T, T1>>) {
+  addComponent<T, T1>(component: Type<SimpleModalComponent<T, T1>>) {
     const factory = this.resolver.resolveComponentFactory(component);
     const injector = ReflectiveInjector.fromResolvedProviders([], this.viewContainer.injector);
     const componentRef = factory.create(injector);
     this.viewContainer.insert(componentRef.hostView);
-    this.content =  <DialogComponent<T, T1>> componentRef.instance;
+    this.content =  <SimpleModalComponent<T, T1>> componentRef.instance;
     this.content.wrapper = this.wrapper;
     return this.content;
   }

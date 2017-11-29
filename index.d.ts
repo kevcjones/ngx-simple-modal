@@ -1,1 +1,1 @@
-export { DialogService, DialogModalModule, DialogOptions, DialogComponent, DialogServiceConfig } from './dist/index';
+export { SimpleModalService, SimpleModalModule, SimpleModalOptions, SimpleModalComponent, SimpleModalServiceConfig } from './dist/index';
