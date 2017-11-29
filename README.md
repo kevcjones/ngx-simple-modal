@@ -117,12 +117,15 @@ export class AppModule {}
 ```
 By default, dialog placeholder will be added to AppComponent.
 But you can select custom placeholder (i.e. document body):
+
 ```typescript
 imports: [
     ...
     DialogModalModule.forRoot({container:document.body})
   ]
 ```
+
+New - You can also pass in a promise, for when you need to delay because the container has not been rendered yet
 
 
 ### Step 2. Create your modal dialog component 
@@ -136,7 +139,7 @@ Therefore **DialogService** is supposed to be a constructor argument of **Dialog
 confirm.component.ts:
 ```typescript
 import { Component } from '@angular/core';
-import { DialogComponent, DialogService } from "angularx-bootstrap-modal";
+import { DialogComponent } from "angularx-bootstrap-modal";
 export interface ConfirmModel {
   title:string;
   message:string;
@@ -162,8 +165,8 @@ export interface ConfirmModel {
 export class ConfirmComponent extends DialogComponent<ConfirmModel, boolean> implements ConfirmModel {
   title: string;
   message: string;
-  constructor(dialogService: DialogService) {
-    super(dialogService);
+  constructor() {
+    super();
   }
   confirm() {
     // we set dialog result as true on click on confirm button, 
@@ -179,7 +182,7 @@ Add component to **declarations** and **entryComponents** section, because the c
 will be created dynamically.
 
 app.module.ts:
-```typescrit
+```typescript
     import { NgModule} from '@angular/core';
     import { CommonModule } from "@angular/common";
     import { BrowserModule } from '@angular/platform-browser';
@@ -256,7 +259,7 @@ Super class of all modal components.
 * @template T1 - input dialog data
 * @template T2 - dialog result
 */
-abstract class DialogComponent<T1, T2> implements T1 {
+abstract abstract class DialogComponent<T1, T2> implements T1 {
     /**
     * Constructor
     * @param {DialogService} dialogService - instance of DialogService
@@ -307,7 +310,7 @@ interface DialogOptions {
 ```
 
 ### DialogService 
-Service to show dialogs
+Service to show and hide dialogs
 
 ### Class Overview
 ```typescript
@@ -320,5 +323,17 @@ class DialogService {
     * @return {Observable<T2>} - returns Observable to get dialog result
     */
     public addDialog<T1, T2>(component:Type<DialogComponent<T1, T2>>, data?:T1, options: DialogOptions): Observable<T2> => {}
+    
+    /**
+     * Remove a dialog externally 
+     * @param [DialogComponent} component
+     */
+    public removeDialog(component: DialogComponent<any, any>): void;
+    
+    /**
+     * Removes all open dialogs in one go
+     */
+    public removeAll(): void {
+
 }
 ```
