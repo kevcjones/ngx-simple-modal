@@ -166,7 +166,7 @@ app.component.ts
     export class AppComponent {
         constructor(private simpleModalService:SimpleModalService) {}
         showConfirm() {
-            let disposable = this.simpleModalService.addDialog(ConfirmComponent, {
+            let disposable = this.simpleModalService.addModal(ConfirmComponent, {
                   title: 'Confirm title', 
                   message: 'Confirm message'
                 })
@@ -255,13 +255,13 @@ class SimpleModalService {
     * @param {SimpleModalOptions?} Dialog options
     * @return {Observable<T2>} - returns Observable to get dialog result
     */
-    public addDialog<T1, T2>(component:Type<SimpleModalComponent<T1, T2>>, data?:T1, options: SimpleModalOptions): Observable<T2> => {}
+    public addModal<T1, T2>(component:Type<SimpleModalComponent<T1, T2>>, data?:T1, options: SimpleModalOptions): Observable<T2> => {}
     
     /**
      * Remove a dialog externally 
      * @param [SimpleModalComponent} component
      */
-    public removeDialog(component: SimpleModalComponent<any, any>): void;
+    public removeModal(component: SimpleModalComponent<any, any>): void;
     
     /**
      * Removes all open dialogs in one go

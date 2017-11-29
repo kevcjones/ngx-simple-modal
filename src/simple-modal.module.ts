@@ -1,15 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { ApplicationRef, ComponentFactoryResolver, Injector, ModuleWithProviders, NgModule } from '@angular/core';
 
-import { DialogHolderComponent } from './simple-modal-holder.component';
-import { DialogWrapperComponent } from './simple-modal-wrapper.component';
+import { SimpleModalHolderComponent } from './simple-modal-holder.component';
+import { SimpleModalWrapperComponent } from './simple-modal-wrapper.component';
 import { SimpleModalService, SimpleModalServiceConfig } from './simple-modal.service';
 import { SimpleModalServiceFactory } from './simple-modal-service.factory';
 
 @NgModule({
     declarations: [
-        DialogHolderComponent,
-        DialogWrapperComponent
+        SimpleModalHolderComponent,
+        SimpleModalWrapperComponent
     ],
     providers: [
         SimpleModalService
@@ -18,8 +18,8 @@ import { SimpleModalServiceFactory } from './simple-modal-service.factory';
         CommonModule
     ],
     entryComponents: [
-        DialogHolderComponent,
-        DialogWrapperComponent
+        SimpleModalHolderComponent,
+        SimpleModalWrapperComponent
     ]
 })
 export class SimpleModalModule {

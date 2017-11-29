@@ -13,7 +13,7 @@ import { SimpleModalComponent } from './simple-modal.component';
     </div>
 `
 })
-export class DialogWrapperComponent implements OnDestroy {
+export class SimpleModalWrapperComponent implements OnDestroy {
 
   /**
    * Target viewContainer to insert dialog content component

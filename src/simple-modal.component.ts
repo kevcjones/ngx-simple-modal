@@ -2,7 +2,7 @@ import { ElementRef, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 
-import { DialogWrapperComponent } from './simple-modal-wrapper.component';
+import { SimpleModalWrapperComponent } from './simple-modal-wrapper.component';
 import { SimpleModalService } from './simple-modal.service';
 
 /**

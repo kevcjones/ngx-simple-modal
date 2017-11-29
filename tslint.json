@@ -124,7 +124,7 @@
         "element",
         "app",
         "kebab-case",
-        "*"
+        "simple"
       ],
       "use-input-property-decorator": true,
       "use-output-property-decorator": true,

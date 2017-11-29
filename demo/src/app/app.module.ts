@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { AlertComponent } from './alert/alert.component';
 import { ConfirmComponent } from "./confirm/confirm.component";
 import { PromptComponent } from "./prompt/prompt.component";
-import { ParentSimpleModalComponent } from "./parent-dialog/parent-dialog.component";
+import { ParentDialogModalComponent } from "./parent-dialog/parent-dialog.component";
 
 @NgModule({
   declarations: [
@@ -16,7 +16,7 @@ import { ParentSimpleModalComponent } from "./parent-dialog/parent-dialog.compon
     AlertComponent,
     ConfirmComponent,
     PromptComponent,
-    ParentSimpleModalComponent
+    ParentDialogModalComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +28,7 @@ import { ParentSimpleModalComponent } from "./parent-dialog/parent-dialog.compon
     AlertComponent,
     ConfirmComponent,
     PromptComponent,
-    ParentSimpleModalComponent
+    ParentDialogModalComponent
   ],
   bootstrap: [AppComponent]
 })

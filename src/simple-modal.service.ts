@@ -1,7 +1,7 @@
 import { ApplicationRef, ComponentFactoryResolver, EmbeddedViewRef, Injectable, Injector, Optional, Type } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { DialogHolderComponent } from './simple-modal-holder.component';
+import { SimpleModalHolderComponent } from './simple-modal-holder.component';
 import { SimpleModalComponent } from './simple-modal.component';
 import { SimpleModalOptions } from './simple-modal-options';
 
@@ -15,9 +15,9 @@ export class SimpleModalService {
 
   /**
    * Placeholder of modal dialogs
-   * @type {DialogHolderComponent}
+   * @type {SimpleModalHolderComponent}
    */
-  private dialogHolderComponent: DialogHolderComponent;
+  private modalHolderComponent: SimpleModalHolderComponent;
 
   /**
    * HTML container for dialogs
@@ -48,41 +48,41 @@ export class SimpleModalService {
    * @param {SimpleModalOptions?} options
    * @return {Observable<T1>}
    */
-  addDialog<T, T1>(component: Type<SimpleModalComponent<T, T1>>, data?: T, options?: SimpleModalOptions): Observable<T1> {
-    if (!this.dialogHolderComponent) {
-      this.dialogHolderComponent = this.createDialogHolder();
+  addModal<T, T1>(component: Type<SimpleModalComponent<T, T1>>, data?: T, options?: SimpleModalOptions): Observable<T1> {
+    if (!this.modalHolderComponent) {
+      this.modalHolderComponent = this.createSimpleModalHolder();
     }
-    return this.dialogHolderComponent.addDialog<T, T1>(component, data, options);
+    return this.modalHolderComponent.addModal<T, T1>(component, data, options);
   }
 
   /**
    * Hides and removes dialog from DOM
    * @param {SimpleModalComponent} component
    */
-  removeDialog(component: SimpleModalComponent<any, any>): void {
-    if (!this.dialogHolderComponent) {
+  removeModal(component: SimpleModalComponent<any, any>): void {
+    if (!this.modalHolderComponent) {
       return;
     }
-    this.dialogHolderComponent.removeDialog(component);
+    this.modalHolderComponent.removeModal(component);
   }
 
   /**
    * Closes all dialogs
    */
   removeAll(): void {
-    if (!this.dialogHolderComponent) {
+    if (!this.modalHolderComponent) {
       return;
     }
-    this.dialogHolderComponent.removeAllDialogs();
+    this.modalHolderComponent.removeAllModals();
   }
 
   /**
    * Creates and add to DOM dialog holder component
-   * @return {DialogHolderComponent}
+   * @return {SimpleModalHolderComponent}
    */
-  private createDialogHolder(): DialogHolderComponent {
+  private createSimpleModalHolder(): SimpleModalHolderComponent {
 
-    const componentFactory = this.resolver.resolveComponentFactory(DialogHolderComponent);
+    const componentFactory = this.resolver.resolveComponentFactory(SimpleModalHolderComponent);
 
     const componentRef = componentFactory.create(this.injector);
     const componentRootNode = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
