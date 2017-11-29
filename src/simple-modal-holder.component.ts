@@ -12,15 +12,15 @@ import { SimpleModalOptions } from './simple-modal-options';
 export class SimpleModalHolderComponent {
 
   /**
-   * Target viewContainer to insert dialogs
+   * Target viewContainer to insert modals
    */
   @ViewChild('viewContainer', {read: ViewContainerRef}) public viewContainer: ViewContainerRef;
 
   /**
-   * Dialog collection, maintained by addModal and removeModal
+   * modal collection, maintained by addModal and removeModal
    * @type {Array<SimpleModalComponent> }
    */
-  dialogs: Array<SimpleModalComponent<any, any>> = [];
+  modals: Array<SimpleModalComponent<any, any>> = [];
 
   /**
    * Constructor
@@ -29,7 +29,7 @@ export class SimpleModalHolderComponent {
   constructor(private resolver: ComponentFactoryResolver) {}
 
   /**
-   * Configures then adds dialog to the dialogs array, and populates with data passed in
+   * Configures then adds modal to the modals array, and populates with data passed in
    * @param {Type<SimpleModalComponent>} component
    * @param {object?} data
    * @param {SimpleModalOptions?} options
@@ -40,17 +40,17 @@ export class SimpleModalHolderComponent {
 
     const factory = this.resolver.resolveComponentFactory(SimpleModalWrapperComponent);
     const componentRef = this.viewContainer.createComponent(factory, options.index);
-    const dialogWrapper: SimpleModalWrapperComponent = <SimpleModalWrapperComponent> componentRef.instance;
-    const _component: SimpleModalComponent<T, T1> =  dialogWrapper.addComponent(component);
+    const modalWrapper: SimpleModalWrapperComponent = <SimpleModalWrapperComponent> componentRef.instance;
+    const _component: SimpleModalComponent<T, T1> =  modalWrapper.addComponent(component);
 
     if (typeof(options.index) !== 'undefined') {
-      this.dialogs.splice(options.index, 0, _component);
+      this.modals.splice(options.index, 0, _component);
     } else {
-      this.dialogs.push(_component);
+      this.modals.push(_component);
     }
     setTimeout(() => {
-      dialogWrapper.wrapper.nativeElement.classList.add('show');
-      dialogWrapper.wrapper.nativeElement.classList.add('in');
+      modalWrapper.wrapper.nativeElement.classList.add('show');
+      modalWrapper.wrapper.nativeElement.classList.add('in');
     });
     if (options.autoCloseTimeout) {
       setTimeout(() => {
@@ -58,14 +58,14 @@ export class SimpleModalHolderComponent {
       }, options.autoCloseTimeout);
     }
     if (options.closeByClickingOutside) {
-      dialogWrapper.onClickOutsideModalContent( () => {
-        this.removeModal(dialogWrapper.content);
+      modalWrapper.onClickOutsideModalContent( () => {
+        this.removeModal(modalWrapper.content);
       });
     }
     if (options.backdropColor) {
-      dialogWrapper.wrapper.nativeElement.style.backgroundColor = options.backdropColor;
+      modalWrapper.wrapper.nativeElement.style.backgroundColor = options.backdropColor;
     }
-    // to avoid circular references hand the dialog a callback for it to self close
+    // to avoid circular references hand the modal a callback for it to self close
     _component.onClose(this.removeModal.bind(this));
 
     // update the body class depending on the count
@@ -75,7 +75,7 @@ export class SimpleModalHolderComponent {
   }
 
   /**
-   * Initiates the removal of a dialog from the collection,
+   * Initiates the removal of a modal from the collection,
    * removal is deferred by 300ms to give classList updates enough
    * to take effect
    * @param {SimpleModalComponent} component
@@ -91,22 +91,22 @@ export class SimpleModalHolderComponent {
 
 
   /**
-   * Insructs the holder element to remove all dialogs,
+   * Insructs the holder element to remove all modals,
    * and flushes the collections
    */
   removeAllModals() {
     this.viewContainer.clear();
-    this.dialogs = [];
+    this.modals = [];
   }
 
   /**
-   * Bind a body class 'modal-open' to a condition of dialogs in pool > 0
+   * Bind a body class 'modal-open' to a condition of modals in pool > 0
    */
 
   private toggleModalOpenClassOnBody() {
     const bodyClass = 'modal-open';
     const body = document.getElementsByTagName('body')[0];
-    if (!this.dialogs.length) {
+    if (!this.modals.length) {
       body.classList.remove(bodyClass);
     } else {
       body.classList.add(bodyClass);
@@ -114,15 +114,15 @@ export class SimpleModalHolderComponent {
   }
 
   /**
-   * Instructs the holder to remove the dialog and
+   * Instructs the holder to remove the modal and
    * removes this component from the collection
    * @param {SimpleModalComponent} component
    */
   private _removeElement(component) {
-    const index = this.dialogs.indexOf(component);
+    const index = this.modals.indexOf(component);
     if (index > -1) {
       this.viewContainer.remove(index);
-      this.dialogs.splice(index, 1);
+      this.modals.splice(index, 1);
     }
     this.toggleModalOpenClassOnBody();
   }

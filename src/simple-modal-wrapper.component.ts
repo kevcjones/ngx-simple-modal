@@ -6,7 +6,7 @@ import { SimpleModalComponent } from './simple-modal.component';
  * The modal backdrop wrapping wrapper to the modal
  */
 @Component({
-  selector: 'dialog-wrapper',
+  selector: 'simple-modal-wrapper',
   template: `
     <div #wrapper class="modal fade" style="display:block !important;" role="dialog">
         <ng-template #viewContainer></ng-template>
@@ -16,7 +16,7 @@ import { SimpleModalComponent } from './simple-modal.component';
 export class SimpleModalWrapperComponent implements OnDestroy {
 
   /**
-   * Target viewContainer to insert dialog content component
+   * Target viewContainer to insert modal content component
    */
   @ViewChild('viewContainer', {read: ViewContainerRef}) public viewContainer: ViewContainerRef;
 
@@ -43,7 +43,7 @@ export class SimpleModalWrapperComponent implements OnDestroy {
   constructor(private resolver: ComponentFactoryResolver) {}
 
   /**
-   * Adds content dialog component to wrapper
+   * Adds content modal component to wrapper
    * @param {Type<SimpleModalComponent>} component
    * @return {SimpleModalComponent}
    */

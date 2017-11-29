@@ -3,7 +3,7 @@ import { ApplicationRef, ComponentFactoryResolver, Injector } from '@angular/cor
 import { SimpleModalService, SimpleModalServiceConfig } from './simple-modal.service';
 
 /**
- * Dialog service factory. Creates dialog service with options
+ * Dialog service factory. Creates modal service with options
  * @param { ComponentFactoryResolver } resolver
  * @param { ApplicationRef } applicationRef
  * @param { Injector } injector

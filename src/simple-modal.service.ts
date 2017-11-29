@@ -14,13 +14,13 @@ export class SimpleModalServiceConfig {
 export class SimpleModalService {
 
   /**
-   * Placeholder of modal dialogs
+   * Placeholder of modals
    * @type {SimpleModalHolderComponent}
    */
   private modalHolderComponent: SimpleModalHolderComponent;
 
   /**
-   * HTML container for dialogs
+   * HTML container for modals
    * type {HTMLElement}
    */
   private container: HTMLElement;
@@ -42,7 +42,7 @@ export class SimpleModalService {
   }
 
   /**
-   * Adds dialog
+   * Adds modal
    * @param {Type<SimpleModalComponent<T, T1>>} component
    * @param {T?} data
    * @param {SimpleModalOptions?} options
@@ -56,7 +56,7 @@ export class SimpleModalService {
   }
 
   /**
-   * Hides and removes dialog from DOM
+   * Hides and removes modal from DOM
    * @param {SimpleModalComponent} component
    */
   removeModal(component: SimpleModalComponent<any, any>): void {
@@ -67,7 +67,7 @@ export class SimpleModalService {
   }
 
   /**
-   * Closes all dialogs
+   * Closes all modals
    */
   removeAll(): void {
     if (!this.modalHolderComponent) {
@@ -77,7 +77,7 @@ export class SimpleModalService {
   }
 
   /**
-   * Creates and add to DOM dialog holder component
+   * Creates and add to DOM modal holder component
    * @return {SimpleModalHolderComponent}
    */
   private createSimpleModalHolder(): SimpleModalHolderComponent {
