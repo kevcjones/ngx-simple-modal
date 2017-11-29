@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
-import {ConfirmComponent} from "../confirm/confirm.component";
+import { DialogComponent, DialogService } from 'angularx-bootstrap-modal';
+
+import { ConfirmComponent } from '../confirm/confirm.component';
 
 
 @Component({
@@ -24,13 +25,16 @@ import {ConfirmComponent} from "../confirm/confirm.component";
 })
 export class ParentDialogComponent extends DialogComponent<null, null>  {
 
-  constructor(dialogService: DialogService) {
-    super(dialogService);
+  constructor(private dialogService: DialogService) {
+    super();
   }
 
   confirm() {
-    this.dialogService.addDialog(ConfirmComponent, {title: 'Confirm', message: 'Are you sure you want close dialog?'}).subscribe((isConfirmed)=>{
-      if(isConfirmed) {
+    this.dialogService.addDialog(ConfirmComponent, {
+      title: 'Confirm',
+      message: 'Are you sure you want close dialog?'
+    }).subscribe((isConfirmed) => {
+      if (isConfirmed) {
         this.close();
       }
     });

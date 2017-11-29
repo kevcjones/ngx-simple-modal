@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
+import { DialogComponent } from 'angularx-bootstrap-modal';
 
 export interface AlertModel {
   title: string;
@@ -26,7 +26,7 @@ export interface AlertModel {
 export class AlertComponent extends DialogComponent<AlertModel, null> implements AlertModel {
   title: string;
   message: string;
-  constructor(dialogService: DialogService) {
-    super(dialogService);
+  constructor() {
+    super();
   }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DialogComponent, DialogService } from "ng2-bootstrap-modal";
+import { DialogComponent } from 'angularx-bootstrap-modal';
 
 export interface PromptModel {
   title:string;
@@ -28,8 +28,8 @@ export class PromptComponent extends DialogComponent<PromptModel, string> implem
   title: string;
   question: string;
   message: string = '';
-  constructor(dialogService: DialogService) {
-    super(dialogService);
+  constructor() {
+    super();
   }
   apply() {
     this.result = this.message;

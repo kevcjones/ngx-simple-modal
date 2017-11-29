@@ -1,19 +1,13 @@
-import {
-  Injectable, ComponentFactoryResolver, ApplicationRef, Injector, EmbeddedViewRef, Type, Optional
-} from "@angular/core";
-import { DialogHolderComponent } from "./dialog-holder.component";
-import { DialogComponent } from "./dialog.component";
-import { Observable } from "rxjs/Observable";
+import { ApplicationRef, ComponentFactoryResolver, EmbeddedViewRef, Injectable, Injector, Optional, Type } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
-export interface DialogOptions {
-  index?: number;
-  autoCloseTimeout?: number;
-  closeByClickingOutside?: boolean;
-  backdropColor?: string;
-}
+import { DialogHolderComponent } from './dialog-holder.component';
+import { DialogComponent } from './dialog.component';
+import { DialogOptions } from './dialog-options';
+
 
 export class DialogServiceConfig {
-  container: HTMLElement=null;
+  container: HTMLElement | PromiseLike<HTMLElement> = null;
 }
 
 @Injectable()
@@ -37,8 +31,14 @@ export class DialogService {
    * @param {Injector} injector
    * @param {DialogServiceConfig} config
    */
-  constructor(private resolver: ComponentFactoryResolver, private applicationRef: ApplicationRef, private injector: Injector, @Optional() config: DialogServiceConfig) {
-    this.container = config && config.container;
+  constructor(
+    private resolver: ComponentFactoryResolver,
+    private applicationRef: ApplicationRef,
+    private injector: Injector,
+    @Optional() config: DialogServiceConfig) {
+      Promise.resolve(config && config.container).then(container => {
+        this.container = container;
+      });
   }
 
   /**
@@ -48,8 +48,8 @@ export class DialogService {
    * @param {DialogOptions?} options
    * @return {Observable<T1>}
    */
-  addDialog<T, T1>(component:Type<DialogComponent<T, T1>>, data?:T, options?:DialogOptions): Observable<T1> {
-    if(!this.dialogHolderComponent) {
+  addDialog<T, T1>(component: Type<DialogComponent<T, T1>>, data?: T, options?: DialogOptions): Observable<T1> {
+    if (!this.dialogHolderComponent) {
       this.dialogHolderComponent = this.createDialogHolder();
     }
     return this.dialogHolderComponent.addDialog<T, T1>(component, data, options);
@@ -59,8 +59,8 @@ export class DialogService {
    * Hides and removes dialog from DOM
    * @param {DialogComponent} component
    */
-  removeDialog(component:DialogComponent<any, any>): void {
-    if(!this.dialogHolderComponent) {
+  removeDialog(component: DialogComponent<any, any>): void {
+    if (!this.dialogHolderComponent) {
       return;
     }
     this.dialogHolderComponent.removeDialog(component);
@@ -70,10 +70,10 @@ export class DialogService {
    * Closes all dialogs
    */
   removeAll(): void {
-    if(!this.dialogHolderComponent) {
+    if (!this.dialogHolderComponent) {
       return;
     }
-    this.dialogHolderComponent.clear();
+    this.dialogHolderComponent.removeAllDialogs();
   }
 
   /**
@@ -82,12 +82,13 @@ export class DialogService {
    */
   private createDialogHolder(): DialogHolderComponent {
 
-    let componentFactory = this.resolver.resolveComponentFactory(DialogHolderComponent);
+    const componentFactory = this.resolver.resolveComponentFactory(DialogHolderComponent);
 
-    let componentRef = componentFactory.create(this.injector);
-    let componentRootNode = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
-    if(!this.container) {
-      let componentRootViewContainer = this.applicationRef['components'][0];
+    const componentRef = componentFactory.create(this.injector);
+    const componentRootNode = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
+
+    if (!this.container) {
+      const componentRootViewContainer = this.applicationRef['components'][0];
       this.container = (componentRootViewContainer.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
     }
     this.applicationRef.attachView(componentRef.hostView);
@@ -99,4 +100,5 @@ export class DialogService {
 
     return componentRef.instance;
   }
+
 }

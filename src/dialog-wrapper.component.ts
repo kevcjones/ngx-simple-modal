@@ -1,41 +1,46 @@
-import {
-  Component, ViewContainerRef, ViewChild, ComponentFactoryResolver, ReflectiveInjector, Type
-} from '@angular/core';
-import {DialogComponent} from "./dialog.component";
-import {DialogService} from "./dialog.service";
+import { Component, ComponentFactoryResolver, OnDestroy, ReflectiveInjector, Type, ViewChild, ViewContainerRef } from '@angular/core';
 
+import { DialogComponent } from './dialog.component';
+
+/**
+ * The modal backdrop wrapping wrapper to the modal
+ */
 @Component({
   selector: 'dialog-wrapper',
   template: `
-    <div #container class="modal fade" style="display:block !important;" role="dialog">
-        <ng-template #element></ng-template>
+    <div #wrapper class="modal fade" style="display:block !important;" role="dialog">
+        <ng-template #viewContainer></ng-template>
     </div>
 `
 })
-export class DialogWrapperComponent {
+export class DialogWrapperComponent implements OnDestroy {
 
   /**
-   * Target element to insert dialog content component
+   * Target viewContainer to insert dialog content component
    */
-  @ViewChild('element', {read: ViewContainerRef}) public element: ViewContainerRef;
+  @ViewChild('viewContainer', {read: ViewContainerRef}) public viewContainer: ViewContainerRef;
 
   /**
-   * Link container DOM element
+   * Link wrapper DOM element
    */
-  @ViewChild('container') public container;
+  @ViewChild('wrapper') public wrapper;
 
   /**
    * Dialog content componet
    * @type {DialogComponent}
    */
-  private content: DialogComponent<any, any>;
+  content: DialogComponent<any, any>;
+
+  /**
+   * Click outside callback
+   */
+  clickOutsideCallback: () => void;
 
   /**
    * Constructor
    * @param {ComponentFactoryResolver} resolver
-   * @param {DialogService} dialogService
    */
-  constructor(private resolver: ComponentFactoryResolver, private dialogService: DialogService) {}
+  constructor(private resolver: ComponentFactoryResolver) {}
 
   /**
    * Adds content dialog component to wrapper
@@ -43,26 +48,33 @@ export class DialogWrapperComponent {
    * @return {DialogComponent}
    */
   addComponent<T, T1>(component: Type<DialogComponent<T, T1>>) {
-    let factory = this.resolver.resolveComponentFactory(component);
-    let injector = ReflectiveInjector.fromResolvedProviders([], this.element.injector);
-    let componentRef = factory.create(injector);
-    this.element.insert(componentRef.hostView);
+    const factory = this.resolver.resolveComponentFactory(component);
+    const injector = ReflectiveInjector.fromResolvedProviders([], this.viewContainer.injector);
+    const componentRef = factory.create(injector);
+    this.viewContainer.insert(componentRef.hostView);
     this.content =  <DialogComponent<T, T1>> componentRef.instance;
-    this.content.wrapper = this;
+    this.content.wrapper = this.wrapper;
     return this.content;
   }
 
-  /**
-   * Registers event handler to close dialog by click on backdrop
-   */
-  closeByClickOutside() {
-    const containerEl = this.container.nativeElement;
-    containerEl.querySelector('.modal-content').addEventListener('click', (event)=> {
-      event.stopPropagation();
-    });
-    containerEl.addEventListener('click', () => {
-        this.dialogService.removeDialog(this.content);
-    }, false);
+  onClickOutsideModalContent( callback: () => void) {
+    this.clickOutsideCallback = callback;
+    const containerEl = this.wrapper.nativeElement;
+    containerEl.querySelector(':first-child').addEventListener('click', this.stopEventPropagation);
+    containerEl.addEventListener('click', this.clickOutsideCallback, false);
+  }
+
+  private stopEventPropagation(event) {
+    event.stopPropagation();
+  }
+
+  ngOnDestroy() {
+    if (this.clickOutsideCallback) {
+      const containerEl = this.wrapper.nativeElement;
+      containerEl.querySelector(':first-child').removeEventListener('click', this.stopEventPropagation);
+      containerEl.removeEventListener('click', this.clickOutsideCallback, false);
+      this.clickOutsideCallback = null;
+    }
   }
 }
 

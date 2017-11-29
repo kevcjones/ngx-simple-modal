@@ -1,3 +1,4 @@
-export { BootstrapModalModule } from './bootstrap-modal.module';
+export { DialogModalModule } from './dialog-modal.module';
 export { DialogComponent } from './dialog.component';
-export { DialogService, DialogOptions, DialogServiceConfig } from './dialog.service';
+export { DialogOptions }  from './dialog-options';
+export { DialogService, DialogServiceConfig } from './dialog.service';
