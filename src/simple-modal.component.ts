@@ -31,7 +31,7 @@ export abstract class SimpleModalComponent<T, T1> implements OnDestroy {
   /**
    * Callback to the holders close function
    */
-  private closerCallback: (component) => void;
+  private closerCallback: (component) => Promise<any>;
 
   /**
    * Constructor
@@ -42,17 +42,25 @@ export abstract class SimpleModalComponent<T, T1> implements OnDestroy {
   /**
    * Maps your object passed in the creation to fields in your own Dialog classes
    * @param {T} data
-   * @return {Observable<T1>}
    */
-  fillData(data: T): Observable<T1> {
+  mapDataObject(data: T): void {
     data = data || <T>{};
     const keys = Object.keys(data);
     for (let i = 0, length = keys.length; i < length; i++) {
       const key = keys[i];
       this[key] = data[key];
     }
+  }
+
+  /**
+   * Setup observer
+   * @return {Observable<T1>}
+   */
+  setupObserver(): Observable<T1> {
     return Observable.create((observer) => {
       this.observer = observer;
+
+      // called if observable is unsubscribed to
       return () => {
         this.close();
       };
@@ -60,21 +68,19 @@ export abstract class SimpleModalComponent<T, T1> implements OnDestroy {
   }
 
   /**
-   * Closes modal
-   */
-  close(): void {
-    if (!!this.closerCallback) {
-      this.closerCallback(this);
-    }
-  }
-
-  /**
    * Defines what happens when close is called - default this
    * will just call the default remove modal process
    * @param callback
    */
-  onClose(callback: (component) => void): void {
+  onClose(callback: (component) => Promise<any>): void {
     this.closerCallback = callback;
+  }
+
+  /**
+   * Closes modal
+   */
+  close(): Promise<any> {
+    return this.closerCallback(this);
   }
 
   /**
@@ -84,6 +90,7 @@ export abstract class SimpleModalComponent<T, T1> implements OnDestroy {
   ngOnDestroy(): void {
     if (this.observer) {
       this.observer.next(this.result);
+      this.observer.complete();
     }
   }
 }
