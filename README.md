@@ -1,4 +1,4 @@
-# NGX Simple Modal
+# NGX Simple Modal [![Build Status](https://travis-ci.org/KevCJones/ngx-simple-modal.svg?branch=master)](https://travis-ci.org/KevCJones/ngx-simple-modal)
 
 * In development - moving over from ngx-simple-modal *
 
