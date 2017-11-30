@@ -11,8 +11,8 @@ import { ParentDialogModalComponent } from "./parent-dialog/parent-dialog.compon
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  confirmResult:boolean = null;
-  promptMessage: string = '';
+  confirmResult = null;
+  promptMessage = '';
 
   constructor(private SimpleModalService:SimpleModalService) {}
 
@@ -24,7 +24,7 @@ export class AppComponent {
     this.SimpleModalService.addModal(ConfirmComponent, {
       title:'Confirmation',
       message:'Bla bla confirm some action?'})
-      .subscribe((isConfirmed)=>{
+      .subscribe((isConfirmed) => {
         // Get modal result
         this.confirmResult = isConfirmed;
     });
@@ -49,7 +49,7 @@ export class AppComponent {
   }
 
   showAlert4() {
-    this.SimpleModalService.addModal(AlertComponent, { message: 'Dialog with red backdrop' }, { backdropColor: 'rgba(255, 0, 0, 0.5)' });
+    this.SimpleModalService.addModal(AlertComponent, { message: 'Dialog with close using escape' }, { keyboard: true});
   }
   showParentDialog() {
     this.SimpleModalService.addModal(ParentDialogModalComponent);
