@@ -222,23 +222,35 @@ abstract abstract class SimpleModalComponent<T1, T2> implements T1 {
 ### SimpleModalOptions 
 ```typescript
 interface SimpleModalOptions {
-  /**
-  * Dialog index (optional) to set order of modals
-  * @type {number}
-  */
-  index?: number;
- 
-  /**
-  * Timestamp to close modal automatically after timeout (in msec)
-  * @type {number}
-  */
-  autoCloseTimeout?: number;
   
   /**
   * Flag to close modal by click on backdrop (outside modal)
   * @type {boolean}
   */
-  closeByClickingOutside?: boolean;
+  closeOnClickOutside?: boolean;
+
+   /**
+  * Flag to close modal by click on backdrop (outside modal)
+  * @type {boolean}
+  */
+  closeOnEscape: boolean;
+  
+  /**
+  * Class to put in document body while modal is open
+  * @type {string}
+  */
+  bodyClass: string;
+
+  /**
+  * Class we add and remove from modal when we add it/ remove it
+  * @type {string}
+  */
+  wrapperClass: string,
+  /**
+  * Time we wait while adding and removing to let animation play
+  * @type {string}
+  */
+  animationDuration: number;
 }
 ```
 
