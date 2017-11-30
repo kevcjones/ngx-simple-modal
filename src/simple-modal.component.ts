@@ -1,8 +1,8 @@
-import { ElementRef, OnDestroy } from '@angular/core';
+import { ElementRef, HostListener, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 
-import { SimpleModalWrapperComponent } from './simple-modal-wrapper.component';
+import { SimpleModalOptions } from './simple-modal-options';
 import { SimpleModalService } from './simple-modal.service';
 
 /**
@@ -27,6 +27,11 @@ export abstract class SimpleModalComponent<T, T1> implements OnDestroy {
    * Dialog wrapper (modal placeholder)
    */
   wrapper: ElementRef;
+
+  /**
+   * ref of options for this component
+   */
+  options: SimpleModalOptions;
 
   /**
    * Callback to the holders close function
@@ -69,10 +74,11 @@ export abstract class SimpleModalComponent<T, T1> implements OnDestroy {
 
   /**
    * Defines what happens when close is called - default this
-   * will just call the default remove modal process
+   * will just call the default remove modal process. If overriden
+   * must include
    * @param callback
    */
-  onClose(callback: (component) => Promise<any>): void {
+  onClosing(callback: (component) => Promise<any>): void {
     this.closerCallback = callback;
   }
 
@@ -82,6 +88,18 @@ export abstract class SimpleModalComponent<T, T1> implements OnDestroy {
   close(): Promise<any> {
     return this.closerCallback(this);
   }
+
+  /**
+   * keypress binding ngx way
+   * @param evt
+   */
+  @HostListener('document:keydown.escape', ['$event'])
+  private onKeydownHandler(evt: KeyboardEvent) {
+    if (this.options && this.options.closeOnEscape) {
+      this.close();
+    }
+  }
+
 
   /**
    * OnDestroy handler
