@@ -38,20 +38,29 @@ export class SimpleModalHolderComponent {
    */
   addModal<T, T1>(component: Type<SimpleModalComponent<T, T1>>, data?: T, options?: SimpleModalOptions): Observable<T1> {
 
-    options = Object.assign({}, defaultModalOptions, options);
-
-    // create
+    // create component
     const factory = this.resolver.resolveComponentFactory(SimpleModalWrapperComponent);
-    const componentRef = this.viewContainer.createComponent(factory, options.index);
+    const componentRef = this.viewContainer.createComponent(factory);
     const modalWrapper: SimpleModalWrapperComponent = <SimpleModalWrapperComponent>componentRef.instance;
     const _component: SimpleModalComponent<T, T1> = modalWrapper.addComponent(component);
 
-    // config
-    this.configIndex(options, _component);
-    this.configAutoClose(options, _component);
-    this.configCloseOnClickOutside(options, modalWrapper);
-    this.configOpenActions(options, modalWrapper);
-    this.configCloseActions(options, _component);
+    // assign options refs
+    _component.options = options = Object.assign({}, defaultModalOptions, options);
+
+    // add to stack
+    this.modals.push(_component);
+
+    // when opening the modal
+    this.onOpening(() => {
+      this.toggleWrapperClass(modalWrapper.wrapper, options.wrapperClass);
+      this.toggleBodyClass(options.bodyClass);
+    });
+
+    // when closing modal
+    _component.onClosing((modal) => this.removeModal(modal));
+
+    // if clicking on background closes modal
+    this.configureCloseOnClickOutside(modalWrapper);
 
     // map and return observable
     _component.mapDataObject(data);
@@ -64,25 +73,27 @@ export class SimpleModalHolderComponent {
    * @param {SimpleModalComponent} component
    * @returns {Promise<void>}
    */
-  removeModal(component: SimpleModalComponent<any, any>): Promise<any> {
-    return component.close();
+  removeModal(closingModal: SimpleModalComponent<any, any>): Promise<any> {
+    const options = closingModal.options;
+    this.toggleWrapperClass(closingModal.wrapper, options.wrapperClass);
+    this.toggleBodyClass(options.bodyClass);
+    return this.wait(options.animationDuration).then(() => {
+      this._removeElement(closingModal);
+    });
   }
 
-
-   /**
-   * Instructs all open modals to
-   */
+  /**
+  * Instructs all open modals to
+  */
   removeAllModals(): Promise<any> {
-    return Promise.all( this.modals.map( modal => modal.close()));
+    return Promise.all(this.modals.map(modal => this.removeModal(modal)));
   }
-
 
   /**
    * Bind a body class 'modal-open' to a condition of modals in pool > 0
    * @param bodyClass - string to add and remove from body in document
    */
-  private configBodyClass(options: SimpleModalOptions) {
-    const bodyClass = options.bodyClass;
+  private toggleBodyClass(bodyClass: string) {
     if (!bodyClass) {
       return;
     }
@@ -95,39 +106,12 @@ export class SimpleModalHolderComponent {
   }
 
   /**
-   * Take the index value in config and use it to splice into array of modals
-   * TODO - challenge the point of this?
-   * @param options
-   * @param _component
-   */
-  private configIndex(options: SimpleModalOptions, _component: SimpleModalComponent<any, any>) {
-    if ((options.index >= 0) && (options.index < this.modals.length)) {
-      this.modals.splice(options.index, 0, _component);
-    } else {
-      this.modals.push(_component);
-    }
-  }
-
-  /**
-   * if there is an autoclose timeout in options, wait for that time and then call remove
-   * @param options
-   * @param _component
-   */
-  private configAutoClose(options: SimpleModalOptions, _component: SimpleModalComponent<any, any>) {
-    if (options.autoCloseTimeout > 0) {
-      this.wait(options.autoCloseTimeout).then(() => {
-        _component.close();
-      });
-    }
-  }
-
-  /**
    * if the option to close on background click is set, then hook up a callback
    * @param options
    * @param modalWrapper
    */
-  private configCloseOnClickOutside(options: SimpleModalOptions, modalWrapper: SimpleModalWrapperComponent) {
-    if (options.closeByClickingOutside) {
+  private configureCloseOnClickOutside(modalWrapper: SimpleModalWrapperComponent) {
+    if (modalWrapper.content.options.closeOnClickOutside) {
       modalWrapper.onClickOutsideModalContent(() => {
         modalWrapper.content.close();
       });
@@ -135,50 +119,39 @@ export class SimpleModalHolderComponent {
   }
 
   /**
+   * Configure the adding and removal of a wrapper class - predominantly animation focused
+   * @param options
+   * @param modalWrapperEl
+   */
+  private toggleWrapperClass(modalWrapperEl: ElementRef, wrapperClass: string) {
+    const wrapperClassList = modalWrapperEl.nativeElement.classList;
+    if (wrapperClassList.contains(wrapperClass)) {
+      wrapperClassList.remove(wrapperClass);
+    } else {
+      wrapperClassList.add(wrapperClass);
+    }
+  }
+
+  /**
+   * Helper function for a more readable timeout
+   * @param ms
+   */
+  private wait(ms: number = 0) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => resolve(), ms);
+    });
+  }
+
+
+  /**
    * Side effects to other DOM when this component opens
    * @param options
    * @param _component
    * @param modalWrapper
    */
-  private configOpenActions(options: SimpleModalOptions, modalWrapper: SimpleModalWrapperComponent) {
+  private onOpening(onModalOpened: () => void) {
     // wait a tick for DOM then perform addition actions
-    this.wait().then(() => {
-      this.configWrapperClass(options, modalWrapper.wrapper);
-      this.configBodyClass(options);
-    });
-  }
-
-  /**
-   * When close function is called this callback is too
-   * @param options
-   * @param _component
-   * @param modalWrapper
-   */
-  private configCloseActions(options: SimpleModalOptions, _component: SimpleModalComponent<any, any>) {
-    _component.onClose(closingComponent => {
-      this.configWrapperClass(options, _component.wrapper);
-      this.configBodyClass(options);
-      return this.wait(options.animationDuration).then( () => {
-        this._removeElement(closingComponent);
-      });
-    });
-  }
-
-
-  private configWrapperClass(options: SimpleModalOptions, modalWrapperEl: ElementRef) {
-    const wrapperClassList = modalWrapperEl.nativeElement.classList;
-    if (wrapperClassList.contains(options.wrapperClass)) {
-      wrapperClassList.remove(options.wrapperClass);
-    } else {
-      wrapperClassList.add(options.wrapperClass);
-    }
-  }
-
-
-  private wait(ms: number = 0) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => resolve(), ms);
-    });
+    this.wait().then(() => onModalOpened());
   }
 
   /**
