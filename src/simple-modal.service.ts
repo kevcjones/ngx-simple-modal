@@ -56,24 +56,27 @@ export class SimpleModalService {
   }
 
   /**
-   * Hides and removes modal from DOM
+   * Hides and removes modal from DOM, resolves promise when fully removed
    * @param {SimpleModalComponent} component
+   * @return {Promise<{}>}
+
    */
-  removeModal(component: SimpleModalComponent<any, any>): void {
+  removeModal(component: SimpleModalComponent<any, any>): Promise<{}> {
     if (!this.modalHolderComponent) {
-      return;
+      return Promise.resolve({});
     }
-    this.modalHolderComponent.removeModal(component);
+    return this.modalHolderComponent.removeModal(component);
   }
 
   /**
-   * Closes all modals
+   * Closes all modals, resolves promise when they're fully removed
+   * @return {Promise<{}>}
    */
-  removeAll(): void {
+  removeAll(): Promise<{}> {
     if (!this.modalHolderComponent) {
-      return;
+      return Promise.resolve({});
     }
-    this.modalHolderComponent.removeAllModals();
+    return this.modalHolderComponent.removeAllModals();
   }
 
   /**
