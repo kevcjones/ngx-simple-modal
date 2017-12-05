@@ -6,9 +6,9 @@ import { SimpleModalModule } from 'ngx-simple-modal';
 
 import { AppComponent } from './app.component';
 import { AlertComponent } from './alert/alert.component';
-import { ConfirmComponent } from "./confirm/confirm.component";
-import { PromptComponent } from "./prompt/prompt.component";
-import { ParentDialogModalComponent } from "./parent-dialog/parent-dialog.component";
+import { ConfirmComponent } from './confirm/confirm.component';
+import { PromptComponent } from './prompt/prompt.component';
+import { ParentDialogModalComponent } from './parent-dialog/parent-dialog.component';
 
 @NgModule({
   declarations: [
