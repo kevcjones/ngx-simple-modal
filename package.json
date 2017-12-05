@@ -1,6 +1,6 @@
 {
   "name": "ngx-simple-modal",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A simple unopinionated framework to implement simple modal based behaviour in angular (v2+) projects.",
   "main": "index.js",
   "scripts": {
@@ -25,8 +25,7 @@
     "url": "https://github.com/kevcjones/ngx-simple-modal/issues"
   },
   "homepage": "https://github.com/kevcjones/ngx-simple-modal#readme",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@angular/common": "4.4.6",
     "@angular/animations": "4.4.6",
