@@ -5,7 +5,4 @@ npm-debug.log
 # IDE #
 .idea/
 
-# Compiled code #
-dist
-
 
