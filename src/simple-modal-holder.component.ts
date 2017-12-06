@@ -76,9 +76,9 @@ export class SimpleModalHolderComponent {
   removeModal(closingModal: SimpleModalComponent<any, any>): Promise<any> {
     const options = closingModal.options;
     this.toggleWrapperClass(closingModal.wrapper, options.wrapperClass);
-    this.toggleBodyClass(options.bodyClass);
     return this.wait(options.animationDuration).then(() => {
       this._removeElement(closingModal);
+      this.toggleBodyClass(options.bodyClass);
     });
   }
 
