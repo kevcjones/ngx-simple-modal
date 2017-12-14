@@ -12,16 +12,111 @@ Extend the ModalComponent class and implement any content you want.
 npm install ngx-simple-modal
 ```
 TODO - add demo link
-TODO - add css usage 
 
 ## Quickstart
 
-### Step 0. add CSS  
-You can add CSS from component
+### Step 0. add CSS
 
-TODO show how to include the css file via the angular config file
-```json
+To create a custom modal box, you can start with the following example, wich is going to create a modal with a header, body and footer. The css already provide a transparency overlay, opacity and slide animation.
 
+You can customize it according to your needs.
+
+**html template**
+
+```html
+<div class="modal_box">
+    <div class="modal_head">
+      <!-- Your Title -->
+    </div>
+    <div class="modal_body">
+      <!-- Modal custom content -->
+    </div>
+    <div class="modal_foot">
+      <!-- 
+        Footer to add button control
+        ex.: <button (click)="close()">Cancel</button>
+      -->
+    </div>
+</div>
+```
+
+```css
+.modal {
+  background-color: rgba(0,0,0,.4);
+  bottom: 0;
+  height: 100%;
+  left: 0;
+  overflow: hidden;
+  padding: 0 16px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 10; /* Adjust according to your needs */
+}
+
+.modal.fade {
+  transition: opacity 400ms ease-in-out;
+  will-change: opacity;
+  opacity: 0;
+}
+
+.modal.fade.in {
+  opacity: 1;
+}
+
+.modal_box {
+  background-color: #ffffff;
+  border-radius: 4px;
+  margin: 16px auto;
+  max-width: 580px;
+  position: relative;
+  transition: opacity 400ms ease-in-out;
+  width: 100%;
+  will-change: opacity;
+}
+
+/** 
+ * You can use these classes to control modal size.
+ * ex.: <div class="modal_box modal_box-size-l">...</div>
+ */
+.modal_box-size-m {
+  max-width: 992px;
+}
+
+.modal_box-size-l {
+  max-width: 1200px;
+}
+
+.modal_foot,
+.modal_head {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 56px;
+  padding: 0 16px;
+}
+
+.modal_head {
+  border-bottom: 1px solid #cecece;
+}
+
+.modal_body {
+  padding: 16px;
+}
+
+.modal_foot {
+  border-top: 1px solid #cecece;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end
+}
+
+.modal_foot button{
+  margin: 0 16px 0 0;
+}
 ```
 
 ### Step 1. import '**SimpleModalModule**' module
@@ -85,21 +180,20 @@ export interface ConfirmModel {
 }
 @Component({  
     selector: 'confirm',
-    template: `<div class="modal-modal">
-                <div class="modal-content">
-                   <div class="modal-header">
-                     <button type="button" class="close" (click)="close()" >&times;</button>
-                     <h4 class="modal-title">{{title || 'Confirm'}}</h4>
-                   </div>
-                   <div class="modal-body">
-                     <p>{{message || 'Are you sure?'}}</p>
-                   </div>
-                   <div class="modal-footer">
-                     <button type="button" class="btn btn-primary" (click)="confirm()">OK</button>
-                     <button type="button" class="btn btn-default" (click)="close()" >Cancel</button>
-                   </div>
-                 </div>
-              </div>`
+    template: `
+      <div class="modal_box">
+        <div class="modal_head">
+          <h4>{{title || 'Confirm'}}</h4>
+        </div>
+        <div class="modal_body">
+          <p>{{message || 'Are you sure?'}}</p>
+        </div>
+        <div class="modal_foot">
+          <button type="button" class="btn btn-outline-danger" (click)="close()" >Cancel</button>
+          <button type="button" class="btn btn-primary" (click)="confirm()">OK</button>
+        </div>
+      </div>
+    `
 })
 export class ConfirmComponent extends SimpleModalComponent<ConfirmModel, boolean> implements ConfirmModel {
   title: string;
@@ -158,8 +252,16 @@ app.component.ts
     @Component({
       selector: 'app',
       template: `
-        <div class="container">
-          <button class="btn btn-default" (click)=showConfirm()>Show confirm</button>
+        <div class="modal_box">
+          <div class="modal_head">
+            <h4>Confirm</h4>
+          </div>
+          <div class="modal_body">
+            <p>Are you sure?</p>
+          </div>
+          <div class="modal_foot">
+            <button type="button" class="btn btn-primary" (click)="showConfirm()">Show confirm</button>
+          </div>
         </div>
       `
     })
