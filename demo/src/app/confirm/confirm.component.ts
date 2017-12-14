@@ -8,21 +8,20 @@ export interface ConfirmModel {
 
 @Component({
   selector: 'confirm',
-  template: `<div class="modal-dialog">
-                <div class="modal-content">
-                   <div class="modal-header">
-                     <button type="button" class="close" (click)="close()" >&times;</button>
-                     <h4 class="modal-title">{{title || 'Confirm'}}</h4>
-                   </div>
-                   <div class="modal-body">
-                     <p>{{message || 'Are you sure?'}}</p>
-                   </div>
-                   <div class="modal-footer">
-                     <button type="button" class="btn btn-primary" (click)="confirm()">OK</button>
-                     <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
-                   </div>
-                 </div>
-                </div>`
+  template: `
+    <div class="modal_box">
+      <div class="modal_head">
+        <h4>{{title || 'Confirm'}}</h4>
+      </div>
+      <div class="modal_body">
+        <p>{{message || 'Are you sure?'}}</p>
+      </div>
+      <div class="modal_foot">
+        <button type="button" class="btn btn-outline-danger" (click)="cancel()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="confirm()">OK</button>
+      </div>
+    </div>
+  `
 })
 export class ConfirmComponent extends SimpleModalComponent<ConfirmModel, boolean> implements ConfirmModel {
   title: string;

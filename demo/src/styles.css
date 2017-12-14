@@ -1,1 +1,66 @@
 /* You can add global styles to this file, and also import other style files */
+.modal{
+  background-color:rgba(0,0,0,.4);
+  bottom:0;
+  height:100%;
+  left:0;
+  overflow: hidden;
+  padding: 0 16px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 10; /* Adjust according to your needs */
+}
+
+.modal.fade {
+  transition: opacity 400ms ease-in-out;
+  will-change: opacity;
+  opacity: 0;
+}
+
+.modal.fade.in {
+  opacity: 1;
+}
+
+.modal_box {
+  background-color:#ffffff;
+  border-radius: 4px;
+  margin: 16px auto;
+  max-width: 580px;
+  position: relative;
+  transition: opacity 400ms ease-in-out;
+  width: 100%;
+  will-change: opacity;
+}
+
+.modal_box-size-m {
+  max-width: 992px;
+}
+
+.modal_box-size-l {
+  max-width: 1200px;
+}
+
+.modal_foot,
+.modal_head {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 56px;
+  padding: 0 16px;
+}
+
+.modal_head {
+  border-bottom:1px solid #cecece;
+}
+
+.modal_body {
+  padding: 16px;
+}
+
+.modal_foot {
+  border-top:1px solid #cecece;
+}
