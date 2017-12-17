@@ -1,1 +1,0 @@
-export { SimpleModalService, SimpleModalModule, SimpleModalOptions, SimpleModalComponent, SimpleModalServiceConfig } from './dist/index';

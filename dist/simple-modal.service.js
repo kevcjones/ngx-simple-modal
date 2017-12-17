@@ -43,7 +43,6 @@ var SimpleModalService = (function () {
         componentRef.onDestroy(function () {
             _this.applicationRef.detachView(componentRef.hostView);
         });
-        console.log('creating container...', this.container);
         this.container.appendChild(componentRootNode);
         return componentRef.instance;
     };
