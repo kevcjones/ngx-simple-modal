@@ -11,13 +11,10 @@ var SimpleModalServiceConfig = (function () {
 exports.SimpleModalServiceConfig = SimpleModalServiceConfig;
 var SimpleModalService = (function () {
     function SimpleModalService(resolver, applicationRef, injector, config) {
-        var _this = this;
         this.resolver = resolver;
         this.applicationRef = applicationRef;
         this.injector = injector;
-        Promise.resolve(config && config.container).then(function (container) {
-            _this.container = container;
-        });
+        this.container = config.container;
     }
     SimpleModalService.prototype.addModal = function (component, data, options) {
         if (!this.modalHolderComponent) {
@@ -42,17 +39,31 @@ var SimpleModalService = (function () {
         var componentFactory = this.resolver.resolveComponentFactory(simple_modal_holder_component_1.SimpleModalHolderComponent);
         var componentRef = componentFactory.create(this.injector);
         var componentRootNode = componentRef.hostView.rootNodes[0];
-        if (!this.container) {
-            var componentRootViewContainer = this.applicationRef['components'][0];
-            this.container = componentRootViewContainer.hostView.rootNodes[0];
-        }
         this.applicationRef.attachView(componentRef.hostView);
         componentRef.onDestroy(function () {
             _this.applicationRef.detachView(componentRef.hostView);
         });
+        console.log('creating container...', this.container);
         this.container.appendChild(componentRootNode);
         return componentRef.instance;
     };
+    Object.defineProperty(SimpleModalService.prototype, "container", {
+        get: function () {
+            if (typeof this._container === 'string') {
+                this._container = document.getElementById(this._container);
+            }
+            if (!this._container) {
+                var componentRootViewContainer = this.applicationRef['components'][0];
+                this.container = componentRootViewContainer.hostView.rootNodes[0];
+            }
+            return this._container;
+        },
+        set: function (c) {
+            this._container = c;
+        },
+        enumerable: true,
+        configurable: true
+    });
     SimpleModalService.decorators = [
         { type: core_1.Injectable },
     ];

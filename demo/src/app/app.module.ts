@@ -22,7 +22,7 @@ import { ParentDialogModalComponent } from "./parent-dialog/parent-dialog.compon
     BrowserModule,
     FormsModule,
     HttpModule,
-    SimpleModalModule
+    SimpleModalModule.forRoot({container: "modal-container"})
   ],
   entryComponents: [
     AlertComponent,

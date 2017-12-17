@@ -7,7 +7,7 @@ import { SimpleModalOptions } from './simple-modal-options';
 
 
 export class SimpleModalServiceConfig {
-  container: HTMLElement | PromiseLike<HTMLElement> = null;
+  container: HTMLElement | string = null;
 }
 
 @Injectable()
@@ -21,9 +21,9 @@ export class SimpleModalService {
 
   /**
    * HTML container for modals
-   * type {HTMLElement}
+   * type {HTMLElement | string}
    */
-  private container: HTMLElement;
+  private _container;
 
   /**
    * @param {ComponentFactoryResolver} resolver
@@ -35,10 +35,9 @@ export class SimpleModalService {
     private resolver: ComponentFactoryResolver,
     private applicationRef: ApplicationRef,
     private injector: Injector,
+
     @Optional() config: SimpleModalServiceConfig) {
-      Promise.resolve(config && config.container).then(container => {
-        this.container = container;
-      });
+      this.container = config.container as any;
   }
 
   /**
@@ -90,18 +89,32 @@ export class SimpleModalService {
     const componentRef = componentFactory.create(this.injector);
     const componentRootNode = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
 
-    if (!this.container) {
-      const componentRootViewContainer = this.applicationRef['components'][0];
-      this.container = (componentRootViewContainer.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
-    }
     this.applicationRef.attachView(componentRef.hostView);
 
     componentRef.onDestroy(() => {
       this.applicationRef.detachView(componentRef.hostView);
     });
+
     this.container.appendChild(componentRootNode);
 
     return componentRef.instance;
+  }
+
+  public set container(c) {
+    this._container = c;
+  }
+
+  public get container(): HTMLElement {
+    if (typeof this._container === 'string') {
+      this._container = document.getElementById(this._container);
+    }
+
+    if (!this._container) {
+      const componentRootViewContainer = this.applicationRef['components'][0];
+      this.container = (componentRootViewContainer.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
+    }
+
+    return this._container;
   }
 
 }

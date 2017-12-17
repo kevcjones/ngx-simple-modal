@@ -17,8 +17,8 @@ var SimpleModalWrapperComponent = (function () {
     SimpleModalWrapperComponent.prototype.onClickOutsideModalContent = function (callback) {
         this.clickOutsideCallback = callback;
         var containerEl = this.wrapper.nativeElement;
-        containerEl.querySelector(':first-child').addEventListener('click', this.stopEventPropagation);
-        containerEl.addEventListener('click', this.clickOutsideCallback, false);
+        containerEl.querySelector(':first-child').addEventListener('click', this.stopEventPropagation, false);
+        containerEl.addEventListener('click', this.clickOutsideCallback, true);
     };
     SimpleModalWrapperComponent.prototype.stopEventPropagation = function (event) {
         event.stopPropagation();
