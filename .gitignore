@@ -1,6 +1,12 @@
+# build files #
+compiled/
+
 # Node Files #
 node_modules
 npm-debug.log
 
 # IDE #
 .idea/
+
+# NPM Lock files #
+package-lock.json
