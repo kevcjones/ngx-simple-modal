@@ -14,11 +14,12 @@ var SimpleModalWrapperComponent = (function () {
         this.content.wrapper = this.wrapper;
         return this.content;
     };
-    SimpleModalWrapperComponent.prototype.onClickOutsideModalContent = function (callback) {
+    SimpleModalWrapperComponent.prototype.onClickOutsideModalContent = function (contentClass, callback) {
         this.clickOutsideCallback = callback;
         var containerEl = this.wrapper.nativeElement;
-        containerEl.querySelector(':first-child').addEventListener('click', this.stopEventPropagation, false);
-        containerEl.addEventListener('click', this.clickOutsideCallback, true);
+        var contentEl = containerEl.querySelector(contentClass) || containerEl.querySelector(':first-child');
+        contentEl.addEventListener('click', this.stopEventPropagation);
+        containerEl.addEventListener('click', this.clickOutsideCallback, false);
     };
     SimpleModalWrapperComponent.prototype.stopEventPropagation = function (event) {
         event.stopPropagation();

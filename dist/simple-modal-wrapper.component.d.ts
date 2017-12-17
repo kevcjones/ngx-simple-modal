@@ -8,7 +8,7 @@ export declare class SimpleModalWrapperComponent implements OnDestroy {
     clickOutsideCallback: () => void;
     constructor(resolver: ComponentFactoryResolver);
     addComponent<T, T1>(component: Type<SimpleModalComponent<T, T1>>): SimpleModalComponent<any, any>;
-    onClickOutsideModalContent(callback: () => void): void;
+    onClickOutsideModalContent(contentClass: string | boolean, callback: () => void): void;
     private stopEventPropagation(event);
     ngOnDestroy(): void;
 }

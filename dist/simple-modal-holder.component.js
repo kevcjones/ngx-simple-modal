@@ -52,7 +52,7 @@ var SimpleModalHolderComponent = (function () {
     };
     SimpleModalHolderComponent.prototype.configureCloseOnClickOutside = function (modalWrapper) {
         if (modalWrapper.content.options.closeOnClickOutside) {
-            modalWrapper.onClickOutsideModalContent(function () {
+            modalWrapper.onClickOutsideModalContent(modalWrapper.content.options.closeOnClickOutside, function () {
                 modalWrapper.content.close();
             });
         }
