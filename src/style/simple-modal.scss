@@ -37,6 +37,10 @@ $_constant-border: 1px solid #cecece;
   }
 }
 
+.modal-open {
+  overflow: hidden;
+}
+
 .modal-content {
   background-color: #FFFFFF;
   border-radius: 4px;

@@ -21,6 +21,10 @@
   opacity: 1;
 }
 
+.modal-open {
+  overflow: hidden;
+}
+
 .modal-content {
   background-color:#ffffff;
   border-radius: 4px;
