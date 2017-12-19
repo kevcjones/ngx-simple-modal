@@ -1,12 +1,16 @@
 {
   "name": "ngx-simple-modal",
-  "version": "1.1.4",
+  "version": "1.2.0",
   "description": "A simple unopinionated framework to implement simple modal based behaviour in angular (v2+) projects.",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "lint": "tslint src/*",
-    "build": "rm -rf dist && npm run lint && ngc",
-    "win-build": "(if exist rd /s /q dist) && npm run lint && ngc"
+    "prebuild": "rimraf dist",
+    "build": "npm run lint && ngc",
+    "postbuild": "npm run prepare-package",
+    "prepare-package": "node scripts/release.js"
   },
   "repository": {
     "type": "git",
@@ -14,6 +18,8 @@
   },
   "keywords": [
     "angular2",
+    "angular4",
+    "angular5",
     "angularx",
     "ngx",
     "dialog",
@@ -27,17 +33,21 @@
   "homepage": "https://github.com/kevcjones/ngx-simple-modal#readme",
   "dependencies": {},
   "devDependencies": {
-    "@angular/common": "4.4.6",
     "@angular/animations": "4.4.6",
-    "@angular/core": "4.4.6",
-    "rxjs": "^5.0.3",
-    "zone.js": "^0.8.12",
+    "@angular/common": "4.4.6",
     "@angular/compiler": "4.4.6",
     "@angular/compiler-cli": "4.4.6",
+    "@angular/core": "4.4.6",
     "@angular/platform-browser": "4.4.6",
     "@angular/platform-server": "4.4.6",
+    "awesome-typescript-loader": "^3.4.1",
     "codelyzer": "^4.0.1",
+    "copyfiles": "^1.2.0",
+    "fs": "0.0.1-security",
+    "rimraf": "^2.6.1",
+    "rxjs": "^5.0.3",
     "tslint": "^5.8.0",
-    "typescript": "^2.3.4"
+    "typescript": "^2.3.4",
+    "zone.js": "^0.8.12"
   }
 }

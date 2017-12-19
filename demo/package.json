@@ -9,8 +9,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "rebuild": "cd .. && npm run build && cd demo && rm -rf node_modules/ngx-simple-modal && npm i && ng serve",
-    "postinstall": "rm -rf node_modules/ngx-simple-modal/node_modules/"
+    "postinstall": "rm -rf node_modules/ngx-simple-modal && cp -rf ../dist node_modules/ngx-simple-modal",
+    "rebuild": "cd .. && npm run build && cd demo && rimraf node_modules/ngx-simple-modal && npm i && ng serve"
   },
   "private": true,
   "dependencies": {
@@ -25,10 +25,10 @@
     "@angular/router": "4.4.6",
     "core-js": "2.4.1",
     "rxjs": "5.4.1",
-    "zone.js": "0.8.14",
-    "ngx-simple-modal": "file:../"
+    "zone.js": "0.8.14"
   },
   "devDependencies": {
+    "rimraf": "^2.6.1",
     "@angular/cli": "1.2.4",
     "@angular/compiler-cli": "4.4.6",
     "@types/jasmine": "~2.5.53",
