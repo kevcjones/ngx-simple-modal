@@ -41,7 +41,7 @@ export class AppComponent {
   }
 
   showAlert2() {
-    this.SimpleModalService.addModal(AlertComponent, { message: 'Click outside to close dialog' }, { closeOnClickOutside: true });
+    this.SimpleModalService.addModal(AlertComponent, { message: 'Click outside to close dialog' }, { closeOnClickOutside: '.modal-content' });
   }
 
   showAlert3() {

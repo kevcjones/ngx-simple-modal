@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.defaultModalOptions = {
     closeOnEscape: false,
-    closeOnClickOutside: false,
+    closeOnClickOutside: 'modal-content',
     bodyClass: 'modal-open',
     wrapperClass: 'in',
     animationDuration: 300
