@@ -1,6 +1,6 @@
 export interface SimpleModalOptions {
     closeOnEscape?: boolean;
-    closeOnClickOutside?: boolean;
+    closeOnClickOutside?: string | boolean;
     bodyClass?: string;
     wrapperClass?: string;
     animationDuration?: number;

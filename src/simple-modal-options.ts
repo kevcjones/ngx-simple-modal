@@ -1,6 +1,6 @@
 export interface SimpleModalOptions {
   closeOnEscape?: boolean;
-  closeOnClickOutside?: boolean;
+  closeOnClickOutside?: string | boolean;
   bodyClass?: string;
   wrapperClass?: string;
   animationDuration?: number;
@@ -8,7 +8,7 @@ export interface SimpleModalOptions {
 
 export const defaultModalOptions: SimpleModalOptions = {
   closeOnEscape: false,
-  closeOnClickOutside: false,
+  closeOnClickOutside: 'modal-content',
   bodyClass: 'modal-open',
   wrapperClass: 'in',
   animationDuration: 300
