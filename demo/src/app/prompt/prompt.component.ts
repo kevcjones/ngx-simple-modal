@@ -8,21 +8,21 @@ export interface PromptModel {
 
 @Component({
   selector: 'prompt',
-  template: `<div class="modal-dialog">
-                <div class="modal-content">
-                   <div class="modal-header">
-                     <button type="button" class="close" (click)="close()">&times;</button>
-                     <h4 class="modal-title">{{title || 'Prompt'}}</h4>
-                   </div>
-                   <div class="modal-body">
-                    <label>{{question}}</label><input type="text" class="form-control" [(ngModel)]="message" name="name" >
-                   </div>
-                   <div class="modal-footer">
-                     <button type="button" class="btn btn-primary" (click)="apply()">OK</button>
-                     <button type="button" class="btn btn-default" (click)="close()" >Cancel</button>
-                   </div>
-                 </div>
-                </div>`
+  template: `
+    <div class="modal_box">
+      <div class="modal_head">
+        <h4>{{title || 'Prompt'}}</h4>
+      </div>
+      <div class="modal_body">
+        <label>{{question}}</label>
+        <input type="text" class="form-control" [(ngModel)]="message" name="name" />
+      </div>
+      <div class="modal_foot">
+        <button type="button" class="btn btn-outline-danger" (click)="close()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="apply()">Confirm</button>
+      </div>
+    </div>
+  `
 })
 export class PromptComponent extends SimpleModalComponent<PromptModel, string> implements PromptModel {
   title: string;
