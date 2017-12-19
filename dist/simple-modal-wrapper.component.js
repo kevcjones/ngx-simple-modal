@@ -17,7 +17,6 @@ var SimpleModalWrapperComponent = (function () {
     SimpleModalWrapperComponent.prototype.onClickOutsideModalContent = function (contentClass, callback) {
         this.clickOutsideCallback = callback;
         var containerEl = this.wrapper.nativeElement;
-
         var contentEl = containerEl.querySelector(contentClass) || containerEl.querySelector(':first-child');
         contentEl.addEventListener('click', this.stopEventPropagation);
         containerEl.addEventListener('click', this.clickOutsideCallback, false);

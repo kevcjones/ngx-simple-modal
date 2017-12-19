@@ -224,10 +224,12 @@ abstract abstract class SimpleModalComponent<T1, T2> implements T1 {
 interface SimpleModalOptions {
   
   /**
-  * Flag to close modal by click on backdrop (outside modal)
-  * @type {boolean}
+  * class to close modal by click on backdrop anything except content classed (outside modal)
+  * using a boolean will simply assume first child of your implemented modal is content
+  * is used in querySelector so must obey its inputs e.g. .class-name or #idName
+  * @type {string}
   */
-  closeOnClickOutside?: boolean;
+  closeOnClickOutside?: string | boolean;
 
    /**
   * Flag to close modal by click on backdrop (outside modal)
