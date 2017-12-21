@@ -1,27 +1,34 @@
 # NGX Simple Modal [![Build Status](https://travis-ci.org/KevCJones/ngx-simple-modal.svg?branch=master)](https://travis-ci.org/KevCJones/ngx-simple-modal)
 
-* In development - we are moving over from angularx-bootstrap-modal *
-
-It is a library to make usage modal easier in Angular2, has no dependencies, but plays well with bootstrap or other frameworks. 
-Create clear and reusable modal components.
-It makes managing modals painless and clearer. 
-Extend the ModalComponent class and implement any content you want. 
+It is a library to makes modals easier in Angular2, has no dependencies, but plays well with bootstrap or other frameworks. 
+- Create clear and reusable modal components.
+- It makes managing modals painless and clearer. 
+- Extend the ModalComponent class and implement any content you want. 
 
 ## Installation
 ```npm
 npm install ngx-simple-modal
 ```
-TODO - add demo link
 
 ## Quickstart
 
-### Step 0. add CSS
+### Step 0. assuming you want to use our built in styles
 
 To create a custom modal box, you can start with the following example, wich is going to create a modal with a header, body and footer. The css already provide a transparency overlay, opacity and slide animation.
 
-You can customize it according to your needs.
+Inside your angular-cli.json update your styles sections to include our CSS
+```
+"styles": [
+  "styles.css",
+  "../node_modules/ngx-simple-modal/styles/simple-modal.css"
+],
+```
 
-**html template**
+#### But i use SASS/SCSS?
+
+We got you covered, you can `@import '../node_modules/ngx-simple-modal/styles/simple-modal.scss'` into what ever root based scss global style you want. Update the relative path depending on where you want to pull it in.
+
+#### Assumed HTML template if you want our base styles 
 
 ```html
 <div class="modal-content">
@@ -40,86 +47,8 @@ You can customize it according to your needs.
 </div>
 ```
 
-```css
-.modal {
-  background-color: rgba(0,0,0,.4);
-  bottom: 0;
-  height: 100%;
-  left: 0;
-  overflow: hidden;
-  padding: 0 16px;
-  position: fixed;
-  right: 0;
-  top: 0;
-  z-index: 10; /* Adjust according to your needs */
-}
 
-.modal.fade {
-  transition: opacity 400ms ease-in-out;
-  will-change: opacity;
-  opacity: 0;
-}
-
-.modal.fade.in {
-  opacity: 1;
-}
-
-.modal-content {
-  background-color: #ffffff;
-  border-radius: 4px;
-  margin: 16px auto;
-  max-width: 580px;
-  position: relative;
-  transition: opacity 400ms ease-in-out;
-  width: 100%;
-  will-change: opacity;
-}
-
-/** 
- * You can use these classes to control modal size.
- * ex.: <div class="modal-content modal-content-size-l">...</div>
- */
-.modal-content-size-m {
-  max-width: 992px;
-}
-
-.modal-content-size-l {
-  max-width: 1200px;
-}
-
-.modal-footer,
-.modal-header {
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  height: 56px;
-  padding: 0 16px;
-}
-
-.modal-header {
-  border-bottom: 1px solid #cecece;
-}
-
-.modal-body {
-  padding: 16px;
-}
-
-.modal-footer {
-  border-top: 1px solid #cecece;
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
-  justify-content: flex-end
-}
-
-.modal-footer button {
-  margin: 0 16px 0 0;
-}
-```
-
-### Step 1. import '**SimpleModalModule**' module
+### Step 1. Import the '**SimpleModalModule**' module
 
 app.module.ts:
 ```typescript
@@ -289,6 +218,47 @@ app.component.ts
         }
     }
 ```
+
+## What if i want to use Bootstrap 3 or 4?
+
+We got you! An example boostrap alert modal component.
+
+```typescript
+import { Component } from '@angular/core';
+import { SimpleModalComponent } from 'ngx-simple-modal';
+
+export interface AlertModel {
+  title: string;
+  message: string;
+}
+
+@Component({
+  selector: 'alert',
+  template: `<div class="modal-dialog">
+                <div class="modal-content">
+                   <div class="modal-header">
+                     <button type="button" class="close" (click)="close()" >&times;</button>
+                     <h4 class="modal-title">{{title || 'Alert!'}}</h4>
+                   </div>
+                   <div class="modal-body">
+                     <p>{{message || 'TADAA-AM!'}}</p>
+                   </div>
+                   <div class="modal-footer">
+                     <button type="button" class="btn btn-primary" (click)="close()">OK</button>
+                   </div>
+                </div>
+             </div>`
+})
+export class AlertComponent extends SimpleModalComponent<AlertModel, null> implements AlertModel {
+  title: string;
+  message: string;
+  constructor() {
+    super();
+  }
+}
+```
+
+As you can see, the implementation is completely in your control. We're just here to help you create, configure, add, track inputs, and remove. 
 
 ## Documentation
 

@@ -18,7 +18,7 @@ try {
 try {
   fs.copy('README.md', 'dist/README.md');
   fs.copy('LICENSE.md', 'dist/LICENSE.md');
-  fs.copy('src/style', 'dist/style');
+  fs.copy('src/styles', 'dist/styles');
   console.log('Copied additional files');
 } catch (e) {
   console.error(`Failed to copy additional files due to: ${e}`);
