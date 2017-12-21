@@ -3,9 +3,9 @@ import { By } from '@angular/platform-browser';
 import { DebugElement, ComponentFactoryResolver, ApplicationRef, Injector } from '@angular/core';
 
 import { Component } from '@angular/core';
-import { SimpleModalComponent } from './simple-modal.component';
-import { SimpleModalServiceFactory } from './simple-modal-service.factory';
-import { SimpleModalService, SimpleModalServiceConfig } from './simple-modal.service';
+import { SimpleModalComponent } from '../simple-modal/simple-modal.component';
+import { SimpleModalServiceFactory } from '../simple-modal/simple-modal-service.factory';
+import { SimpleModalService, SimpleModalServiceConfig } from '../simple-modal/simple-modal.service';
 
 interface AlertModel {
   title: string;
