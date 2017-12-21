@@ -78,6 +78,23 @@ export class SimpleModalService {
     return this.modalHolderComponent.removeAllModals();
   }
 
+  set container(c) {
+    this._container = c;
+  }
+
+  get container(): HTMLElement {
+    if (typeof this._container === 'string') {
+      this._container = document.getElementById(this._container);
+    }
+
+    if (!this._container) {
+      const componentRootViewContainer = this.applicationRef['components'][0];
+      this.container = (componentRootViewContainer.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
+    }
+
+    return this._container;
+  }
+
   /**
    * Creates and add to DOM modal holder component
    * @return {SimpleModalHolderComponent}
@@ -98,23 +115,6 @@ export class SimpleModalService {
     this.container.appendChild(componentRootNode);
 
     return componentRef.instance;
-  }
-
-  public set container(c) {
-    this._container = c;
-  }
-
-  public get container(): HTMLElement {
-    if (typeof this._container === 'string') {
-      this._container = document.getElementById(this._container);
-    }
-
-    if (!this._container) {
-      const componentRootViewContainer = this.applicationRef['components'][0];
-      this.container = (componentRootViewContainer.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
-    }
-
-    return this._container;
   }
 
 }

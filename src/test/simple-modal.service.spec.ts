@@ -61,7 +61,6 @@ describe('SimpleModalService', () => {
   it('create a "holder" component the first time you add a Modal', () => {
     const createSimpleModalHolderMock = jest.fn().mockImplementation(() => ({addModal: () => {}}));
     modalService['createSimpleModalHolder'] = createSimpleModalHolderMock;
-    console.log(typeof modalService);
     modalService.addModal(AlertComponent, {title: 'Alert title!'});
     modalService.addModal(AlertComponent, {title: 'Alert2 title!'});
     expect(createSimpleModalHolderMock.mock.calls.length).toBe(1);
