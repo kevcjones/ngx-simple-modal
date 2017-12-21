@@ -1,5 +1,4 @@
-const fs = require('fs');
-var copyfiles = require('copyfiles');
+const fs = require('fs-extra');
 const package = require('../package.json');
 
 delete package.scripts;
@@ -10,22 +9,23 @@ package.module = patchPath(package.module);
 package.typings = patchPath(package.typings);
 
 try {
-  fs.writeFileSync('dist/package.json', JSON.stringify(package, null, '  '));
+  fs.writeJsonSync('dist/package.json', package, {spaces: '   '});
   console.log('package.json was written');
 } catch (e) {
   console.error(`Failed to write package.json file due to: ${e}`);
 }
 
 try {
-  copyfiles([
-    'README.md',
-    'LICENSE.md',
-    'dist' // Destination path
-  ], {}, () => null);
+  fs.copy('README.md', 'dist/README.md');
+  fs.copy('LICENSE.md', 'dist/LICENSE.md');
+  fs.copy('src/style', 'dist/style');
   console.log('Copied additional files');
 } catch (e) {
   console.error(`Failed to copy additional files due to: ${e}`);
 }
+
+
+
 
 function patchPath(path) {
   return path.replace('dist/', '');
