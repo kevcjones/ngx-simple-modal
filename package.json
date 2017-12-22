@@ -9,7 +9,7 @@
     "demo": "cd demo && npm i && ng serve",
     "lint": "tslint src/**/*.ts",
     "prebuild": "rimraf dist",
-    "build": "npm run lint && ngc",
+    "build": "npm run lint && npm run test && ngc",
     "postbuild": "npm run prepare-package",
     "prepare-package": "node scripts/release.js",
     "test": "jest",

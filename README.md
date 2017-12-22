@@ -1,6 +1,6 @@
 # NGX Simple Modal [![Build Status](https://travis-ci.org/KevCJones/ngx-simple-modal.svg?branch=master)](https://travis-ci.org/KevCJones/ngx-simple-modal)
 
-It is a library to makes modals easier in Angular2, has no dependencies, but plays well with bootstrap or other frameworks. 
+It is a library to makes modals easier in Angular (2+), has no dependencies, but plays well with bootstrap or other frameworks. 
 - Create clear and reusable modal components.
 - It makes managing modals painless and clearer. 
 - Extend the ModalComponent class and implement any content you want. 
