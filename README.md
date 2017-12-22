@@ -1,30 +1,54 @@
 # NGX Simple Modal [![Build Status](https://travis-ci.org/KevCJones/ngx-simple-modal.svg?branch=master)](https://travis-ci.org/KevCJones/ngx-simple-modal)
 
-* In development - we are moving over from angularx-bootstrap-modal *
-
-It is a library to make usage modal easier in Angular2, has no dependencies, but plays well with bootstrap or other frameworks. 
-Create clear and reusable modal components.
-It makes managing modals painless and clearer. 
-Extend the ModalComponent class and implement any content you want. 
+It is a library to makes modals easier in Angular2, has no dependencies, but plays well with bootstrap or other frameworks. 
+- Create clear and reusable modal components.
+- It makes managing modals painless and clearer. 
+- Extend the ModalComponent class and implement any content you want. 
 
 ## Installation
 ```npm
 npm install ngx-simple-modal
 ```
-TODO - add demo link
-TODO - add css usage 
 
 ## Quickstart
 
-### Step 0. add CSS  
-You can add CSS from component
+### Step 0. assuming you want to use our built in styles
 
-TODO show how to include the css file via the angular config file
-```json
+To create a custom modal box, you can start with the following example, wich is going to create a modal with a header, body and footer. The css already provide a transparency overlay, opacity and slide animation.
 
+Inside your angular-cli.json update your styles sections to include our CSS
+```
+"styles": [
+  "styles.css",
+  "../node_modules/ngx-simple-modal/styles/simple-modal.css"
+],
 ```
 
-### Step 1. import '**SimpleModalModule**' module
+#### But i use SASS/SCSS?
+
+We got you covered, you can `@import '../node_modules/ngx-simple-modal/styles/simple-modal.scss'` into what ever root based scss global style you want. Update the relative path depending on where you want to pull it in.
+
+#### Assumed HTML template if you want our base styles 
+
+```html
+<div class="modal-content">
+    <div class="modal-header">
+      <!-- Your Title -->
+    </div>
+    <div class="modal-body">
+      <!-- Modal custom content -->
+    </div>
+    <div class="modal-footer">
+      <!-- 
+        Footer to add button control
+        ex.: <button (click)="close()">Cancel</button>
+      -->
+    </div>
+</div>
+```
+
+
+### Step 1. Import the '**SimpleModalModule**' module
 
 app.module.ts:
 ```typescript
@@ -85,21 +109,20 @@ export interface ConfirmModel {
 }
 @Component({  
     selector: 'confirm',
-    template: `<div class="modal-modal">
-                <div class="modal-content">
-                   <div class="modal-header">
-                     <button type="button" class="close" (click)="close()" >&times;</button>
-                     <h4 class="modal-title">{{title || 'Confirm'}}</h4>
-                   </div>
-                   <div class="modal-body">
-                     <p>{{message || 'Are you sure?'}}</p>
-                   </div>
-                   <div class="modal-footer">
-                     <button type="button" class="btn btn-primary" (click)="confirm()">OK</button>
-                     <button type="button" class="btn btn-default" (click)="close()" >Cancel</button>
-                   </div>
-                 </div>
-              </div>`
+    template: `
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4>{{title || 'Confirm'}}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{{message || 'Are you sure?'}}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-danger" (click)="close()" >Cancel</button>
+          <button type="button" class="btn btn-primary" (click)="confirm()">OK</button>
+        </div>
+      </div>
+    `
 })
 export class ConfirmComponent extends SimpleModalComponent<ConfirmModel, boolean> implements ConfirmModel {
   title: string;
@@ -158,8 +181,16 @@ app.component.ts
     @Component({
       selector: 'app',
       template: `
-        <div class="container">
-          <button class="btn btn-default" (click)=showConfirm()>Show confirm</button>
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4>Confirm</h4>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" (click)="showConfirm()">Show confirm</button>
+          </div>
         </div>
       `
     })
@@ -187,6 +218,47 @@ app.component.ts
         }
     }
 ```
+
+## What if i want to use Bootstrap 3 or 4?
+
+We got you! An example boostrap alert modal component.
+
+```typescript
+import { Component } from '@angular/core';
+import { SimpleModalComponent } from 'ngx-simple-modal';
+
+export interface AlertModel {
+  title: string;
+  message: string;
+}
+
+@Component({
+  selector: 'alert',
+  template: `<div class="modal-dialog">
+                <div class="modal-content">
+                   <div class="modal-header">
+                     <button type="button" class="close" (click)="close()" >&times;</button>
+                     <h4 class="modal-title">{{title || 'Alert!'}}</h4>
+                   </div>
+                   <div class="modal-body">
+                     <p>{{message || 'TADAA-AM!'}}</p>
+                   </div>
+                   <div class="modal-footer">
+                     <button type="button" class="btn btn-primary" (click)="close()">OK</button>
+                   </div>
+                </div>
+             </div>`
+})
+export class AlertComponent extends SimpleModalComponent<AlertModel, null> implements AlertModel {
+  title: string;
+  message: string;
+  constructor() {
+    super();
+  }
+}
+```
+
+As you can see, the implementation is completely in your control. We're just here to help you create, configure, add, track inputs, and remove. 
 
 ## Documentation
 
