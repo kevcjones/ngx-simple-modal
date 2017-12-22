@@ -1,0 +1,28 @@
+{
+   "name": "ngx-simple-modal",
+   "version": "1.2.0",
+   "description": "A simple unopinionated framework to implement simple modal based behaviour in angular (v2+) projects.",
+   "main": "index.js",
+   "module": "index.js",
+   "typings": "index.d.ts",
+   "repository": {
+      "type": "git",
+      "url": "git+https://github.com/kevcjones/ngx-simple-modal.git"
+   },
+   "keywords": [
+      "angular2",
+      "angular4",
+      "angular5",
+      "angularx",
+      "ngx",
+      "dialog",
+      "modal"
+   ],
+   "author": "Kevin Jones <him@kevincjones.co.uk> (kevcjones)",
+   "license": "MIT",
+   "bugs": {
+      "url": "https://github.com/kevcjones/ngx-simple-modal/issues"
+   },
+   "homepage": "https://github.com/kevcjones/ngx-simple-modal#readme",
+   "dependencies": {}
+}
