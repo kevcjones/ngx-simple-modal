@@ -27,7 +27,7 @@ try {
 }
 
 try {
-  rimraf('dist/test',() => { console.log('deleted test folder..'); });
+  rimraf('dist/tests',() => { console.log('deleted tests folder..'); });
 } catch (e) {
   console.error(`Failed to delete test folder from final package due to: ${e}`);
 }

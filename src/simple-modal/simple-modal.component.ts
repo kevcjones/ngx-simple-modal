@@ -40,7 +40,6 @@ export abstract class SimpleModalComponent<T, T1> implements OnDestroy {
 
   /**
    * Constructor
-   * @param {SimpleModalService} SimpleModalService - instance of SimpleModalService
    */
   constructor() {}
 

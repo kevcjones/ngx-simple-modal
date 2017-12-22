@@ -78,11 +78,16 @@ export class SimpleModalService {
     return this.modalHolderComponent.removeAllModals();
   }
 
-  set container(c) {
+  /**
+   * Accessor for contain - will auto generate from string
+   * if needed or default to the root element if nothing was set
+   */
+  
+  private set container(c) {
     this._container = c;
   }
 
-  get container(): HTMLElement {
+  private get container(): HTMLElement {
     if (typeof this._container === 'string') {
       this._container = document.getElementById(this._container);
     }
