@@ -1,3 +1,5 @@
+'use strict';
+
 import { ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement, ComponentFactoryResolver, ApplicationRef, Injector } from '@angular/core';
@@ -15,7 +17,6 @@ const config: SimpleModalServiceConfig = {
 };
 
 describe('SimpleModalService', () => {
-
   let modalService: SimpleModalService;
   let createSimpleModalHolderMock;
   let simpleModalHolderComponentMock;

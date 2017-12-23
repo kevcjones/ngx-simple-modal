@@ -1,3 +1,5 @@
+'use strict';
+
 import { ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NgModule, DebugElement, ComponentFactoryResolver, ApplicationRef, Injector } from '@angular/core';
