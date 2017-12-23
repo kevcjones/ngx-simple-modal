@@ -30,7 +30,7 @@ describe('SimpleModalHolder', () => {
   let component: SimpleModalHolderComponent;
   let fixture: ComponentFixture<SimpleModalHolderComponent>;
 
-  
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [FakeTestAlertModule],
@@ -66,35 +66,35 @@ describe('SimpleModalHolder', () => {
   it('should have a method called removeAllModals', () => {
     expect(typeof component.removeAllModals).toBe('function');
   });
-  
+
 
   /**
    * Function tests
    */
   it('should add a modal to the modals array when adding', () => {
     expect(component.modals).toHaveLength(0);
-    component.addModal(AlertComponent, {title: 'Alert title!'})
+    component.addModal(AlertComponent, {title: 'Alert title!'});
     expect(component.modals).toHaveLength(1);
   });
 
   it('should remove a modal to the modals array when removing', () => {
     expect.assertions(1);
     component.addModal(AlertComponent, {title: 'Alert title!'});
-    let modal = component.modals[0];
+    const modal = component.modals[0];
     return component.removeModal(modal).then( () => {
-      expect(component.modals).toHaveLength(0);  
+      expect(component.modals).toHaveLength(0);
     });
-    
+
   });
 
   it('should remove a modal to the modals array when removing', () => {
     expect.assertions(1);
     component.addModal(AlertComponent, {title: 'Alert title!'});
-    let modal = component.modals[0];
+    const modal = component.modals[0];
     return component.removeModal(modal).then( () => {
-      expect(component.modals).toHaveLength(0);  
+      expect(component.modals).toHaveLength(0);
     });
-    
+
   });
 
   it('should remove all modals when asked', () => {
@@ -105,9 +105,9 @@ describe('SimpleModalHolder', () => {
     component.addModal(AlertComponent, {title: 'Alert title4'});
     expect(component.modals.length).toBe(4);
     return component.removeAllModals().then( () => {
-      expect(component.modals).toHaveLength(0);  
+      expect(component.modals).toHaveLength(0);
     });
-    
+
   });
 
   it('should add a class to the body when a modal is added', () => {
@@ -117,7 +117,7 @@ describe('SimpleModalHolder', () => {
       setTimeout( () => {
         expect(document.body.classList.contains('modal-open')).toBeTruthy();
         resolve(1);
-      },301)
+      }, 301);
     });
   });
 
@@ -126,7 +126,7 @@ describe('SimpleModalHolder', () => {
     expect.assertions(1);
     component.addModal(AlertComponent, {title: 'Alert title!'});
     component.addModal(AlertComponent, {title: 'Alert title2!'});
-    let modal = component.modals[1];
+    const modal = component.modals[1];
     return component.removeModal(modal).then( () => {
       expect(document.body.classList.contains('modal-open')).toBeTruthy();
     });
@@ -135,13 +135,13 @@ describe('SimpleModalHolder', () => {
   it('should remove class if removing last modal ', () => {
     expect.assertions(1);
     component.addModal(AlertComponent, {title: 'Alert title!'});
-    let modal = component.modals[0];
+    const modal = component.modals[0];
     return component.removeModal(modal).then( () => {
       expect(document.body.classList.contains('modal-open')).toBeFalsy();
     });
   });
 
-  
+
 
 
 });

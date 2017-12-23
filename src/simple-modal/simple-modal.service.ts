@@ -82,7 +82,7 @@ export class SimpleModalService {
    * Accessor for contain - will auto generate from string
    * if needed or default to the root element if nothing was set
    */
-  
+
   private set container(c) {
     this._container = c;
   }

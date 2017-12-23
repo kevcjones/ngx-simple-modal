@@ -7,7 +7,7 @@ import { SimpleModalWrapperComponent } from './simple-modal-wrapper.component';
 import { SimpleModalComponent } from './simple-modal.component';
 
 /**
- * View container manager which manages a list of modals currently active 
+ * View container manager which manages a list of modals currently active
  * inside the viewvontainer
  */
 @Component({
@@ -54,7 +54,7 @@ export class SimpleModalHolderComponent {
     // add to stack
     this.modals.push(_component);
 
-    // wait a tick then setup the following while adding a modal 
+    // wait a tick then setup the following while adding a modal
     this.wait().then(() => {
       this.toggleWrapperClass(modalWrapper.wrapper, options.wrapperClass);
       this.toggleBodyClass(options.bodyClass);
@@ -68,7 +68,7 @@ export class SimpleModalHolderComponent {
 
     // map and return observable
     _component.mapDataObject(data);
-    
+
     return _component.setupObserver();
   }
 

@@ -38,7 +38,7 @@ describe('SimpleModalService', () => {
 
   beforeEach(inject([SimpleModalService], (simpleModalService: SimpleModalService) => {
     modalService = simpleModalService;
-    
+
     // mock the createSimpleModalHolder which generates the holder
     simpleModalHolderComponentMock = SimpleModalHolderComponentMock();
     createSimpleModalHolderMock = jest.fn(() => simpleModalHolderComponentMock);
@@ -71,12 +71,12 @@ describe('SimpleModalService', () => {
   it('attempts to generate a "holder" component [only] the first time you add a Modal', () => {
     modalService.addModal(AlertComponent, {title: 'Alert title!'});
     modalService.addModal(AlertComponent, {title: 'Alert2 title!'});
-    
+
     expect(createSimpleModalHolderMock.mock.calls.length).toBe(1);
   });
 
   it('should try to remove modal if at least one was added', () => {
-    modalService.addModal(AlertComponent, {title: 'Alert title!'});  
+    modalService.addModal(AlertComponent, {title: 'Alert title!'});
     modalService.removeModal(<any>{});
     expect(simpleModalHolderComponentMock.addModal.mock.calls.length).toBe(1);
     expect(simpleModalHolderComponentMock.removeModal.mock.calls.length).toBe(1);
