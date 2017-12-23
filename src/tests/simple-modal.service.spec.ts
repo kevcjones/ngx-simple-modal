@@ -39,7 +39,7 @@ describe('SimpleModalService', () => {
   beforeEach(inject([SimpleModalService], (simpleModalService: SimpleModalService) => {
     modalService = simpleModalService;
     
-    // mock the createSimpleModalHolder which generates the holder component
+    // mock the createSimpleModalHolder which generates the holder
     simpleModalHolderComponentMock = SimpleModalHolderComponentMock();
     createSimpleModalHolderMock = jest.fn(() => simpleModalHolderComponentMock);
     modalService['createSimpleModalHolder'] = createSimpleModalHolderMock;
