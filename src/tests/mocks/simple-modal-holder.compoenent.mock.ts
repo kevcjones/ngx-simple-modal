@@ -5,4 +5,3 @@ export const SimpleModalHolderComponentMock = () => ({
     removeModal: jest.fn(),
     removeAllModals: jest.fn()
   });
-  

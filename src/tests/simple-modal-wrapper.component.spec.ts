@@ -1,19 +1,22 @@
-'use strict';
-
-import { ComponentFixture, TestBed, inject } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { NgModule, DebugElement, ComponentFactoryResolver, ApplicationRef, Injector } from '@angular/core';
-
-import { Component } from '@angular/core';
-import { SimpleModalServiceFactory } from '../simple-modal/simple-modal-service.factory';
-import { SimpleModalService, SimpleModalServiceConfig } from '../simple-modal/simple-modal.service';
 import { AlertComponent } from './mocks/basic-alert';
-import { SimpleModalHolderComponentMock } from './mocks/simple-modal-holder.compoenent.mock';
-import { SimpleModalHolderComponent } from '../simple-modal/simple-modal-holder.component';
-import { SimpleModalWrapperComponent } from '../simple-modal/simple-modal-wrapper.component';
+import {
+  ApplicationRef,
+  ComponentFactoryResolver,
+  DebugElement,
+  Injector,
+  NgModule
+  } from '@angular/core';
+import { By } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs/Observable';
 import { setTimeout } from 'timers';
+import { SimpleModalHolderComponent } from '../simple-modal/simple-modal-holder.component';
+import { SimpleModalHolderComponentMock } from './mocks/simple-modal-holder.compoenent.mock';
+import { SimpleModalService, SimpleModalServiceConfig } from '../simple-modal/simple-modal.service';
+import { SimpleModalServiceFactory } from '../simple-modal/simple-modal-service.factory';
+import { SimpleModalWrapperComponent } from '../simple-modal/simple-modal-wrapper.component';
 
 
 const config: SimpleModalServiceConfig = {
