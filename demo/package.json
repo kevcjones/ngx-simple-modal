@@ -9,7 +9,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "rm -rf node_modules/ngx-simple-modal && cp -rf ../dist node_modules/ngx-simple-modal",
+    "compile": "",
+    "postinstall": "cd .. && npm i && npm run build && cd demo && rimraf node_modules/ngx-simple-modal && cp -rf ../dist node_modules/ngx-simple-modal",
     "rebuild": "cd .. && npm run build && cd demo && rimraf node_modules/ngx-simple-modal && npm i && ng serve"
   },
   "private": true,
