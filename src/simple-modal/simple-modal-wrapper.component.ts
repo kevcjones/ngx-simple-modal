@@ -69,15 +69,6 @@ export class SimpleModalWrapperComponent implements OnDestroy {
     containerEl.addEventListener('click', this.clickOutsideCallback, false);
   }
 
-  /**
-   * Helper function to stop event propagation, as a function so easily unlistened to
-   * @param event
-   */
-  private stopEventPropagation(event) {
-    event.stopPropagation();
-  }
-
-
   ngOnDestroy() {
     if (this.clickOutsideCallback) {
       const containerEl = this.wrapper.nativeElement;
@@ -85,6 +76,14 @@ export class SimpleModalWrapperComponent implements OnDestroy {
       containerEl.removeEventListener('click', this.clickOutsideCallback, false);
       this.clickOutsideCallback = null;
     }
+  }
+
+  /**
+   * Helper function to stop event propagation, as a function so easily unlistened to
+   * @param event
+   */
+  private stopEventPropagation(event) {
+    event.stopPropagation();
   }
 }
 

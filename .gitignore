@@ -1,5 +1,6 @@
 # build files #
 compiled/
+dist/
 
 # Node Files #
 node_modules

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
 import { SimpleModalService } from 'ngx-simple-modal';
 import { AlertComponent } from './alert/alert.component';
 import { ConfirmComponent } from './confirm/confirm.component';
@@ -47,6 +48,11 @@ export class AppComponent {
   showAlert3() {
     this.SimpleModalService.addModal(AlertComponent, { message: 'Dialog with close using escape' }, { closeOnEscape: true});
   }
+
+  showAlert4() {
+    throw new Error('Shown via custom error handler');
+  }
+
   showParentDialog() {
     this.SimpleModalService.addModal(ParentDialogModalComponent);
   }

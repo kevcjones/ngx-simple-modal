@@ -6,11 +6,15 @@
   "module": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
-    "lint": "tslint src/*",
+    "demo": "cd demo && npm i && ng serve",
+    "lint": "tslint src/**/*.ts",
     "prebuild": "rimraf dist",
-    "build": "npm run lint && ngc",
+    "build": "npm run lint && npm run test && ngc",
     "postbuild": "npm run prepare-package",
-    "prepare-package": "node scripts/release.js"
+    "prepare-package": "node scripts/release.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:ci": "jest --runInBand"
   },
   "repository": {
     "type": "git",
@@ -38,15 +42,24 @@
     "@angular/compiler": "4.4.6",
     "@angular/compiler-cli": "4.4.6",
     "@angular/core": "4.4.6",
+    "@angular/platform-browser-dynamic": "4.4.6",
     "@angular/platform-browser": "4.4.6",
     "@angular/platform-server": "4.4.6",
+    "@types/jest": "^19.2.4",
+    "@types/node": "~6.0.60",
     "awesome-typescript-loader": "^3.4.1",
     "codelyzer": "^4.0.1",
+    "jest": "^20.0.3",
+    "jest-preset-angular": "^2.0.2",
     "fs-extra": "^5.0.0",
     "rimraf": "^2.6.1",
     "rxjs": "^5.0.3",
     "tslint": "^5.8.0",
     "typescript": "^2.3.4",
     "zone.js": "^0.8.12"
+  },
+  "jest": {
+    "preset": "jest-preset-angular",
+    "setupTestFrameworkScriptFile": "<rootDir>/src/tests/jest.ts"
   }
 }

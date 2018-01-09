@@ -6,6 +6,10 @@ import { defaultModalOptions, SimpleModalOptions } from './simple-modal-options'
 import { SimpleModalWrapperComponent } from './simple-modal-wrapper.component';
 import { SimpleModalComponent } from './simple-modal.component';
 
+/**
+ * View container manager which manages a list of modals currently active
+ * inside the viewvontainer
+ */
 @Component({
   selector: 'simple-modal-holder',
   template: '<ng-template #viewContainer></ng-template>',
@@ -50,13 +54,13 @@ export class SimpleModalHolderComponent {
     // add to stack
     this.modals.push(_component);
 
-    // when opening the modal
-    this.onOpening(() => {
+    // wait a tick then setup the following while adding a modal
+    this.wait().then(() => {
       this.toggleWrapperClass(modalWrapper.wrapper, options.wrapperClass);
       this.toggleBodyClass(options.bodyClass);
     });
 
-    // when closing modal
+    // when closing modal remove it
     _component.onClosing((modal) => this.removeModal(modal));
 
     // if clicking on background closes modal
@@ -64,6 +68,7 @@ export class SimpleModalHolderComponent {
 
     // map and return observable
     _component.mapDataObject(data);
+
     return _component.setupObserver();
   }
 
@@ -77,7 +82,7 @@ export class SimpleModalHolderComponent {
     const options = closingModal.options;
     this.toggleWrapperClass(closingModal.wrapper, options.wrapperClass);
     return this.wait(options.animationDuration).then(() => {
-      this._removeElement(closingModal);
+      this.removeModalFromArray(closingModal);
       this.toggleBodyClass(options.bodyClass);
     });
   }
@@ -142,24 +147,12 @@ export class SimpleModalHolderComponent {
     });
   }
 
-
-  /**
-   * Side effects to other DOM when this component opens
-   * @param options
-   * @param _component
-   * @param modalWrapper
-   */
-  private onOpening(onModalOpened: () => void) {
-    // wait a tick for DOM then perform addition actions
-    this.wait().then(() => onModalOpened());
-  }
-
   /**
    * Instructs the holder to remove the modal and
    * removes this component from the collection
    * @param {SimpleModalComponent} component
    */
-  private _removeElement(component) {
+  private removeModalFromArray(component) {
     const index = this.modals.indexOf(component);
     if (index > -1) {
       this.viewContainer.remove(index);
