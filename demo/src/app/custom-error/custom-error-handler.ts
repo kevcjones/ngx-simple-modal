@@ -24,7 +24,7 @@ export class CustomErrorHandler implements ErrorHandler {
             message: message,
         });
 
-        //ng5 error handler does not trigger change detection so we have to do this
+        // ng5 error handler does not trigger change detection so we have to do this
         setTimeout(() => appRef.tick(), 0);
   }
 }
