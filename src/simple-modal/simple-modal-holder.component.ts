@@ -103,10 +103,11 @@ export class SimpleModalHolderComponent {
       return;
     }
     const body = document.getElementsByTagName('body')[0];
+    const bodyClassItems = bodyClass.split(' ');
     if (!this.modals.length) {
-      body.classList.remove(bodyClass);
+      body.classList.remove(...bodyClassItems);
     } else {
-      body.classList.add(bodyClass);
+      body.classList.add(...bodyClassItems);
     }
   }
 
@@ -130,10 +131,11 @@ export class SimpleModalHolderComponent {
    */
   private toggleWrapperClass(modalWrapperEl: ElementRef, wrapperClass: string) {
     const wrapperClassList = modalWrapperEl.nativeElement.classList;
-    if (wrapperClassList.contains(wrapperClass)) {
-      wrapperClassList.remove(wrapperClass);
+    const wrapperClassItems = wrapperClass.split(' ');
+    if (wrapperClassList.toString().indexOf(wrapperClass) !== -1) {
+      wrapperClassList.remove(...wrapperClassItems);
     } else {
-      wrapperClassList.add(wrapperClass);
+      wrapperClassList.add(...wrapperClassItems);
     }
   }
 
