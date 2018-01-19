@@ -15,6 +15,7 @@ $_constant-border: 1px solid #cecece;
   right: 0;
   top: 0;
   z-index: 10; /* Adjust according to your needs */
+  text-align: center;
 
   &.fade {
       opacity: 0;
@@ -49,6 +50,8 @@ $_constant-border: 1px solid #cecece;
   position: relative;
   width: 100%;
   will-change: opacity;
+  display: inline-block;
+  text-align: left;
 
   &-size-m {
     max-width: 992px;
