@@ -11,7 +11,7 @@
     "e2e": "ng e2e",
     "compile": "",
     "postinstall": "cd .. && npm i && npm run build && cd demo && rimraf node_modules/ngx-simple-modal && cp -rf ../dist node_modules/ngx-simple-modal",
-    "rebuild": "cd .. && npm run build && cd demo && rimraf node_modules/ngx-simple-modal && npm i && ng serve"
+    "rebuild": "npm i && ng serve"
   },
   "private": true,
   "dependencies": {
@@ -25,6 +25,7 @@
     "@angular/platform-browser-dynamic": "4.4.6",
     "@angular/router": "4.4.6",
     "core-js": "2.4.1",
+    "ng-select": "^1.0.0-rc.3",
     "rxjs": "5.4.1",
     "zone.js": "0.8.14"
   },

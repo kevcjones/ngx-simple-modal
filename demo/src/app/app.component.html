@@ -14,6 +14,26 @@
   <br>
   <div class="row">
     <div class="col-sm-4 text-right">
+      <b>Alert with ng-select example: </b>
+    </div>
+    <div class="col-sm-4">
+      <button class="btn btn-default btn-block" (click)=showAlertWithSelect()>Show alert with select</button>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-sm-4 text-right">
+      <b>Alert with ng-select example and close when clicking background: </b>
+    </div>
+    <div class="col-sm-4">
+      <button class="btn btn-default btn-block" (click)=showAlertWithSelectPlusBClick()>Show alert with select</button>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-sm-4 text-right">
       <b>Confirm example: </b>
     </div>
     <div class="col-sm-4">
@@ -45,7 +65,7 @@
       <b>Close modal by click outside example: </b>
     </div>
     <div class="col-sm-4">
-      <button class="btn btn-default btn-block" (click)=showAlert2()>Show alert</button>
+      <button class="btn btn-default btn-block" (click)=showAlertWithClickOutside()>Show alert</button>
     </div>
   </div>
   <br>
@@ -55,7 +75,7 @@
       <b>ESC key closable example: </b>
     </div>
     <div class="col-sm-4">
-      <button class="btn btn-default btn-block" (click)=showAlert3()>Show alert</button>
+      <button class="btn btn-default btn-block" (click)=showAlertWithCloseByEscapeKey()>Show alert</button>
     </div>
   </div>
   <br>
@@ -65,7 +85,7 @@
       <b>Show dialogue in error handler / catch function: </b>
     </div>
     <div class="col-sm-4">
-      <button class="btn btn-default btn-block" (click)=showAlert4()>Show alert</button>
+      <button class="btn btn-default btn-block" (click)=showAlertThatThrowsError()>Show alert</button>
     </div>
   </div>
   <br>
