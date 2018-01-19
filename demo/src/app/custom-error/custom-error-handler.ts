@@ -1,8 +1,7 @@
-import { ErrorHandler, Injectable, Injector, isDevMode } from '@angular/core';
+import { ErrorHandler, Injectable, Injector, isDevMode, ApplicationRef } from '@angular/core';
 import { SimpleModalService } from 'ngx-simple-modal';
 
 import { AlertComponent } from '../alert/alert.component';
-import { ApplicationRef } from '@angular/core/src/application_ref';
 
 
 @Injectable()
@@ -16,9 +15,9 @@ export class CustomErrorHandler implements ErrorHandler {
         const message = error.message ? error.message : error.toString();
 
         if (isDevMode()) {
-            console.error('Custom error : '+error);
+            console.error('Custom error : ' + error);
         }
-        
+
         modalService.addModal(AlertComponent, {
             title: 'An error occurred',
             message: message,
