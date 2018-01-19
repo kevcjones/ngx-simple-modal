@@ -5,6 +5,7 @@ import { AlertComponent } from './alert/alert.component';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { PromptComponent } from './prompt/prompt.component';
 import { ParentDialogModalComponent } from './parent-dialog/parent-dialog.component';
+import { AlertSelectComponent } from './alert-select/alert-select.component';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +20,14 @@ export class AppComponent {
 
   showAlert() {
     this.SimpleModalService.addModal(AlertComponent, {title: 'Alert title!', message: 'Alert message!!!'});
+  }
+
+  showAlertWithSelect() {
+    this.SimpleModalService.addModal(AlertSelectComponent, {title: 'Alert title!', message: 'Alert message!!!'});
+  }
+
+  showAlertWithSelectPlusBClick() {
+    this.SimpleModalService.addModal(AlertSelectComponent, {title: 'Alert title!', message: 'Alert message!!!'}, { closeOnClickOutside: true });
   }
 
   showConfirm() {
@@ -41,15 +50,15 @@ export class AppComponent {
       });
   }
 
-  showAlert2() {
-    this.SimpleModalService.addModal(AlertComponent, { message: 'Click outside to close dialog' }, { closeOnClickOutside: '.modal-content' });
+  showAlertWithClickOutside() {
+    this.SimpleModalService.addModal(AlertComponent, { message: 'Click outside to close dialog' }, { closeOnClickOutside: true });
   }
 
-  showAlert3() {
+  showAlertWithCloseByEscapeKey() {
     this.SimpleModalService.addModal(AlertComponent, { message: 'Dialog with close using escape' }, { closeOnEscape: true});
   }
 
-  showAlert4() {
+  showAlertThatThrowsError() {
     throw new Error('Shown via custom error handler');
   }
 
