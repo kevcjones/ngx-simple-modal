@@ -311,33 +311,36 @@ abstract abstract class SimpleModalComponent<T1, T2> implements T1 {
 interface SimpleModalOptions {
   
   /**
-  * class to close modal by click on backdrop anything except content classed (outside modal)
-  * using a boolean will simply assume first child of your implemented modal is content
-  * is used in querySelector so must obey its inputs e.g. .class-name or #idName
-  * @type {string}
+  * clicking outside your content will be close the modal.
+  * @default false
+  * @type {boolean}
   */
-  closeOnClickOutside?: string | boolean;
+  closeOnClickOutside?: boolean;
 
-   /**
+  /**
   * Flag to close modal by click on backdrop (outside modal)
+  * @default false
   * @type {boolean}
   */
   closeOnEscape: boolean;
   
   /**
   * Class to put in document body while modal is open
+  * @default 'modal-open'
   * @type {string}
   */
   bodyClass: string;
 
   /**
   * Class we add and remove from modal when we add it/ remove it
+  * @default 'in'
   * @type {string}
   */
   wrapperClass: string,
   /**
   * Time we wait while adding and removing to let animation play
   * @type {string}
+  * @default 300
   */
   animationDuration: number;
 }
