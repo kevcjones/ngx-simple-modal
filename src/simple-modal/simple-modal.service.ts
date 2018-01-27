@@ -35,9 +35,10 @@ export class SimpleModalService {
     private resolver: ComponentFactoryResolver,
     private applicationRef: ApplicationRef,
     private injector: Injector,
-
     @Optional() config: SimpleModalServiceConfig) {
-      this.container = config.container as any;
+      if (config) {
+        this.container = config.container as any;
+      }
   }
 
   /**
