@@ -77,7 +77,7 @@ export abstract class SimpleModalComponent<T, T1> implements OnDestroy {
    * must include
    * @param callback
    */
-  onClosing(callback: (component) => Promise<any>): void {
+  onClosing(callback: ((component: SimpleModalComponent<any, any>) => Promise<any>)): void {
     this.closerCallback = callback;
   }
 
