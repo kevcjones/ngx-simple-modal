@@ -70,7 +70,7 @@ app.module.ts:
 import { NgModule} from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { BrowserModule } from '@angular/platform-browser';
-import { NGXSimpleModalModule } from 'ngx-simple-modal';
+import { SimpleModalModule } from 'ngx-simple-modal';
 import { AppComponent } from './app.component';
 @NgModule({
   declarations: [
@@ -79,7 +79,7 @@ import { AppComponent } from './app.component';
   imports: [
     CommonModule,
     BrowserModule,
-    NGXSimpleModalModule
+    SimpleModalModule
   ],
   bootstrap: [AppComponent]
 })
@@ -91,7 +91,7 @@ But you can select custom placeholder (i.e. document body):
 ```typescript
 imports: [
     ...
-    NGXSimpleModalModule.forRoot({container:document.body})
+    SimpleModalModule.forRoot({container:document.body})
   ]
 ```
 
@@ -100,7 +100,7 @@ If you want a container that is not yet in the DOM during the intial load you ca
 ```typescript
 imports: [
     ...
-    NGXSimpleModalModule.forRoot({container: elementPromisingFn()})
+    SimpleModalModule.forRoot({container: elementPromisingFn()})
   ]
 ```
 
@@ -163,7 +163,7 @@ app.module.ts:
     import { NgModule} from '@angular/core';
     import { CommonModule } from "@angular/common";
     import { BrowserModule } from '@angular/platform-browser';
-    import { NGXSimpleModalModule } from 'ngx-simple-modal';
+    import { SimpleModalModule } from 'ngx-simple-modal';
     import { ConfirmComponent } from './confirm.component';
     import { AppComponent } from './app.component';
     @NgModule({
@@ -174,7 +174,7 @@ app.module.ts:
       imports: [
         CommonModule,
         BrowserModule,
-        NGXSimpleModalModule
+        SimpleModalModule
       ],
       //Don't forget to add the component to entryComponents section
       entryComponents: [
