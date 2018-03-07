@@ -2,8 +2,8 @@ import { ElementRef, HostListener, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 
-import { SimpleModalOptions } from './simple-modal-options';
 import { SimpleModalService } from './simple-modal.service';
+import { SimpleModalOptions } from './simple-modal-options';
 
 /**
  * Abstract modal

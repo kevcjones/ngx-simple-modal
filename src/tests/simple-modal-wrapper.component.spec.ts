@@ -17,6 +17,7 @@ import { SimpleModalHolderComponentMock } from './mocks/simple-modal-holder.comp
 import { SimpleModalService, SimpleModalServiceConfig } from '../simple-modal/simple-modal.service';
 import { SimpleModalServiceFactory } from '../simple-modal/simple-modal-service.factory';
 import { SimpleModalWrapperComponent } from '../simple-modal/simple-modal-wrapper.component';
+import { DefaultSimpleModalOptionConfig, defaultSimpleModalOptions } from '../simple-modal/simple-modal-options';
 
 
 const config: SimpleModalServiceConfig = {
@@ -39,7 +40,13 @@ describe('SimpleModalHolder', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [FakeTestAlertModule],
-      declarations: [SimpleModalHolderComponent]
+      declarations: [SimpleModalHolderComponent],
+      providers: [
+        {
+          provide: DefaultSimpleModalOptionConfig,
+          useValue: defaultSimpleModalOptions
+        }
+      ]
     });
 
     // create component and test fixture

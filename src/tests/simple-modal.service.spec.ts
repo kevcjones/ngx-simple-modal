@@ -10,6 +10,7 @@ import { SimpleModalService, SimpleModalServiceConfig } from '../simple-modal/si
 import { AlertComponent } from './mocks/basic-alert';
 import { SimpleModalHolderComponentMock } from './mocks/simple-modal-holder.compoenent.mock';
 import { SimpleModalHolderComponent } from '../simple-modal/simple-modal-holder.component';
+import { DefaultSimpleModalOptionConfig, defaultSimpleModalOptions } from '../simple-modal/simple-modal-options';
 
 
 const config: SimpleModalServiceConfig = {
@@ -32,6 +33,10 @@ describe('SimpleModalService', () => {
           provide: SimpleModalService,
           useFactory: SimpleModalServiceFactory,
           deps: [ComponentFactoryResolver, ApplicationRef, Injector, SimpleModalServiceConfig]
+        },
+        {
+          provide: DefaultSimpleModalOptionConfig,
+          useValue: defaultSimpleModalOptions
         }
       ]
     });

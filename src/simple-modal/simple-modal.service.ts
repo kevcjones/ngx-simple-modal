@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { SimpleModalHolderComponent } from './simple-modal-holder.component';
 import { SimpleModalComponent } from './simple-modal.component';
-import { SimpleModalOptions } from './simple-modal-options';
+import { SimpleModalOptionsOverrides } from './simple-modal-options';
 
 
 export class SimpleModalServiceConfig {
@@ -45,10 +45,10 @@ export class SimpleModalService {
    * Adds modal
    * @param {Type<SimpleModalComponent<T, T1>>} component
    * @param {T?} data
-   * @param {SimpleModalOptions?} options
+   * @param {SimpleModalOptionsOverrides?} options
    * @return {Observable<T1>}
    */
-  addModal<T, T1>(component: Type<SimpleModalComponent<T, T1>>, data?: T, options?: SimpleModalOptions): Observable<T1> {
+  addModal<T, T1>(component: Type<SimpleModalComponent<T, T1>>, data?: T, options?: SimpleModalOptionsOverrides): Observable<T1> {
     if (!this.modalHolderComponent) {
       this.modalHolderComponent = this.createSimpleModalHolder();
     }

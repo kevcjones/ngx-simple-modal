@@ -1,8 +1,8 @@
-import { Component, ComponentFactoryResolver, Type, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentFactoryResolver, Type, ViewChild, ViewContainerRef, Inject } from '@angular/core';
 import { ElementRef } from '@angular/core/src/linker/element_ref';
 import { Observable } from 'rxjs/Observable';
 
-import { defaultModalOptions, SimpleModalOptions } from './simple-modal-options';
+import { SimpleModalOptions, DefaultSimpleModalOptionConfig, SimpleModalOptionsOverrides } from './simple-modal-options';
 import { SimpleModalWrapperComponent } from './simple-modal-wrapper.component';
 import { SimpleModalComponent } from './simple-modal.component';
 
@@ -31,16 +31,17 @@ export class SimpleModalHolderComponent {
    * Constructor
    * @param {ComponentFactoryResolver} resolver
    */
-  constructor(private resolver: ComponentFactoryResolver) { }
+  constructor(private resolver: ComponentFactoryResolver,
+    @Inject(DefaultSimpleModalOptionConfig) private defaultSimpleModalOptions: SimpleModalOptions ) { }
 
   /**
    * Configures then adds modal to the modals array, and populates with data passed in
    * @param {Type<SimpleModalComponent>} component
    * @param {object?} data
-   * @param {SimpleModalOptions?} options
+   * @param {SimpleModalOptionsOverrides?} options
    * @return {Observable<*>}
    */
-  addModal<T, T1>(component: Type<SimpleModalComponent<T, T1>>, data?: T, options?: SimpleModalOptions): Observable<T1> {
+  addModal<T, T1>(component: Type<SimpleModalComponent<T, T1>>, data?: T, options?: SimpleModalOptionsOverrides): Observable<T1> {
 
     // create component
     const factory = this.resolver.resolveComponentFactory(SimpleModalWrapperComponent);
@@ -49,7 +50,7 @@ export class SimpleModalHolderComponent {
     const _component: SimpleModalComponent<T, T1> = modalWrapper.addComponent(component);
 
     // assign options refs
-    _component.options = options = Object.assign({}, defaultModalOptions, options);
+    _component.options = options = Object.assign({}, this.defaultSimpleModalOptions, options);
 
     // add to stack
     this.modals.push(_component);
