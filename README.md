@@ -108,7 +108,7 @@ where `elementPromisingFn` is anything you want as long as its resolvement retur
 
 #### Setting up modal defaults globally
 
-An optional second paramter takes a global object of type SimpleModalOptions (all fields required).. you can spread
+An optional second parameter takes a global object of type SimpleModalOptions (all fields required).. you can spread
 these with the defaultSimpleModalOptions if you like. 
 
 ```typescript
