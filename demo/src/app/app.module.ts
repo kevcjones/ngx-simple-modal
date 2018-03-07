@@ -23,7 +23,7 @@ import { DefaultSimpleModalOptionConfig, defaultSimpleModalOptions } from 'ngx-s
     FormsModule,
     HttpModule,
     SelectModule,
-    SimpleModalModule.forRoot({container: 'modal-container'}, {...defaultSimpleModalOptions, ...{ closeOnEscape: true, closeOnClickOutside: true }})
+    SimpleModalModule.forRoot({container: 'modal-container'})
   ],
   declarations: [
     AppComponent,
