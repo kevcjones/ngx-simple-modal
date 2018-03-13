@@ -106,6 +106,31 @@ imports: [
 
 where `elementPromisingFn` is anything you want as long as its resolvement returns a nativeElement node from the DOM.
 
+#### Setting up modal defaults globally
+
+An optional second parameter takes a global object of type SimpleModalOptions (all fields required).. you can spread
+these with the defaultSimpleModalOptions if you like. 
+
+```typescript
+imports: [
+    ...
+    SimpleModalModule.forRoot({container: 'modal-container'}, {...defaultSimpleModalOptions, ...{ closeOnEscape: true, closeOnClickOutside: true }})
+
+  ]
+```
+
+OR, if you need to control behaviour more granularly, you can provide the configuration in modules or locally like so
+
+```typescript
+provide:[
+  {
+    provide: DefaultSimpleModalOptionConfig,
+    useValue: {...defaultSimpleModalOptions, ...{ closeOnEscape: true, closeOnClickOutside: true }}
+  }
+]
+```
+    
+
 ### Step 2. Create your modal component 
 Your modal is expected to be extended from **SimpleModalComponent**.
 **SimpleModalService** is generic class with two arguments:

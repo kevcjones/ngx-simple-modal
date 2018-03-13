@@ -5,6 +5,7 @@ import { SimpleModalHolderComponent } from './simple-modal-holder.component';
 import { SimpleModalWrapperComponent } from './simple-modal-wrapper.component';
 import { SimpleModalService, SimpleModalServiceConfig } from './simple-modal.service';
 import { SimpleModalServiceFactory } from './simple-modal-service.factory';
+import { defaultSimpleModalOptions, DefaultSimpleModalOptionConfig, SimpleModalOptions } from './simple-modal-options';
 
 @NgModule({
     declarations: [
@@ -12,7 +13,11 @@ import { SimpleModalServiceFactory } from './simple-modal-service.factory';
         SimpleModalWrapperComponent
     ],
     providers: [
-        SimpleModalService
+        SimpleModalService,
+        {
+          provide: DefaultSimpleModalOptionConfig,
+          useValue: defaultSimpleModalOptions
+        }
     ],
     imports: [
         CommonModule
@@ -23,7 +28,7 @@ import { SimpleModalServiceFactory } from './simple-modal-service.factory';
     ]
 })
 export class SimpleModalModule {
-    static forRoot(config: SimpleModalServiceConfig): ModuleWithProviders {
+    static forRoot(config: SimpleModalServiceConfig, defaultModalOptions?: SimpleModalOptions): ModuleWithProviders {
         return {
             ngModule: SimpleModalModule,
             providers: [
@@ -32,6 +37,10 @@ export class SimpleModalModule {
                     provide: SimpleModalService,
                     useFactory: SimpleModalServiceFactory,
                     deps: [ComponentFactoryResolver, ApplicationRef, Injector, SimpleModalServiceConfig]
+                },
+                {
+                    provide: DefaultSimpleModalOptionConfig,
+                    useValue: defaultModalOptions || defaultSimpleModalOptions
                 }
             ]
         };

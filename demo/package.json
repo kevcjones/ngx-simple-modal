@@ -10,6 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "compile": "",
+    "freshcopy": "rimraf node_modules/ngx-simple-modal && cp -rf ../dist node_modules/ngx-simple-modal",
     "postinstall": "cd .. && npm i && npm run build && cd demo && rimraf node_modules/ngx-simple-modal && cp -rf ../dist node_modules/ngx-simple-modal",
     "rebuild": "npm i && ng serve"
   },

@@ -14,6 +14,7 @@ import { SimpleModalWrapperComponent } from '../simple-modal/simple-modal-wrappe
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 import { setTimeout } from 'timers';
+import { defaultSimpleModalOptions, DefaultSimpleModalOptionConfig } from '../simple-modal/simple-modal-options';
 
 
 const config: SimpleModalServiceConfig = {
@@ -36,7 +37,13 @@ describe('SimpleModalHolder', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [FakeTestAlertModule],
-      declarations: [SimpleModalHolderComponent]
+      declarations: [SimpleModalHolderComponent],
+      providers: [
+        {
+          provide: DefaultSimpleModalOptionConfig,
+          useValue: defaultSimpleModalOptions
+        }
+      ]
     });
 
     // create component and test fixture

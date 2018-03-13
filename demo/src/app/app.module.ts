@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { SimpleModalModule } from 'ngx-simple-modal';
+import { SimpleModalModule, SimpleModalOptions } from 'ngx-simple-modal';
 import { SelectModule } from 'ng-select';
 
 
@@ -14,9 +14,17 @@ import { ParentDialogModalComponent } from './parent-dialog/parent-dialog.compon
 import { CustomErrorHandler } from './custom-error/custom-error-handler'
 import { OptionService } from './alert-select/options.service';
 import { AlertSelectComponent } from './alert-select/alert-select.component';
+import { DefaultSimpleModalOptionConfig, defaultSimpleModalOptions } from 'ngx-simple-modal/simple-modal/simple-modal-options';
 
 
 @NgModule({
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpModule,
+    SelectModule,
+    SimpleModalModule.forRoot({container: 'modal-container'})
+  ],
   declarations: [
     AppComponent,
     AlertComponent,
@@ -27,16 +35,13 @@ import { AlertSelectComponent } from './alert-select/alert-select.component';
   ],
   providers: [{
     provide: ErrorHandler,
-    useClass: CustomErrorHandler
+    useClass: CustomErrorHandler,
   },
+  // {
+  //   provide: DefaultSimpleModalOptionConfig,
+  //   useValue: {...defaultSimpleModalOptions, ...{ closeOnEscape: true, closeOnClickOutside: true }}
+  // },
   OptionService],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    SelectModule,
-    SimpleModalModule.forRoot({container: 'modal-container'})
-  ],
   entryComponents: [
     AlertComponent,
     AlertSelectComponent,
