@@ -52,6 +52,9 @@ export class SimpleModalHolderComponent {
     // assign options refs
     _component.options = options = Object.assign({}, this.defaultSimpleModalOptions, options);
 
+    // set base classes for wrapper
+    modalWrapper.modalClasses = options.wrapperDefaultClasses;
+
     // add to stack
     this.modals.push(_component);
 

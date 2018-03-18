@@ -8,7 +8,7 @@ import { SimpleModalComponent } from './simple-modal.component';
 @Component({
   selector: 'simple-modal-wrapper',
   template: `
-    <div #wrapper class="modal fade" [ngStyle]="{display:'block'}" role="dialog">
+    <div #wrapper [ngClass]="modalClasses" [ngStyle]="{display:'block'}" role="dialog">
         <ng-template #viewContainer></ng-template>
     </div>
 `
@@ -24,6 +24,11 @@ export class SimpleModalWrapperComponent implements OnDestroy {
    * Link wrapper DOM element
    */
   @ViewChild('wrapper') public wrapper;
+
+  /**
+   * Wrapper modal and fade classes
+   */
+  modalClasses = 'modal fade';
 
   /**
    * Dialog content componet
