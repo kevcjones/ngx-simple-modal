@@ -8,3 +8,5 @@ npm-debug.log
 
 # IDE #
 .idea/
+
+package-lock.json
