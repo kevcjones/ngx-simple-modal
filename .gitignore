@@ -8,5 +8,6 @@ npm-debug.log
 
 # IDE #
 .idea/
+.vscode/
 
 package-lock.json
