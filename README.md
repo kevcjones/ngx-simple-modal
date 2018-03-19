@@ -114,7 +114,12 @@ these with the defaultSimpleModalOptions if you like.
 ```typescript
 imports: [
     ...
-    SimpleModalModule.forRoot({container: 'modal-container'}, {...defaultSimpleModalOptions, ...{ closeOnEscape: true, closeOnClickOutside: true }})
+    SimpleModalModule.forRoot({container: 'modal-container'}, {...defaultSimpleModalOptions, ...{ 
+      closeOnEscape: true, 
+      closeOnClickOutside: true,
+      wrapperDefaultClasses: 'o-modal o-modal--fade',
+      wrapperClass: 'o-modal--fade-in'
+    }})
 
   ]
 ```
@@ -356,6 +361,14 @@ interface SimpleModalOptions {
   */
   bodyClass: string;
 
+
+  /**
+  * Default classes which live in modal wrapper. Change if you need to for your own css requirements
+  * @default 'modal fade'
+  * @type {string}
+  */
+  wrapperDefaultClasses: string,
+  
   /**
   * Class we add and remove from modal when we add it/ remove it
   * @default 'in'
