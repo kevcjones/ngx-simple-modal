@@ -1,6 +1,7 @@
 # build files #
 compiled/
 dist/
+.history/
 
 # Node Files #
 node_modules
