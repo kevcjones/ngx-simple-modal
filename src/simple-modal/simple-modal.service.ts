@@ -1,5 +1,5 @@
 import { ApplicationRef, ComponentFactoryResolver, EmbeddedViewRef, Injectable, Injector, Optional, Type } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import { SimpleModalHolderComponent } from './simple-modal-holder.component';
 import { SimpleModalComponent } from './simple-modal.component';

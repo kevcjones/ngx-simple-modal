@@ -1,5 +1,3 @@
-import { Observable } from "rxjs/Observable";
-
 export const SimpleModalComponentMock = () => ({
     mapDataObject: jest.fn(),
     setupObserver: jest.fn(),
@@ -7,4 +5,3 @@ export const SimpleModalComponentMock = () => ({
     close: jest.fn(),
     ngOnDestroy: jest.fn(),
   });
-  

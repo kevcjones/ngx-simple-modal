@@ -1,8 +1,6 @@
 import { ElementRef, HostListener, OnDestroy } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Observer } from 'rxjs/Observer';
+import { Observable, Observer } from 'rxjs';
 
-import { SimpleModalService } from './simple-modal.service';
 import { SimpleModalOptions } from './simple-modal-options';
 
 /**

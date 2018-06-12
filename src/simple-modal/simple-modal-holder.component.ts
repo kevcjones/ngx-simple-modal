@@ -1,6 +1,6 @@
 import { Component, ComponentFactoryResolver, Type, ViewChild, ViewContainerRef, Inject } from '@angular/core';
 import { ElementRef } from '@angular/core/src/linker/element_ref';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import { SimpleModalOptions, DefaultSimpleModalOptionConfig, SimpleModalOptionsOverrides } from './simple-modal-options';
 import { SimpleModalWrapperComponent } from './simple-modal-wrapper.component';
