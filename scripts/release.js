@@ -1,5 +1,5 @@
 
-const rimraf = require('rimraf')
+const del = require('del')
 const fs = require('fs-extra');
 const package = require('../package.json');
 
@@ -26,11 +26,13 @@ try {
   console.error(`Failed to copy additional files due to: ${e}`);
 }
 
-try {
-  rimraf('dist/tests',() => { console.log('deleted tests folder..'); });
-} catch (e) {
+del('dist/tests')
+.then((paths) => {
+  console.log('deleted tests folder..');
+})
+.catch(e => {
   console.error(`Failed to delete test folder from final package due to: ${e}`);
-}
+})
 
 function patchPath(path) {
   return path.replace('dist/', '');

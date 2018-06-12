@@ -1,5 +1,3 @@
-import { Observable } from "rxjs";
-
 export const SimpleModalWrapperComponentMock = () => ({
     clickOutsideCallback: null,
     addComponent: jest.fn(),
