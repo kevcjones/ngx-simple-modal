@@ -20,7 +20,8 @@
 "src/**/*"
 ],
 "exclude": [
-"demo",
+"demo_ng5",
+"demo_ng6",
 "index.d.ts",
 "node_modules",
 "dist"

@@ -5,4 +5,5 @@ npm-debug.log
 # IDE #
 .idea/
 # Demo application #
-demo/
+demo_ng5/
+demo_ng6/
