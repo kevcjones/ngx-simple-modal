@@ -12,13 +12,13 @@
   z-index: 10; /* Adjust according to your needs */
 }
 
-.modal.fade {
+.modal.fade-anim {
   transition: opacity 400ms ease-in-out;
   will-change: opacity;
   opacity: 0;
 }
 
-.modal.fade.in {
+.modal.fade-anim.in {
   opacity: 1;
 }
 

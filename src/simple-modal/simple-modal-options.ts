@@ -24,7 +24,7 @@ export const defaultSimpleModalOptions: SimpleModalOptions = {
   closeOnEscape: false,
   closeOnClickOutside: false,
   bodyClass: 'modal-open',
-  wrapperDefaultClasses: 'modal fade',
+  wrapperDefaultClasses: 'modal fade-anim',
   wrapperClass: 'in',
   animationDuration: 300
 };

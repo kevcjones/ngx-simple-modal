@@ -17,7 +17,7 @@ $_constant-border: 1px solid #cecece;
   z-index: 10; /* Adjust according to your needs */
   text-align: center;
 
-  &.fade {
+  &.fade-anim {
       opacity: 0;
       will-change: opacity;
 
@@ -33,7 +33,7 @@ $_constant-border: 1px solid #cecece;
       }
   }
 
-  &.fade.in {
+  &.fade-anim.in {
       opacity: 1;
   }
 }

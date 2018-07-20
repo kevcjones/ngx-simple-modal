@@ -28,7 +28,7 @@ export class SimpleModalWrapperComponent implements OnDestroy {
   /**
    * Wrapper modal and fade classes
    */
-  modalClasses = 'modal fade';
+  modalClasses = 'modal fade-anim';
 
   /**
    * Dialog content componet
