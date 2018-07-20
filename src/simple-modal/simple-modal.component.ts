@@ -91,7 +91,7 @@ export abstract class SimpleModalComponent<T, T1> implements OnDestroy {
    * @param evt
    */
   @HostListener('document:keydown.escape', ['$event'])
-  private onKeydownHandler(evt: KeyboardEvent) {
+  onKeydownHandler(evt: KeyboardEvent) {
     if (this.options && this.options.closeOnEscape) {
       this.close();
     }
