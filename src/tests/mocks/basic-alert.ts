@@ -1,17 +1,17 @@
-import { Component } from "@angular/core";
-import { SimpleModalComponent } from "../../simple-modal/simple-modal.component";
+import { Component } from '@angular/core';
+import { SimpleModalComponent } from '../../simple-modal/simple-modal.component';
 
 export interface AlertModel {
-    title: string;
+  title: string;
 }
 
 @Component({
-    selector: 'alert',
-    template: `<div class="modal-dialog">{{title}}</div>`
+  selector: 'alert',
+  template: `<div class="modal-dialog">{{title}}</div>`,
 })
 export class AlertComponent extends SimpleModalComponent<AlertModel, null> implements AlertModel {
-    title: string;
-    constructor() {
-        super();
-    }
+  title: string;
+  constructor() {
+    super();
+  }
 }
