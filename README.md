@@ -144,9 +144,12 @@ Your modal is expected to be extended from **SimpleModalComponent**.
 
 Therefore **SimpleModalService** is supposed to be a constructor argument of **SimpleModalComponent**.
 
+If you want to use ngOnDestroy() hook method in your modal component, you must call in your ngOnDestroy super.ngOnDestroy().
+Because, if you don't do that, subscribe method wouldn't catch next and you will have memory leak.
+
 confirm.component.ts:
 ```typescript
-import { Component } from '@angular/core';
+import { Component,OnDestroy } from '@angular/core';
 import { SimpleModalComponent } from "ngx-simple-modal";
 export interface ConfirmModel {
   title:string;
@@ -169,7 +172,7 @@ export interface ConfirmModel {
       </div>
     `
 })
-export class ConfirmComponent extends SimpleModalComponent<ConfirmModel, boolean> implements ConfirmModel {
+export class ConfirmComponent extends SimpleModalComponent<ConfirmModel, boolean> implements ConfirmModel,OnDestroy {
   title: string;
   message: string;
   constructor() {
@@ -180,6 +183,12 @@ export class ConfirmComponent extends SimpleModalComponent<ConfirmModel, boolean
     // then we can get modal result from caller code 
     this.result = true;
     this.close();
+  }
+  ngOnDestroy(){
+    //your code in ngOnDestroy
+    //......
+    //
+    super.ngOnDestroy();//<---- do this
   }
 }
 ```
@@ -316,7 +325,7 @@ Super class of all modal components.
 * @template T1 - input modal data
 * @template T2 - modal result
 */
-abstract abstract class SimpleModalComponent<T1, T2> implements T1 {
+abstract abstract class SimpleModalComponent<T1, T2> implements T1, OnDestroy {
     /**
     * Constructor
     * @param {SimpleModalService} simpleModalService - instance of SimpleModalService
@@ -333,6 +342,12 @@ abstract abstract class SimpleModalComponent<T1, T2> implements T1 {
     * Closes modal
     */
     public close:Function
+    
+    /**
+    * OnDestroy handler
+    * Sends modal result to observer
+    */
+    public ngOnDestroy:Function
 }
 ```
 
