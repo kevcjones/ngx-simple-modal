@@ -1,20 +1,102 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<div class="container" >
+  <h1 class="text-center">ngx-simple-modal demo ng5</h1>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-sm-4 text-right">
+      <b>Alert example: </b>
+    </div>
+    <div class="col-sm-4">
+      <button class="btn btn-default btn-block" (click)=showAlert()>Show alert</button>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-sm-4 text-right">
+      <b>Alert with ng-select example: </b>
+    </div>
+    <div class="col-sm-4">
+      <button class="btn btn-default btn-block" (click)=showAlertWithSelect()>Show alert with select</button>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-sm-4 text-right">
+      <b>Alert with ng-select example and close when clicking background: </b>
+    </div>
+    <div class="col-sm-4">
+      <button class="btn btn-default btn-block" (click)=showAlertWithSelectPlusBClick()>Show alert with select</button>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-sm-4 text-right">
+      <b>Confirm example: </b>
+    </div>
+    <div class="col-sm-4">
+      <button class="btn btn-default btn-block" (click)=showConfirm()>Show confirm</button>
+    </div>
+    <div class="col-sm-4" *ngIf="confirmResult != null">
+      <span>Result: </span>
+      <b [ngClass]="{'text-danger': !confirmResult, 'text-success': confirmResult}">{{confirmResult ? 'Accepted': 'Declined'}}</b>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-sm-4 text-right">
+      <b>Prompt example: </b>
+    </div>
+    <div class="col-sm-4">
+      <button class="btn btn-default btn-block" (click)=showPrompt()>Show prompt</button>
+    </div>
+    <div class="col-sm-4" *ngIf="promptMessage">
+      <span>Your name: </span>
+      <b>{{promptMessage}}</b>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-sm-4 text-right">
+      <b>Close modal by click outside example: </b>
+    </div>
+    <div class="col-sm-4">
+      <button class="btn btn-default btn-block" (click)=showAlertWithClickOutside()>Show alert</button>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-sm-4 text-right">
+      <b>ESC key closable example: </b>
+    </div>
+    <div class="col-sm-4">
+      <button class="btn btn-default btn-block" (click)=showAlertWithCloseByEscapeKey()>Show alert</button>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-sm-4 text-right">
+      <b>Show dialogue in error handler / catch function: </b>
+    </div>
+    <div class="col-sm-4">
+      <button class="btn btn-default btn-block" (click)=showAlertThatThrowsError()>Show alert</button>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-sm-4 text-right">
+      <b>Show modal from modal: </b>
+    </div>
+    <div class="col-sm-4">
+      <button class="btn btn-default btn-block" (click)=showParentDialog()>Show modal</button>
+    </div>
+  </div>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-
+<div class="modal-container"></div>
