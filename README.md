@@ -1,9 +1,9 @@
 # NGX Simple Modal [![Build Status](https://travis-ci.org/KevCJones/ngx-simple-modal.svg?branch=master)](https://travis-ci.org/KevCJones/ngx-simple-modal)
 
-It is a library to makes modals easier in Angular (2+), has no dependencies, but plays well with bootstrap or other frameworks. 
+It is a library to makes modals easier in Angular (2+), has no dependencies, but plays well with bootstrap or other frameworks.
 - Create clear and reusable modal components.
-- It makes managing modals painless and clearer. 
-- Extend the ModalComponent class and implement any content you want. 
+- It makes managing modals painless and clearer.
+- Extend the ModalComponent class and implement any content you want.
 
 ## Credits
 
@@ -13,7 +13,7 @@ This project was seeded by [https://github.com/ankosoftware/ng2-bootstrap-modal]
 
 - The SimpleModal* naming convention replaces the older BootstrapModule + Dialogue* naming mixed convention
 - There is no strict dependency on Bootstrap now, you can use our CSS or use any framework you want
-- SimpleModalOptions changed a couple options, please see below for details. 
+- SimpleModalOptions changed a couple options, please see below for details.
 
 ## Demo
 
@@ -43,7 +43,7 @@ Inside your angular-cli.json update your styles sections to include our CSS
 
 We got you covered, you can `@import '../node_modules/ngx-simple-modal/styles/simple-modal.scss'` into what ever root based scss global style you want. Update the relative path depending on where you want to pull it in.
 
-#### Assumed HTML template if you want our base styles 
+#### Assumed HTML template if you want our base styles
 
 ```html
 <div class="modal-content">
@@ -54,7 +54,7 @@ We got you covered, you can `@import '../node_modules/ngx-simple-modal/styles/si
       <!-- Modal custom content -->
     </div>
     <div class="modal-footer">
-      <!-- 
+      <!--
         Footer to add button control
         ex.: <button (click)="close()">Cancel</button>
       -->
@@ -95,7 +95,7 @@ imports: [
   ]
 ```
 
-If you want a container that is not yet in the DOM during the intial load you can pass a promiseLike function instead to container e.g. 
+If you want a container that is not yet in the DOM during the intial load you can pass a promiseLike function instead to container e.g.
 
 ```typescript
 imports: [
@@ -109,13 +109,13 @@ where `elementPromisingFn` is anything you want as long as its resolvement retur
 #### Setting up modal defaults globally
 
 An optional second parameter takes a global object of type SimpleModalOptions (all fields required).. you can spread
-these with the defaultSimpleModalOptions if you like. 
+these with the defaultSimpleModalOptions if you like.
 
 ```typescript
 imports: [
     ...
-    SimpleModalModule.forRoot({container: 'modal-container'}, {...defaultSimpleModalOptions, ...{ 
-      closeOnEscape: true, 
+    SimpleModalModule.forRoot({container: 'modal-container'}, {...defaultSimpleModalOptions, ...{
+      closeOnEscape: true,
       closeOnClickOutside: true,
       wrapperDefaultClasses: 'o-modal o-modal--fade',
       wrapperClass: 'o-modal--fade-in'
@@ -134,9 +134,9 @@ provide:[
   }
 ]
 ```
-    
 
-### Step 2. Create your modal component 
+
+### Step 2. Create your modal component
 Your modal is expected to be extended from **SimpleModalComponent**.
 **SimpleModalService** is generic class with two arguments:
 1) input modal data type (data to initialize component);
@@ -144,18 +144,15 @@ Your modal is expected to be extended from **SimpleModalComponent**.
 
 Therefore **SimpleModalService** is supposed to be a constructor argument of **SimpleModalComponent**.
 
-If you want to use ngOnDestroy() hook method in your modal component, you must call in your ngOnDestroy super.ngOnDestroy().
-Because, if you don't do that, subscribe method wouldn't catch next and you will have memory leak.
-
 confirm.component.ts:
 ```typescript
-import { Component,OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { SimpleModalComponent } from "ngx-simple-modal";
 export interface ConfirmModel {
   title:string;
   message:string;
 }
-@Component({  
+@Component({
     selector: 'confirm',
     template: `
       <div class="modal-content">
@@ -172,23 +169,17 @@ export interface ConfirmModel {
       </div>
     `
 })
-export class ConfirmComponent extends SimpleModalComponent<ConfirmModel, boolean> implements ConfirmModel,OnDestroy {
+export class ConfirmComponent extends SimpleModalComponent<ConfirmModel, boolean> implements ConfirmModel {
   title: string;
   message: string;
   constructor() {
     super();
   }
   confirm() {
-    // we set modal result as true on click on confirm button, 
-    // then we can get modal result from caller code 
+    // we set modal result as true on click on confirm button,
+    // then we can get modal result from caller code
     this.result = true;
     this.close();
-  }
-  ngOnDestroy(){
-    //your code in ngOnDestroy
-    //......
-    //
-    super.ngOnDestroy();//<---- do this
   }
 }
 ```
@@ -231,7 +222,7 @@ app.component.ts
     import { Component } from '@angular/core';
     import { ConfirmComponent } from './confirm.component';
     import { SimpleModalService } from "ngx-simple-modal";
-    
+
     @Component({
       selector: 'app',
       template: `
@@ -252,7 +243,7 @@ app.component.ts
         constructor(private simpleModalService:SimpleModalService) {}
         showConfirm() {
             let disposable = this.simpleModalService.addModal(ConfirmComponent, {
-                  title: 'Confirm title', 
+                  title: 'Confirm title',
                   message: 'Confirm message'
                 })
                 .subscribe((isConfirmed)=>{
@@ -312,7 +303,7 @@ export class AlertComponent extends SimpleModalComponent<AlertModel, null> imple
 }
 ```
 
-As you can see, the implementation is completely in your control. We're just here to help you create, configure, add, track inputs, and remove. 
+As you can see, the implementation is completely in your control. We're just here to help you create, configure, add, track inputs, and remove.
 
 ## Documentation
 
@@ -331,18 +322,18 @@ abstract abstract class SimpleModalComponent<T1, T2> implements T1, OnDestroy {
     * @param {SimpleModalService} simpleModalService - instance of SimpleModalService
     */
     constructor(simpleModalService: SimpleModalService)
-    
+
     /**
-    * Dialog result 
+    * Dialog result
     * @type {T2}
     */
     protected result:T2
-    
+
     /**
     * Closes modal
     */
     public close:Function
-    
+
     /**
     * OnDestroy handler
     * Sends modal result to observer
@@ -351,10 +342,10 @@ abstract abstract class SimpleModalComponent<T1, T2> implements T1, OnDestroy {
 }
 ```
 
-### SimpleModalOptions 
+### SimpleModalOptions
 ```typescript
 interface SimpleModalOptions {
-  
+
   /**
   * clicking outside your content will be close the modal.
   * @default false
@@ -368,7 +359,7 @@ interface SimpleModalOptions {
   * @type {boolean}
   */
   closeOnEscape: boolean;
-  
+
   /**
   * Class to put in document body while modal is open
   * @default 'modal-open'
@@ -383,7 +374,7 @@ interface SimpleModalOptions {
   * @type {string}
   */
   wrapperDefaultClasses: string,
-  
+
   /**
   * Class we add and remove from modal when we add it/ remove it
   * @default 'in'
@@ -399,7 +390,7 @@ interface SimpleModalOptions {
 }
 ```
 
-### SimpleModalService 
+### SimpleModalService
 Service to show and hide modals
 
 ### Class Overview
@@ -408,18 +399,18 @@ class SimpleModalService {
     /**
     * Adds modal
     * @param {Type<SimpleModalComponent<T1, T2>} component - modal component
-    * @param {T1?} data - Initialization data for component (optional) to add to component instance and can be used in component code or template 
+    * @param {T1?} data - Initialization data for component (optional) to add to component instance and can be used in component code or template
     * @param {SimpleModalOptions?} Dialog options
     * @return {Observable<T2>} - returns Observable to get modal result
     */
     public addModal<T1, T2>(component:Type<SimpleModalComponent<T1, T2>>, data?:T1, options: SimpleModalOptions): Observable<T2> => {}
-    
+
     /**
-     * Remove a modal externally 
+     * Remove a modal externally
      * @param [SimpleModalComponent} component
      */
     public removeModal(component: SimpleModalComponent<any, any>): void;
-    
+
     /**
      * Removes all open modals in one go
      */

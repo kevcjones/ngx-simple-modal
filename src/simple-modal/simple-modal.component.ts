@@ -3,6 +3,11 @@ import { Observable, Observer } from 'rxjs';
 
 import { SimpleModalOptions } from './simple-modal-options';
 
+export interface OnDestroyLike {
+  ngOnDestroy(): void;
+  [key: string]: any;
+}
+
 /**
  * Abstract modal
  * @template T - modal data;
@@ -62,12 +67,15 @@ export abstract class SimpleModalComponent<T, T1> implements OnDestroy {
     return Observable.create((observer) => {
       this.observer = observer;
 
+      this.completeOnDestroy(this);
+
       // called if observable is unsubscribed to
       return () => {
         this.close();
       };
     });
   }
+
 
   /**
    * Defines what happens when close is called - default this
@@ -97,15 +105,25 @@ export abstract class SimpleModalComponent<T, T1> implements OnDestroy {
     }
   }
 
-
   /**
-   * OnDestroy handler
-   * Sends modal result to observer
+   * wrap the ngOnDestroy safely so that implementers can make their own
+   * destroy functions safely.
+   * @param component
    */
-  ngOnDestroy(): void {
-    if (this.observer) {
-      this.observer.next(this.result);
-      this.observer.complete();
-    }
+  private completeOnDestroy( component: OnDestroyLike) {
+    const ngDestroyOriginal = component.ngOnDestroy;
+    component.ngOnDestroy = () => {
+      if (ngDestroyOriginal) {
+        ngDestroyOriginal.apply(component);
+      }
+      if (this.observer) {
+        this.observer.next(this.result);
+        this.observer.complete();
+      }
+    };
+  }
+
+  ngOnDestroy() {
+    // empty but needed
   }
 }

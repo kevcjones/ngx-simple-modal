@@ -7,7 +7,7 @@
   "typings": "dist/index.d.ts",
   "scripts": {
     "demo-ng5": "cd demo-ng5 && npm i && ng serve",
-    "demo_ng6": "cd demo_ng6 && npm i && ng serve",
+    "demo-ng6": "cd demo-ng6 && npm i && ng serve",
     "lint": "./node_modules/.bin/tslint src/**/*.ts",
     "prebuild": "del dist",
     "build": "npm run lint && ngc",

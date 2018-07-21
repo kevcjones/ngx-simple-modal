@@ -16,22 +16,22 @@ export class AppComponent {
   confirmResult = null;
   promptMessage = '';
 
-  constructor(private SimpleModalService: SimpleModalService) {}
+  constructor(private simpleModalService: SimpleModalService) {}
 
   showAlert() {
-    this.SimpleModalService.addModal(AlertComponent, {title: 'Alert title!', message: 'Alert message!!!'});
+    this.simpleModalService.addModal(AlertComponent, {title: 'Alert title!', message: 'Alert message!!!'});
   }
 
   showAlertWithSelect() {
-    this.SimpleModalService.addModal(AlertSelectComponent, {title: 'Alert title!', message: 'Alert message!!!'});
+    this.simpleModalService.addModal(AlertSelectComponent, {title: 'Alert title!', message: 'Alert message!!!'});
   }
 
   showAlertWithSelectPlusBClick() {
-    this.SimpleModalService.addModal(AlertSelectComponent, {title: 'Alert title!', message: 'Alert message!!!'}, { closeOnClickOutside: true });
+    this.simpleModalService.addModal(AlertSelectComponent, {title: 'Alert title!', message: 'Alert message!!!'}, { closeOnClickOutside: true });
   }
 
   showConfirm() {
-    this.SimpleModalService.addModal(ConfirmComponent, {
+    this.simpleModalService.addModal(ConfirmComponent, {
       title: 'Confirmation',
       message: 'Bla bla confirm some action?'})
       .subscribe((isConfirmed) => {
@@ -41,7 +41,7 @@ export class AppComponent {
   }
 
   showPrompt() {
-    this.SimpleModalService.addModal(PromptComponent, {
+    this.simpleModalService.addModal(PromptComponent, {
       title: 'Name dialog',
       question: 'What is your name?: '})
       .subscribe((message) => {
@@ -51,11 +51,11 @@ export class AppComponent {
   }
 
   showAlertWithClickOutside() {
-    this.SimpleModalService.addModal(AlertComponent, { message: 'Click outside to close dialog' }, { closeOnClickOutside: true });
+    this.simpleModalService.addModal(AlertComponent, { message: 'Click outside to close dialog' }, { closeOnClickOutside: true });
   }
 
   showAlertWithCloseByEscapeKey() {
-    this.SimpleModalService.addModal(AlertComponent, { message: 'Dialog with close using escape' }, { closeOnEscape: true});
+    this.simpleModalService.addModal(AlertComponent, { message: 'Dialog with close using escape' }, { closeOnEscape: true});
   }
 
   showAlertThatThrowsError() {
@@ -63,6 +63,6 @@ export class AppComponent {
   }
 
   showParentDialog() {
-    this.SimpleModalService.addModal(ParentDialogModalComponent);
+    this.simpleModalService.addModal(ParentDialogModalComponent);
   }
 }

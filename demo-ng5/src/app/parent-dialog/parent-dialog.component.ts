@@ -24,12 +24,12 @@ import { ConfirmComponent } from '../confirm/confirm.component';
 })
 export class ParentDialogModalComponent extends SimpleModalComponent<null, null>  {
 
-  constructor(private SimpleModalService: SimpleModalService) {
+  constructor(private simpleModalService: SimpleModalService) {
     super();
   }
 
   confirm() {
-    this.SimpleModalService.addModal(ConfirmComponent, {
+    this.simpleModalService.addModal(ConfirmComponent, {
       title: 'Confirm',
       message: 'Are you sure you want close dialog?'
     }).subscribe((isConfirmed) => {
