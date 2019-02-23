@@ -35,13 +35,13 @@ Inside your angular-cli.json update your styles sections to include our CSS
 ```
 "styles": [
   "styles.css",
-  "../node_modules/ngx-simple-modal/styles/simple-modal.css"
+  "../node_modules/ngx-simple-modal/src/styles/simple-modal.css"
 ],
 ```
 
 #### But i use SASS/SCSS?
 
-We got you covered, you can `@import '../node_modules/ngx-simple-modal/styles/simple-modal.scss'` into what ever root based scss global style you want. Update the relative path depending on where you want to pull it in.
+We got you covered, you can `@import '../node_modules/ngx-simple-modal/src/styles/simple-modal.scss'` into what ever root based scss global style you want. Update the relative path depending on where you want to pull it in.
 
 #### Assumed HTML template if you want our base styles
 
