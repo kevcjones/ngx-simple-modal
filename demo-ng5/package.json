@@ -10,8 +10,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "compile": "",
-    "freshcopy": "rimraf node_modules/ngx-simple-modal && cp -rf ../dist node_modules/ngx-simple-modal",
-    "postinstall": "cd .. && npm i && npm run build && cd demo-ng5 && rimraf node_modules/ngx-simple-modal && cp -rf ../dist node_modules/ngx-simple-modal",
+    "freshcopy": "rm -rf node_modules/ngx-simple-modal && cp -rf ../dist node_modules/ngx-simple-modal",
+    "postinstall": "cd .. && npm i && npm run build && cd demo-ng5 && rm -rf node_modules/ngx-simple-modal && cp -rf ../dist node_modules/ngx-simple-modal",
     "rebuild": "npm i && ng serve"
   },
   "private": true,
@@ -51,7 +51,6 @@
     "protractor": "~5.1.2",
     "ts-node": "~3.2.0",
     "tslint": "~5.7.0",
-    "typescript": "~2.4.2",
-    "rimraf": "^2.6.1"
+    "typescript": "~2.4.2"
   }
 }

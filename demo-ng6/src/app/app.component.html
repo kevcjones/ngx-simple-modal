@@ -1,5 +1,5 @@
-<div class="container" >
-  <h1 class="text-center">ngx-simple-modal demo ng5</h1>
+<div class="container">
+  <h1 class="text-center">ngx-simple-modal demo ng6</h1>
   <br>
   <br>
   <div class="row">
@@ -41,7 +41,8 @@
     </div>
     <div class="col-sm-4" *ngIf="confirmResult != null">
       <span>Result: </span>
-      <b [ngClass]="{'text-danger': !confirmResult, 'text-success': confirmResult}">{{confirmResult ? 'Accepted': 'Declined'}}</b>
+      <b
+        [ngClass]="{'text-danger': !confirmResult, 'text-success': confirmResult}">{{confirmResult ? 'Accepted': 'Declined'}}</b>
     </div>
   </div>
   <br>

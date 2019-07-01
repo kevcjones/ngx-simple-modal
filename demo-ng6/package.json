@@ -8,8 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "freshcopy": "rimraf node_modules/ngx-simple-modal && cp -rf ../dist node_modules/ngx-simple-modal",
-    "postinstall": "cd .. && npm i && npm run build && cd demo-ng6 && rimraf node_modules/ngx-simple-modal && cp -rf ../dist node_modules/ngx-simple-modal",
+    "freshcopy": "rm -rf node_modules/ngx-simple-modal && cp -rf ../dist node_modules/ngx-simple-modal",
+    "postinstall": "cd .. && npm i && npm run build && cd demo-ng6 && rm -rf node_modules/ngx-simple-modal && cp -rf ../dist node_modules/ngx-simple-modal",
     "rebuild": "npm i && ng serve"
   },
   "private": true,
