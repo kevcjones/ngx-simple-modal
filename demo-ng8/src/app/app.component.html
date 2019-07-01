@@ -1,0 +1,103 @@
+<div class="container">
+  <h1 class="text-center">ngx-simple-modal demo ng8</h1>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-sm-4 text-right">
+      <b>Alert example: </b>
+    </div>
+    <div class="col-sm-4">
+      <button class="btn btn-default btn-block" (click)=showAlert()>Show alert</button>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-sm-4 text-right">
+      <b>Alert with ng-select example: </b>
+    </div>
+    <div class="col-sm-4">
+      <button class="btn btn-default btn-block" (click)=showAlertWithSelect()>Show alert with select</button>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-sm-4 text-right">
+      <b>Alert with ng-select example and close when clicking background: </b>
+    </div>
+    <div class="col-sm-4">
+      <button class="btn btn-default btn-block" (click)=showAlertWithSelectPlusBClick()>Show alert with select</button>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-sm-4 text-right">
+      <b>Confirm example: </b>
+    </div>
+    <div class="col-sm-4">
+      <button class="btn btn-default btn-block" (click)=showConfirm()>Show confirm</button>
+    </div>
+    <div class="col-sm-4" *ngIf="confirmResult != null">
+      <span>Result: </span>
+      <b
+        [ngClass]="{'text-danger': !confirmResult, 'text-success': confirmResult}">{{confirmResult ? 'Accepted': 'Declined'}}</b>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-sm-4 text-right">
+      <b>Prompt example: </b>
+    </div>
+    <div class="col-sm-4">
+      <button class="btn btn-default btn-block" (click)=showPrompt()>Show prompt</button>
+    </div>
+    <div class="col-sm-4" *ngIf="promptMessage">
+      <span>Your name: </span>
+      <b>{{promptMessage}}</b>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-sm-4 text-right">
+      <b>Close modal by click outside example: </b>
+    </div>
+    <div class="col-sm-4">
+      <button class="btn btn-default btn-block" (click)=showAlertWithClickOutside()>Show alert</button>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-sm-4 text-right">
+      <b>ESC key closable example: </b>
+    </div>
+    <div class="col-sm-4">
+      <button class="btn btn-default btn-block" (click)=showAlertWithCloseByEscapeKey()>Show alert</button>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-sm-4 text-right">
+      <b>Show dialogue in error handler / catch function: </b>
+    </div>
+    <div class="col-sm-4">
+      <button class="btn btn-default btn-block" (click)=showAlertThatThrowsError()>Show alert</button>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-sm-4 text-right">
+      <b>Show modal from modal: </b>
+    </div>
+    <div class="col-sm-4">
+      <button class="btn btn-default btn-block" (click)=showParentDialog()>Show modal</button>
+    </div>
+  </div>
+</div>
+<div class="modal-container"></div>
