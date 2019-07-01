@@ -50,7 +50,6 @@
     "@angular/platform-server": "6.0.9",
     "@types/jest": "^19.2.4",
     "@types/node": "^6.0.102",
-    "awesome-typescript-loader": "^3.4.1",
     "codelyzer": "^4.0.1",
     "del": "^3.0.0",
     "del-cli": "^1.1.0",
