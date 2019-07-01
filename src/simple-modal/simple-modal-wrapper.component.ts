@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, OnDestroy, ReflectiveInjector, Type, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentFactoryResolver, OnDestroy, ReflectiveInjector, Type, ViewChild, ViewContainerRef, ElementRef } from '@angular/core';
 
 import { SimpleModalComponent } from './simple-modal.component';
 
@@ -18,12 +18,12 @@ export class SimpleModalWrapperComponent implements OnDestroy {
   /**
    * Target viewContainer to insert modal content component
    */
-  @ViewChild('viewContainer', {read: ViewContainerRef}) public viewContainer: ViewContainerRef;
+  @ViewChild('viewContainer', {read: ViewContainerRef, static: false}) public viewContainer: ViewContainerRef;
 
   /**
    * Link wrapper DOM element
    */
-  @ViewChild('wrapper') public wrapper;
+  @ViewChild('wrapper', {static: false}) public wrapper !: ElementRef;
 
   /**
    * Wrapper modal and fade classes

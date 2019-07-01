@@ -1,8 +1,18 @@
-import { Component, ComponentFactoryResolver, Type, ViewChild, ViewContainerRef, Inject } from '@angular/core';
-import { ElementRef } from '@angular/core/src/linker/element_ref';
+import {
+  Component,
+  ComponentFactoryResolver,
+  ElementRef,
+  Inject,
+  Type,
+  ViewChild,
+  ViewContainerRef,
+} from '@angular/core';
 import { Observable } from 'rxjs';
-
-import { SimpleModalOptions, DefaultSimpleModalOptionConfig, SimpleModalOptionsOverrides } from './simple-modal-options';
+import {
+  DefaultSimpleModalOptionConfig,
+  SimpleModalOptions,
+  SimpleModalOptionsOverrides,
+} from './simple-modal-options';
 import { SimpleModalWrapperComponent } from './simple-modal-wrapper.component';
 import { SimpleModalComponent } from './simple-modal.component';
 
@@ -15,11 +25,11 @@ import { SimpleModalComponent } from './simple-modal.component';
   template: '<ng-template #viewContainer></ng-template>',
 })
 export class SimpleModalHolderComponent {
-
   /**
    * Target viewContainer to insert modals
    */
-  @ViewChild('viewContainer', { read: ViewContainerRef }) public viewContainer: ViewContainerRef;
+  @ViewChild('viewContainer', { read: ViewContainerRef, static: false })
+  public viewContainer: ViewContainerRef;
 
   /**
    * modal collection, maintained by addModal and removeModal
@@ -31,8 +41,10 @@ export class SimpleModalHolderComponent {
    * Constructor
    * @param {ComponentFactoryResolver} resolver
    */
-  constructor(private resolver: ComponentFactoryResolver,
-    @Inject(DefaultSimpleModalOptionConfig) private defaultSimpleModalOptions: SimpleModalOptions ) { }
+  constructor(
+    private resolver: ComponentFactoryResolver,
+    @Inject(DefaultSimpleModalOptionConfig) private defaultSimpleModalOptions: SimpleModalOptions
+  ) {}
 
   /**
    * Configures then adds modal to the modals array, and populates with data passed in
@@ -41,12 +53,17 @@ export class SimpleModalHolderComponent {
    * @param {SimpleModalOptionsOverrides?} options
    * @return {Observable<*>}
    */
-  addModal<T, T1>(component: Type<SimpleModalComponent<T, T1>>, data?: T, options?: SimpleModalOptionsOverrides): Observable<T1> {
-
+  addModal<T, T1>(
+    component: Type<SimpleModalComponent<T, T1>>,
+    data?: T,
+    options?: SimpleModalOptionsOverrides
+  ): Observable<T1> {
     // create component
     const factory = this.resolver.resolveComponentFactory(SimpleModalWrapperComponent);
     const componentRef = this.viewContainer.createComponent(factory);
-    const modalWrapper: SimpleModalWrapperComponent = <SimpleModalWrapperComponent>componentRef.instance;
+    const modalWrapper: SimpleModalWrapperComponent = <SimpleModalWrapperComponent>(
+      componentRef.instance
+    );
     const _component: SimpleModalComponent<T, T1> = modalWrapper.addComponent(component);
 
     // assign options refs
@@ -65,7 +82,7 @@ export class SimpleModalHolderComponent {
     });
 
     // when closing modal remove it
-    _component.onClosing((modal) => this.removeModal(modal));
+    _component.onClosing(modal => this.removeModal(modal));
 
     // if clicking on background closes modal
     this.configureCloseOnClickOutside(modalWrapper);
@@ -92,8 +109,8 @@ export class SimpleModalHolderComponent {
   }
 
   /**
-  * Instructs all open modals to
-  */
+   * Instructs all open modals to
+   */
   removeAllModals(): Promise<any> {
     return Promise.all(this.modals.map(modal => this.removeModal(modal)));
   }
@@ -122,9 +139,12 @@ export class SimpleModalHolderComponent {
    */
   private configureCloseOnClickOutside(modalWrapper: SimpleModalWrapperComponent) {
     if (modalWrapper.content.options.closeOnClickOutside) {
-      modalWrapper.onClickOutsideModalContent(modalWrapper.content.options.closeOnClickOutside, () => {
-        modalWrapper.content.close();
-      });
+      modalWrapper.onClickOutsideModalContent(
+        modalWrapper.content.options.closeOnClickOutside,
+        () => {
+          modalWrapper.content.close();
+        }
+      );
     }
   }
 
@@ -165,5 +185,4 @@ export class SimpleModalHolderComponent {
       this.modals.splice(index, 1);
     }
   }
-
 }
