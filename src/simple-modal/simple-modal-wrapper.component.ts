@@ -1,5 +1,13 @@
-import { Component, ComponentFactoryResolver, OnDestroy, ReflectiveInjector, Type, ViewChild, ViewContainerRef, ElementRef } from '@angular/core';
-
+import {
+  Component,
+  ComponentFactoryResolver,
+  ElementRef,
+  OnDestroy,
+  ReflectiveInjector,
+  Type,
+  ViewChild,
+  ViewContainerRef,
+} from '@angular/core';
 import { SimpleModalComponent } from './simple-modal.component';
 
 /**
@@ -8,22 +16,26 @@ import { SimpleModalComponent } from './simple-modal.component';
 @Component({
   selector: 'simple-modal-wrapper',
   template: `
-    <div #wrapper [ngClass]="modalClasses" [ngStyle]="{display:'block'}" role="dialog">
-        <ng-template #viewContainer></ng-template>
+    <div
+      simpleModalWrapperOuterContainer
+      [ngClass]="modalClasses"
+      [ngStyle]="{ display: 'block' }"
+      role="dialog"
+    >
+      <ng-template simpleModalWrapperContainer></ng-template>
     </div>
-`
+  `,
 })
 export class SimpleModalWrapperComponent implements OnDestroy {
-
   /**
    * Target viewContainer to insert modal content component
    */
-  @ViewChild('viewContainer', {read: ViewContainerRef, static: false}) public viewContainer: ViewContainerRef;
+  viewContainer: ViewContainerRef;
 
   /**
    * Link wrapper DOM element
    */
-  @ViewChild('wrapper', {static: false}) public wrapper !: ElementRef;
+  wrapper: ElementRef;
 
   /**
    * Wrapper modal and fade classes
@@ -57,7 +69,7 @@ export class SimpleModalWrapperComponent implements OnDestroy {
     const injector = ReflectiveInjector.fromResolvedProviders([], this.viewContainer.injector);
     const componentRef = factory.create(injector);
     this.viewContainer.insert(componentRef.hostView);
-    this.content =  <SimpleModalComponent<T, T1>> componentRef.instance;
+    this.content = <SimpleModalComponent<T, T1>>componentRef.instance;
     this.content.wrapper = this.wrapper;
     return this.content;
   }
@@ -66,7 +78,7 @@ export class SimpleModalWrapperComponent implements OnDestroy {
    * Configures the function to call when you click on background of a modal but not the contents
    * @param callback
    */
-  onClickOutsideModalContent( contentClass: boolean, callback: () => void) {
+  onClickOutsideModalContent(contentClass: boolean, callback: () => void) {
     this.clickOutsideCallback = callback;
     const containerEl = this.wrapper.nativeElement;
     const contentEl = containerEl.querySelector(':first-child');
@@ -77,7 +89,9 @@ export class SimpleModalWrapperComponent implements OnDestroy {
   ngOnDestroy() {
     if (this.clickOutsideCallback) {
       const containerEl = this.wrapper.nativeElement;
-      containerEl.querySelector(':first-child').removeEventListener('click', this.stopEventPropagation);
+      containerEl
+        .querySelector(':first-child')
+        .removeEventListener('click', this.stopEventPropagation);
       containerEl.removeEventListener('click', this.clickOutsideCallback, false);
       this.clickOutsideCallback = null;
     }
@@ -91,5 +105,3 @@ export class SimpleModalWrapperComponent implements OnDestroy {
     event.stopPropagation();
   }
 }
-
-

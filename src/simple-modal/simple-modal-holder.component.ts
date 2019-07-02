@@ -4,7 +4,6 @@ import {
   ElementRef,
   Inject,
   Type,
-  ViewChild,
   ViewContainerRef,
 } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -22,14 +21,13 @@ import { SimpleModalComponent } from './simple-modal.component';
  */
 @Component({
   selector: 'simple-modal-holder',
-  template: '<ng-template #viewContainer></ng-template>',
+  template: '<ng-template simpleModalHolderContainer></ng-template>',
 })
 export class SimpleModalHolderComponent {
   /**
    * Target viewContainer to insert modals
    */
-  @ViewChild('viewContainer', { read: ViewContainerRef, static: false })
-  public viewContainer: ViewContainerRef;
+  viewContainer: ViewContainerRef;
 
   /**
    * modal collection, maintained by addModal and removeModal
