@@ -16,18 +16,9 @@ import {
   DefaultSimpleModalOptionConfig,
   SimpleModalOptions,
 } from './simple-modal-options';
-import { SimpleModalHolderContainerDirective } from './simple-modal-holder.directive';
-import { SimpleModalWrapperContainerDirective } from './simple-modal-wrapper.directive';
-import { SimpleModalWrapperOuterContainerDirective } from './simple-modal-wrapper-outer.directive';
 
 @NgModule({
-  declarations: [
-    SimpleModalHolderComponent,
-    SimpleModalHolderContainerDirective,
-    SimpleModalWrapperComponent,
-    SimpleModalWrapperContainerDirective,
-    SimpleModalWrapperOuterContainerDirective,
-  ],
+  declarations: [SimpleModalHolderComponent, SimpleModalWrapperComponent],
   providers: [
     SimpleModalService,
     {

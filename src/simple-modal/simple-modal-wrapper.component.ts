@@ -16,13 +16,8 @@ import { SimpleModalComponent } from './simple-modal.component';
 @Component({
   selector: 'simple-modal-wrapper',
   template: `
-    <div
-      simpleModalWrapperOuterContainer
-      [ngClass]="modalClasses"
-      [ngStyle]="{ display: 'block' }"
-      role="dialog"
-    >
-      <ng-template simpleModalWrapperContainer></ng-template>
+    <div #wrapper [ngClass]="modalClasses" [ngStyle]="{ display: 'block' }" role="dialog">
+      <ng-template #viewContainer></ng-template>
     </div>
   `,
 })
@@ -30,11 +25,12 @@ export class SimpleModalWrapperComponent implements OnDestroy {
   /**
    * Target viewContainer to insert modal content component
    */
-  viewContainer: ViewContainerRef;
+  @ViewChild('viewContainer', { read: ViewContainerRef, static: true }) viewContainer;
 
   /**
    * Link wrapper DOM element
    */
+  @ViewChild('wrapper', { read: ElementRef, static: true })
   wrapper: ElementRef;
 
   /**
@@ -66,6 +62,7 @@ export class SimpleModalWrapperComponent implements OnDestroy {
    */
   addComponent<T, T1>(component: Type<SimpleModalComponent<T, T1>>) {
     const factory = this.resolver.resolveComponentFactory(component);
+    console.log(this.viewContainer);
     const injector = ReflectiveInjector.fromResolvedProviders([], this.viewContainer.injector);
     const componentRef = factory.create(injector);
     this.viewContainer.insert(componentRef.hostView);

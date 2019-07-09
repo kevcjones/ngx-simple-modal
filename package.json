@@ -8,7 +8,7 @@
   "scripts": {
     "demo-ng5": "cd demo-ng5 && npm i && ng serve",
     "demo-ng6": "cd demo-ng6 && npm i && ng serve",
-    "demo-ng8": "cd demo-ng8 && npm i && ng serve",
+    "demo-ng8": "cd demo-ng8 && npm i && ng serve --prod",
     "lint": "./node_modules/.bin/tslint src/**/*.ts",
     "prebuild": "rm -rf dist",
     "build": "npm run lint && ngc",

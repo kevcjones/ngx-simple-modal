@@ -5,8 +5,9 @@ import {
   Inject,
   Type,
   ViewContainerRef,
+  ViewChild,
 } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import {
   DefaultSimpleModalOptionConfig,
   SimpleModalOptions,
@@ -21,13 +22,13 @@ import { SimpleModalComponent } from './simple-modal.component';
  */
 @Component({
   selector: 'simple-modal-holder',
-  template: '<ng-template simpleModalHolderContainer></ng-template>',
+  template: '<ng-template #viewContainer></ng-template>',
 })
 export class SimpleModalHolderComponent {
   /**
    * Target viewContainer to insert modals
    */
-  viewContainer: ViewContainerRef;
+  @ViewChild('viewContainer', { read: ViewContainerRef, static: true }) viewContainer;
 
   /**
    * modal collection, maintained by addModal and removeModal
@@ -57,6 +58,9 @@ export class SimpleModalHolderComponent {
     options?: SimpleModalOptionsOverrides
   ): Observable<T1> {
     // create component
+    if (!this.viewContainer) {
+      return of(null);
+    }
     const factory = this.resolver.resolveComponentFactory(SimpleModalWrapperComponent);
     const componentRef = this.viewContainer.createComponent(factory);
     const modalWrapper: SimpleModalWrapperComponent = <SimpleModalWrapperComponent>(
