@@ -111,7 +111,7 @@ export class SimpleModalService {
     }
 
     // fallback
-    if (typeof this._container === 'string') {
+    if (!this._container || typeof this._container === 'string') {
       this._container = document.getElementsByTagName('body')[0];
     }
 
