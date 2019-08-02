@@ -11,6 +11,11 @@ It is a library to makes modals easier in Angular (2+), has no dependencies, but
 - There is no strict dependency on Bootstrap now, you can use our CSS or use any framework you want
 - SimpleModalOptions changed a couple options, please see below for details.
 
+## Worked on
+
+- Angular v8 also compatible with Angular Elements (July 2019)
+- Angular v4-7 
+
 ## Demo
 
 You can see the demo in action here - [https://ngx-simple-modal-demo.stackblitz.io](https://ngx-simple-modal-demo.stackblitz.io)
