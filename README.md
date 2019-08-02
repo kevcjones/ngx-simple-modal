@@ -5,10 +5,6 @@ It is a library to makes modals easier in Angular (2+), has no dependencies, but
 - It makes managing modals painless and clearer.
 - Extend the ModalComponent class and implement any content you want.
 
-## Credits
-
-This project was seeded by [https://github.com/ankosoftware/ng2-bootstrap-modal](https://github.com/ankosoftware/ng2-bootstrap-modal) because the author was not responding to pull requests so decided to take what they had started and update and run with it. Along the way we put some of our own opinions on it and added some tests, enough changes that it stopped being a viable PR for the original without serious breaking changes.
-
 ## Migrating from ng2-bootstrap-modal or angularx-bootstrap-modal
 
 - The SimpleModal* naming convention replaces the older BootstrapModule + Dialogue* naming mixed convention
@@ -418,3 +414,7 @@ class SimpleModalService {
 
 }
 ```
+
+## Credits
+
+This project was seeded by [https://github.com/ankosoftware/ng2-bootstrap-modal](https://github.com/ankosoftware/ng2-bootstrap-modal) because the author was not responding to pull requests so decided to take what they had started and update and run with it. Along the way we put some of our own opinions on it and added some tests, enough changes that it stopped being a viable PR for the original without serious breaking changes.
