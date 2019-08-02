@@ -16,7 +16,8 @@
     "prepare-package": "node scripts/release.js",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:ci": "jest --runInBand"
+    "test:ci": "jest --runInBand",
+    "release": "git add -A && git commit -m \"Releasing\" && npm run build && release-it"
   },
   "repository": {
     "type": "git",
