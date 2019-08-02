@@ -23,14 +23,23 @@
     "url": "git+https://github.com/kevcjones/ngx-simple-modal.git"
   },
   "keywords": [
+    "angular",
     "angular2",
     "angular4",
     "angular5",
     "angular6",
+    "angular7",
+    "angular8",
     "angularx",
+    "extendable",
     "ngx",
+    "simple",
+    "smart",
     "dialog",
-    "modal"
+    "modal",
+    "typescript",
+    "component",
+    "ui"
   ],
   "author": "Kevin Jones <him@kevincjones.co.uk> (kevcjones)",
   "license": "MIT",
