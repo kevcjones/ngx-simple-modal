@@ -24,7 +24,7 @@ export abstract class SimpleModalComponent<T, T1> implements OnDestroy {
    * Dialog result
    * @type {T1}
    */
-  protected result: T1;
+  result: T1;
 
   /**
    * Dialog wrapper (modal placeholder)

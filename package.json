@@ -10,6 +10,7 @@
     "demo-ng6": "cd demo-ng6 && npm i && ng serve",
     "demo-ng8": "cd demo-ng8 && npm i && ng serve --prod",
     "lint": "./node_modules/.bin/tslint src/**/*.ts",
+    "prepublish": "npm run build",
     "prebuild": "rm -rf dist",
     "build": "npm run lint && ngc",
     "postbuild": "npm run prepare-package",
@@ -69,7 +70,7 @@
     "jest-preset-angular": "^2.0.2",
     "rxjs": "^6.0.0",
     "tslint": "^5.8.0",
-    "typescript": "3.4.5",
+    "typescript": "^3.4.5",
     "zone.js": "^0.9.1"
   },
   "jest": {
