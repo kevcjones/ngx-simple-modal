@@ -5,7 +5,6 @@ import { HttpModule } from '@angular/http';
 import { SimpleModalModule, SimpleModalOptions } from 'ngx-simple-modal';
 import { SelectModule } from 'ng-select';
 
-
 import { AppComponent } from './app.component';
 import { AlertComponent } from './alert/alert.component';
 import { ConfirmComponent } from './confirm/confirm.component';
@@ -14,8 +13,10 @@ import { ParentDialogModalComponent } from './parent-dialog/parent-dialog.compon
 import { CustomErrorHandler } from './custom-error/custom-error-handler';
 import { OptionService } from './alert-select/options.service';
 import { AlertSelectComponent } from './alert-select/alert-select.component';
-import { DefaultSimpleModalOptionConfig, defaultSimpleModalOptions } from 'ngx-simple-modal/simple-modal/simple-modal-options';
-
+import {
+  DefaultSimpleModalOptionConfig,
+  defaultSimpleModalOptions,
+} from 'ngx-simple-modal/simple-modal/simple-modal-options';
 
 @NgModule({
   imports: [
@@ -23,7 +24,7 @@ import { DefaultSimpleModalOptionConfig, defaultSimpleModalOptions } from 'ngx-s
     FormsModule,
     HttpModule,
     SelectModule,
-    SimpleModalModule.forRoot({container: 'modal-container'})
+    SimpleModalModule.forRoot({ container: 'modal-container' }),
   ],
   declarations: [
     AppComponent,
@@ -31,17 +32,19 @@ import { DefaultSimpleModalOptionConfig, defaultSimpleModalOptions } from 'ngx-s
     AlertSelectComponent,
     ConfirmComponent,
     PromptComponent,
-    ParentDialogModalComponent
+    ParentDialogModalComponent,
   ],
-  providers: [{
-    provide: ErrorHandler,
-    useClass: CustomErrorHandler,
-  },
-  // {
-  //   provide: DefaultSimpleModalOptionConfig,
-  //   useValue: {...defaultSimpleModalOptions, ...{ closeOnEscape: true, closeOnClickOutside: true }}
-  // },
-  OptionService],
+  providers: [
+    {
+      provide: ErrorHandler,
+      useClass: CustomErrorHandler,
+    },
+    // {
+    //   provide: DefaultSimpleModalOptionConfig,
+    //   useValue: {...defaultSimpleModalOptions, ...{ closeOnEscape: true, closeOnClickOutside: true }}
+    // },
+    OptionService,
+  ],
   entryComponents: [
     AlertComponent,
     AlertSelectComponent,
@@ -49,6 +52,6 @@ import { DefaultSimpleModalOptionConfig, defaultSimpleModalOptions } from 'ngx-s
     PromptComponent,
     ParentDialogModalComponent,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

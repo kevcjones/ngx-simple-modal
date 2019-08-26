@@ -9,6 +9,7 @@ export interface SimpleModalOptionsOverrides {
   wrapperDefaultClasses?: string;
   wrapperClass?: string;
   animationDuration?: number;
+  autoFocus?: boolean;
 }
 
 export class SimpleModalOptions implements SimpleModalOptionsOverrides {
@@ -18,6 +19,7 @@ export class SimpleModalOptions implements SimpleModalOptionsOverrides {
   wrapperDefaultClasses: string;
   wrapperClass: string;
   animationDuration: number;
+  autoFocus: boolean;
 }
 
 export const defaultSimpleModalOptions: SimpleModalOptions = {
@@ -26,6 +28,7 @@ export const defaultSimpleModalOptions: SimpleModalOptions = {
   bodyClass: 'modal-open',
   wrapperDefaultClasses: 'modal fade-anim',
   wrapperClass: 'in',
-  animationDuration: 300
+  animationDuration: 300,
+  autoFocus: false
 };
 

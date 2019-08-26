@@ -25,10 +25,16 @@ export class AppComponent {
   }
 
   showAlertWithSelect() {
-    this.simpleModalService.addModal(AlertSelectComponent, {
-      title: 'Alert title!',
-      message: 'Alert message!!!',
-    });
+    this.simpleModalService.addModal(
+      AlertSelectComponent,
+      {
+        title: 'Alert title!',
+        message: 'Alert message!!!',
+      },
+      {
+        autoFocus: true,
+      }
+    );
   }
 
   showAlertWithSelectPlusBClick() {
@@ -52,13 +58,15 @@ export class AppComponent {
   }
 
   showPrompt() {
-    this.simpleModalService.addModal(PromptComponent, {
-      title: 'Name dialog',
-      question: 'What is your name?: ',
-    }).subscribe(message => {
-      // We get modal result
-      this.promptMessage = message;
-    });
+    this.simpleModalService
+      .addModal(PromptComponent, {
+        title: 'Name dialog',
+        question: 'What is your name?: ',
+      })
+      .subscribe(message => {
+        // We get modal result
+        this.promptMessage = message;
+      });
   }
 
   showAlertWithClickOutside() {

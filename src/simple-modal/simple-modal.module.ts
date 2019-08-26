@@ -16,11 +16,13 @@ import {
   DefaultSimpleModalOptionConfig,
   SimpleModalOptions,
 } from './simple-modal-options';
+import { CoalescingComponentFactoryResolver } from '../utils/coalescing-component-factory-resolver';
 
 @NgModule({
   declarations: [SimpleModalHolderComponent, SimpleModalWrapperComponent],
   providers: [
     SimpleModalService,
+    CoalescingComponentFactoryResolver,
     {
       provide: DefaultSimpleModalOptionConfig,
       useValue: defaultSimpleModalOptions,
@@ -49,5 +51,12 @@ export class SimpleModalModule {
         },
       ],
     };
+  }
+
+  constructor(
+    coalescingResolver: CoalescingComponentFactoryResolver,
+    localResolver: ComponentFactoryResolver
+  ) {
+    coalescingResolver.registerResolver(localResolver);
   }
 }

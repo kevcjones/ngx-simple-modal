@@ -37,6 +37,11 @@ export class SimpleModalHolderComponent {
   modals: Array<SimpleModalComponent<any, any>> = [];
 
   /**
+   * if auto focus is on and no element focused, store it here to be restored back after close
+   */
+  previousActiveElement = null;
+
+  /**
    * Constructor
    * @param {ComponentFactoryResolver} resolver
    */
@@ -81,6 +86,7 @@ export class SimpleModalHolderComponent {
     this.wait().then(() => {
       this.toggleWrapperClass(modalWrapper.wrapper, options.wrapperClass);
       this.toggleBodyClass(options.bodyClass);
+      this.autoFocusFirstElement(_component.wrapper, options.autoFocus);
     });
 
     // when closing modal remove it
@@ -107,6 +113,7 @@ export class SimpleModalHolderComponent {
     return this.wait(options.animationDuration).then(() => {
       this.removeModalFromArray(closingModal);
       this.toggleBodyClass(options.bodyClass);
+      this.restorePreviousFocus();
     });
   }
 
@@ -147,6 +154,33 @@ export class SimpleModalHolderComponent {
           modalWrapper.content.close();
         }
       );
+    }
+  }
+
+  /**
+   * Auto focus o the first element if autofocus is on
+   * @param options
+   * @param modalWrapperEl
+   */
+  private autoFocusFirstElement(componentWrapper: ElementRef, autoFocus: boolean) {
+    if (autoFocus) {
+      const focusable = componentWrapper.nativeElement.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusable && focusable.length) {
+        this.previousActiveElement = document.activeElement;
+        focusable[0].focus();
+      }
+    }
+  }
+
+  /**
+   * Restores the last focus is there was one
+   */
+  private restorePreviousFocus() {
+    if (this.previousActiveElement) {
+      this.previousActiveElement.focus();
+      this.previousActiveElement = null;
     }
   }
 

@@ -14,7 +14,7 @@ It is a library to makes modals easier in Angular (2+), has no dependencies, but
 ## Worked on
 
 - Angular v8 also compatible with Angular Elements (July 2019)
-- Angular v4-7 
+- Angular v4-7
 
 ## Demo
 
@@ -119,7 +119,9 @@ imports: [
       closeOnEscape: true,
       closeOnClickOutside: true,
       wrapperDefaultClasses: 'o-modal o-modal--fade',
-      wrapperClass: 'o-modal--fade-in'
+      wrapperClass: 'o-modal--fade-in',
+      animationDuration: 300,
+      autoFocus: true
     }})
 
   ]
@@ -388,6 +390,13 @@ interface SimpleModalOptions {
   * @default 300
   */
   animationDuration: number;
+
+  /**
+  * FInds teh first focusable element in the page and applies focus on open  after closing restores focus back to previous
+  * @type {boolean}
+  * @default false
+  */
+  autoFocus: number;
 }
 ```
 
