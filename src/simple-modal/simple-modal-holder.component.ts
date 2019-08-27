@@ -86,7 +86,9 @@ export class SimpleModalHolderComponent {
     this.wait().then(() => {
       this.toggleWrapperClass(modalWrapper.wrapper, options.wrapperClass);
       this.toggleBodyClass(options.bodyClass);
-      this.autoFocusFirstElement(_component.wrapper, options.autoFocus);
+      this.wait(options.animationDuration).then(() => {
+        this.autoFocusFirstElement(_component.wrapper, options.autoFocus);
+      });
     });
 
     // when closing modal remove it
