@@ -2,7 +2,7 @@
   "compilerOptions": {
     "declaration": true,
     "module": "es2015",
-    "target": "es5",
+    "target": "es2015",
     "baseUrl": ".",
     "stripInternal": true,
     "emitDecoratorMetadata": true,
