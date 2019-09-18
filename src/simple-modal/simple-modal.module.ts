@@ -5,6 +5,7 @@ import {
   Injector,
   ModuleWithProviders,
   NgModule,
+  Optional,
 } from '@angular/core';
 
 import { SimpleModalHolderComponent } from './simple-modal-holder.component';
@@ -55,8 +56,10 @@ export class SimpleModalModule {
 
   constructor(
     coalescingResolver: CoalescingComponentFactoryResolver,
-    localResolver: ComponentFactoryResolver
+    @Optional() localResolver: ComponentFactoryResolver
   ) {
-    coalescingResolver.registerResolver(localResolver);
+    if (localResolver) {
+      coalescingResolver.registerResolver(localResolver);
+    }
   }
 }
