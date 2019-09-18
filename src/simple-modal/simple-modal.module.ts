@@ -56,10 +56,8 @@ export class SimpleModalModule {
 
   constructor(
     coalescingResolver: CoalescingComponentFactoryResolver,
-    @Optional() localResolver: ComponentFactoryResolver
+    localResolver: ComponentFactoryResolver
   ) {
-    if (localResolver) {
-      coalescingResolver.registerResolver(localResolver);
-    }
+    coalescingResolver.registerResolver(localResolver);
   }
 }
