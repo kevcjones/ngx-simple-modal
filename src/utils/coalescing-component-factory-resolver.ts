@@ -50,7 +50,7 @@ export class CoalescingComponentFactoryResolver extends ComponentFactoryResolver
     } finally {
       this.inCall = false;
     }
-  };
+  }
 
   private resolveInternal = <T>(component: Type<T>): ComponentFactory<T> => {
     for (const [resolver, fn] of Array.from(this.resolvers.entries())) {
@@ -63,5 +63,5 @@ export class CoalescingComponentFactoryResolver extends ComponentFactoryResolver
     }
 
     return this.rootResolve.call(this.rootResolver, component);
-  };
+  }
 }
