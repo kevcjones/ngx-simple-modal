@@ -1,6 +1,6 @@
 {
   "name": "ngx-simple-modal",
-  "version": "1.4.3-3",
+  "version": "1.4.3",
   "description": "A simple unopinionated framework to implement simple modal based behaviour in angular (v2+) projects.",
   "main": "dist/index.js",
   "module": "dist/index.js",
