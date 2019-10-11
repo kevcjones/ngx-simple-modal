@@ -38,7 +38,7 @@ export abstract class SimpleModalComponent<T, T1> implements OnDestroy {
   /**
    * ready$ is when all animations and focusing have comleted
    */
-  _ready$ = new Subject<void>();
+  _ready$ = new Subject<boolean>();
 
   /**
    * Callback to the holders close function
@@ -113,7 +113,7 @@ export abstract class SimpleModalComponent<T, T1> implements OnDestroy {
   }
 
   markAsReady() {
-    this._ready$.next();
+    this._ready$.next(true);
   }
 
   /**
