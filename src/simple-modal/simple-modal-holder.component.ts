@@ -88,6 +88,7 @@ export class SimpleModalHolderComponent {
       this.toggleBodyClass(options.bodyClass);
       this.wait(options.animationDuration).then(() => {
         this.autoFocusFirstElement(_component.wrapper, options.autoFocus);
+        _component.markAsReady();
       });
     });
 

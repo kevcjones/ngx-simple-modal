@@ -1,5 +1,5 @@
 import { ElementRef, HostListener, OnDestroy } from '@angular/core';
-import { Observable, Observer } from 'rxjs';
+import { Observable, Observer, Subject } from 'rxjs';
 
 import { SimpleModalOptions } from './simple-modal-options';
 
@@ -14,7 +14,6 @@ export interface OnDestroyLike {
  * @template T1 - modal result
  */
 export abstract class SimpleModalComponent<T, T1> implements OnDestroy {
-
   /**
    * Observer to return result from modal
    */
@@ -37,9 +36,14 @@ export abstract class SimpleModalComponent<T, T1> implements OnDestroy {
   options: SimpleModalOptions;
 
   /**
+   * ready$ is when all animations and focusing have comleted
+   */
+  _ready$ = new Subject<void>();
+
+  /**
    * Callback to the holders close function
    */
-  private closerCallback: (component) => Promise<any>;
+  private closerCallback: (component) => Promise<any> = () => Promise.resolve();
 
   /**
    * Constructor
@@ -64,7 +68,7 @@ export abstract class SimpleModalComponent<T, T1> implements OnDestroy {
    * @return {Observable<T1>}
    */
   setupObserver(): Observable<T1> {
-    return Observable.create((observer) => {
+    return Observable.create(observer => {
       this.observer = observer;
 
       this.completeOnDestroy(this);
@@ -76,14 +80,13 @@ export abstract class SimpleModalComponent<T, T1> implements OnDestroy {
     });
   }
 
-
   /**
    * Defines what happens when close is called - default this
    * will just call the default remove modal process. If overriden
    * must include
    * @param callback
    */
-  onClosing(callback: ((component: SimpleModalComponent<any, any>) => Promise<any>)): void {
+  onClosing(callback: (component: SimpleModalComponent<any, any>) => Promise<any>): void {
     this.closerCallback = callback;
   }
 
@@ -105,12 +108,20 @@ export abstract class SimpleModalComponent<T, T1> implements OnDestroy {
     }
   }
 
+  get ready$() {
+    return this._ready$.asObservable();
+  }
+
+  markAsReady() {
+    this._ready$.next();
+  }
+
   /**
    * wrap the ngOnDestroy safely so that implementers can make their own
    * destroy functions safely.
    * @param component
    */
-  private completeOnDestroy( component: OnDestroyLike) {
+  private completeOnDestroy(component: OnDestroyLike) {
     const ngDestroyOriginal = component.ngOnDestroy;
     component.ngOnDestroy = () => {
       if (ngDestroyOriginal) {
