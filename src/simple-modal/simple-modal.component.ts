@@ -1,5 +1,5 @@
 import { ElementRef, HostListener, OnDestroy } from '@angular/core';
-import { Observable, Observer, Subject } from 'rxjs';
+import { Observable, Observer, Subject, BehaviorSubject } from 'rxjs';
 
 import { SimpleModalOptions } from './simple-modal-options';
 
@@ -38,7 +38,7 @@ export abstract class SimpleModalComponent<T, T1> implements OnDestroy {
   /**
    * ready$ is when all animations and focusing have comleted
    */
-  _ready$ = new Subject<boolean>();
+  _ready$ = new BehaviorSubject<boolean>(false);
 
   /**
    * Callback to the holders close function
