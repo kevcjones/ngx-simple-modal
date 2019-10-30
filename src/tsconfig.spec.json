@@ -1,5 +1,5 @@
 {
-  "extends": "./tsconfig.es2015.json",
+  "extends": "./tsconfig.build.json",
   "compilerOptions": {
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
