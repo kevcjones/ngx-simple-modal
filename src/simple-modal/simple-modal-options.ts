@@ -1,18 +1,8 @@
-import { Injectable, InjectionToken } from '@angular/core';
+import { InjectionToken } from '@angular/core';
 
-export let DefaultSimpleModalOptionConfig = new InjectionToken<SimpleModalOptions>('default-simple-modal.config');
+export const DefaultSimpleModalOptionConfig = new InjectionToken<SimpleModalOptions>('default-simple-modal.config');
 
-export interface SimpleModalOptionsOverrides {
-  closeOnEscape?: boolean;
-  closeOnClickOutside?: boolean;
-  bodyClass?: string;
-  wrapperDefaultClasses?: string;
-  wrapperClass?: string;
-  animationDuration?: number;
-  autoFocus?: boolean;
-}
-
-export class SimpleModalOptions implements SimpleModalOptionsOverrides {
+export interface SimpleModalOptions {
   closeOnEscape: boolean;
   closeOnClickOutside: boolean;
   bodyClass: string;
@@ -21,6 +11,8 @@ export class SimpleModalOptions implements SimpleModalOptionsOverrides {
   animationDuration: number;
   autoFocus: boolean;
 }
+
+export type SimpleModalOptionsOverrides = Partial<SimpleModalOptions>;
 
 export const defaultSimpleModalOptions: SimpleModalOptions = {
   closeOnEscape: false,
@@ -31,4 +23,3 @@ export const defaultSimpleModalOptions: SimpleModalOptions = {
   animationDuration: 300,
   autoFocus: false
 };
-
