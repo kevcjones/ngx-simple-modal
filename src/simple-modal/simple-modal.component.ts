@@ -59,7 +59,11 @@ export abstract class SimpleModalComponent<T, T1> implements OnDestroy {
     const keys = Object.keys(data);
     for (let i = 0, length = keys.length; i < length; i++) {
       const key = keys[i];
-      this[key] = data[key];
+      if (typeof data[key] === 'object' && typeof this[key] === 'object') {
+        Object.assign(this[key], data[key]);
+      } else {
+        this[key] = data[key];
+      }
     }
   }
 
