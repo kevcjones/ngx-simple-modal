@@ -5,14 +5,9 @@ It is a library to makes modals easier in Angular (2+), has no dependencies, but
 - It makes managing modals painless and clearer.
 - Extend the ModalComponent class and implement any content you want.
 
-## Migrating from ng2-bootstrap-modal or angularx-bootstrap-modal
-
-- The SimpleModal* naming convention replaces the older BootstrapModule + Dialogue* naming mixed convention
-- There is no strict dependency on Bootstrap now, you can use our CSS or use any framework you want
-- SimpleModalOptions changed a couple options, please see below for details.
-
 ## Worked on
 
+- Amgular 9 with new ng-packagr updates supplied by the Angular tooling team themselves :bowtie:
 - Angular v8 also compatible with Angular Elements (July 2019)
 - Angular v4-7
 
