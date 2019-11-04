@@ -1,6 +1,6 @@
 {
   "name": "ngx-simple-modal",
-  "version": "1.4.5",
+  "version": "1.4.6",
   "description": "A simple unopinionated framework to implement simple modal based behaviour in angular (v2+) projects.",
   "scripts": {
     "demo-ng5": "cd demo-ng5 && npm i && ng serve",
