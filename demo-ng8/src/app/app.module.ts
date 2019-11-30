@@ -1,22 +1,18 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, ErrorHandler } from '@angular/core';
+import { A11yModule } from '@angular/cdk/a11y';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { SimpleModalModule, SimpleModalOptions } from 'ngx-simple-modal';
+import { BrowserModule } from '@angular/platform-browser';
 import { SelectModule } from 'ng-select';
-
-import { AppComponent } from './app.component';
-import { AlertComponent } from './alert/alert.component';
-import { ConfirmComponent } from './confirm/confirm.component';
-import { PromptComponent } from './prompt/prompt.component';
-import { ParentDialogModalComponent } from './parent-dialog/parent-dialog.component';
-import { CustomErrorHandler } from './custom-error/custom-error-handler';
-import { OptionService } from './alert-select/options.service';
+import { defaultSimpleModalOptions, SimpleModalModule } from 'ngx-simple-modal';
 import { AlertSelectComponent } from './alert-select/alert-select.component';
-import {
-  DefaultSimpleModalOptionConfig,
-  defaultSimpleModalOptions,
-} from 'ngx-simple-modal/simple-modal/simple-modal-options';
+import { OptionService } from './alert-select/options.service';
+import { AlertComponent } from './alert/alert.component';
+import { AppComponent } from './app.component';
+import { ConfirmComponent } from './confirm/confirm.component';
+import { CustomErrorHandler } from './custom-error/custom-error-handler';
+import { ParentDialogModalComponent } from './parent-dialog/parent-dialog.component';
+import { PromptComponent } from './prompt/prompt.component';
 
 @NgModule({
   imports: [
@@ -24,7 +20,19 @@ import {
     FormsModule,
     HttpModule,
     SelectModule,
-    SimpleModalModule.forRoot({ container: 'modal-container' }),
+    A11yModule,
+    SimpleModalModule.forRoot(
+      { container: 'modal-container' },
+      {
+        ...defaultSimpleModalOptions,
+        ...{
+          closeOnEscape: true,
+          closeOnClickOutside: true,
+          animationDuration: 0,
+          autoFocus: true,
+        },
+      }
+    ),
   ],
   declarations: [
     AppComponent,
