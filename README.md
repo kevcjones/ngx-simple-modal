@@ -8,7 +8,7 @@ It is a library to makes modals easier in Angular (2+), has no dependencies, but
 ## Worked on
 
 - Amgular 9 with new ng-packagr updates supplied by the Angular tooling team themselves :bowtie:
-- Angular v8 also compatible with Angular Elements (July 2019)
+- Angular v8 also compatible with Angular Elements (December 2019)
 - Angular v4-7
 
 ## Demo
