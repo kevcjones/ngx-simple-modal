@@ -7,7 +7,7 @@ It is a library to makes modals easier in Angular (2+), has no dependencies, but
 
 ## Worked on
 
-- Amgular 9 with new ng-packagr updates supplied by the Angular tooling team themselves :bowtie:
+- Angular 9 with new ng-packagr updates supplied by the Angular tooling team themselves :bowtie:
 - Angular v8 also compatible with Angular Elements (December 2019)
 - Angular v4-7
 
@@ -15,6 +15,8 @@ It is a library to makes modals easier in Angular (2+), has no dependencies, but
 
 You can see the demo in action here - [https://ngx-simple-modal-demo.stackblitz.io](https://ngx-simple-modal-demo.stackblitz.io)
 You can have a play with this demo code here - [https://stackblitz.com/edit/ngx-simple-modal-demo?embed=1&file=styles.css](https://stackblitz.com/edit/ngx-simple-modal-demo?embed=1&file=styles.css)
+
+NG9 Preliminary test can be found here - [https://codesandbox.io/s/ngx-simple-modal-ng9-durdl](https://codesandbox.io/s/ngx-simple-modal-ng9-durdl)
 
 ## Installation
 ```npm
