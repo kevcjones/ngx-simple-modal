@@ -13,7 +13,7 @@ export interface OnDestroyLike {
  * @template T - modal data;
  * @template T1 - modal result
  */
-export abstract class SimpleModalComponent<T, T1> implements OnDestroy {
+export abstract class SimpleModalComponent<T, T1> {
   /**
    * Observer to return result from modal
    */
@@ -75,8 +75,6 @@ export abstract class SimpleModalComponent<T, T1> implements OnDestroy {
     return Observable.create(observer => {
       this.observer = observer;
 
-      this.completeOnDestroy(this);
-
       // called if observable is unsubscribed to
       return () => {
         this.close();
@@ -98,6 +96,10 @@ export abstract class SimpleModalComponent<T, T1> implements OnDestroy {
    * Closes modal
    */
   close(): Promise<any> {
+    if (this.observer) {
+      this.observer.next(this.result);
+      this.observer.complete();
+    }
     return this.closerCallback(this);
   }
 
@@ -118,27 +120,5 @@ export abstract class SimpleModalComponent<T, T1> implements OnDestroy {
 
   markAsReady() {
     this._ready$.next(true);
-  }
-
-  /**
-   * wrap the ngOnDestroy safely so that implementers can make their own
-   * destroy functions safely.
-   * @param component
-   */
-  private completeOnDestroy(component: OnDestroyLike) {
-    const ngDestroyOriginal = component.ngOnDestroy;
-    component.ngOnDestroy = () => {
-      if (ngDestroyOriginal) {
-        ngDestroyOriginal.apply(component);
-      }
-      if (this.observer) {
-        this.observer.next(this.result);
-        this.observer.complete();
-      }
-    };
-  }
-
-  ngOnDestroy() {
-    // empty but needed
   }
 }
