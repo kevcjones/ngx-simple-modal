@@ -96,11 +96,13 @@ export abstract class SimpleModalComponent<T, T1> {
    * Closes modal
    */
   close(): Promise<any> {
-    if (this.observer) {
-      this.observer.next(this.result);
-      this.observer.complete();
-    }
-    return this.closerCallback(this);
+    return this.closerCallback(this).then(v => {
+      if (this.observer) {
+        this.observer.next(this.result);
+        this.observer.complete();
+      }
+      return v;
+    });
   }
 
   /**
