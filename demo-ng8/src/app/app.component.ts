@@ -14,6 +14,7 @@ import { AlertSelectComponent } from './alert-select/alert-select.component';
 export class AppComponent {
   confirmResult = null;
   promptMessage = '';
+  selectResult = null;
 
   constructor(private simpleModalService: SimpleModalService) {}
 
@@ -25,16 +26,20 @@ export class AppComponent {
   }
 
   showAlertWithSelect() {
-    this.simpleModalService.addModal(
-      AlertSelectComponent,
-      {
-        title: 'Alert title!',
-        message: 'Alert message!!!',
-      },
-      {
-        autoFocus: true,
-      }
-    );
+    this.simpleModalService
+      .addModal(
+        AlertSelectComponent,
+        {
+          title: 'Alert title!',
+          message: 'Alert message!!!',
+        },
+        {
+          autoFocus: true,
+        }
+      )
+      .subscribe(selected => {
+        this.selectResult = selected;
+      });
   }
 
   showAlertWithSelectPlusBClick() {

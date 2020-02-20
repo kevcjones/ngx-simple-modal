@@ -29,6 +29,10 @@
     <div class="col-sm-4">
       <button class="btn btn-default btn-block" (click)=showAlertWithSelectPlusBClick()>Show alert with select</button>
     </div>
+    <div class="col-sm-4" *ngIf="selectResult != null">
+      <span>Result: </span>
+      {{selectResult}}
+    </div>
   </div>
   <br>
   <br>
