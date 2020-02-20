@@ -74,7 +74,7 @@ export class SimpleModalWrapperComponent implements OnDestroy {
    * Configures the function to call when you click on background of a modal but not the contents
    * @param callback
    */
-  onClickOutsideModalContent(contentClass: boolean, callback: () => void) {
+  onClickOutsideModalContent(callback: () => void) {
     this.clickOutsideCallback = callback;
     const containerEl = this.wrapper.nativeElement;
     const contentEl = containerEl.querySelector(':first-child');
