@@ -47,7 +47,7 @@ export class SimpleModalWrapperComponent implements OnDestroy {
   /**
    * Click outside callback
    */
-  clickOutsideCallback: () => void;
+  clickOutsideCallback: (event) => void;
 
   /**
    * Constructor
@@ -75,29 +75,21 @@ export class SimpleModalWrapperComponent implements OnDestroy {
    * @param callback
    */
   onClickOutsideModalContent(callback: () => void) {
-    this.clickOutsideCallback = callback;
+    this.clickOutsideCallback = event => {
+        if (event.target === containerEl) {
+            callback();
+        }
+    };
     const containerEl = this.wrapper.nativeElement;
-    const contentEl = containerEl.querySelector(':first-child');
-    contentEl.addEventListener('click', this.stopEventPropagation);
+
     containerEl.addEventListener('click', this.clickOutsideCallback, false);
   }
 
   ngOnDestroy() {
     if (this.clickOutsideCallback) {
       const containerEl = this.wrapper.nativeElement;
-      containerEl
-        .querySelector(':first-child')
-        .removeEventListener('click', this.stopEventPropagation);
       containerEl.removeEventListener('click', this.clickOutsideCallback, false);
       this.clickOutsideCallback = null;
     }
-  }
-
-  /**
-   * Helper function to stop event propagation, as a function so easily unlistened to
-   * @param event
-   */
-  private stopEventPropagation(event) {
-    event.stopPropagation();
   }
 }
