@@ -47,7 +47,7 @@ export class SimpleModalWrapperComponent implements OnDestroy {
   /**
    * Click outside callback
    */
-  clickOutsideCallback: (event) => void;
+  clickOutsideCallback: (event: MouseEvent) => void;
 
   /**
    * Constructor
@@ -75,10 +75,10 @@ export class SimpleModalWrapperComponent implements OnDestroy {
    * @param callback
    */
   onClickOutsideModalContent(callback: () => void) {
-    this.clickOutsideCallback = event => {
-        if (event.target === containerEl) {
-            callback();
-        }
+    this.clickOutsideCallback = (event: MouseEvent) => {
+      if (event.target === containerEl) {
+        callback();
+      }
     };
     const containerEl = this.wrapper.nativeElement;
 
