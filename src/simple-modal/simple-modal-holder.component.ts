@@ -150,11 +150,11 @@ export class SimpleModalHolderComponent {
    * @param modalWrapper
    */
   private configureCloseOnClickOutside(modalWrapper: SimpleModalWrapperComponent) {
-    if (modalWrapper.content.options.closeOnClickOutside) {
-      modalWrapper.onClickOutsideModalContent(() => {
+    modalWrapper.onClickOutsideModalContent(() => {
+      if (modalWrapper.content.options.closeOnClickOutside) {
         modalWrapper.content.close();
-      });
-    }
+      }
+    });
   }
 
   /**
