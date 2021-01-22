@@ -33,7 +33,7 @@ export class SimpleModalModule {
   static forRoot(
     config: SimpleModalServiceConfig,
     defaultModalOptions?: SimpleModalOptions
-  ): ModuleWithProviders {
+  ): ModuleWithProviders<SimpleModalModule> {
     return {
       ngModule: SimpleModalModule,
       providers: [
