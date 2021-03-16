@@ -8,8 +8,10 @@ export interface SimpleModalOptions {
   bodyClass: string;
   wrapperDefaultClasses: string;
   wrapperClass: string;
+  draggableClass: string;
   animationDuration: number;
   autoFocus: boolean;
+  draggable: boolean;
 }
 
 export type SimpleModalOptionsOverrides = Partial<SimpleModalOptions>;
@@ -20,6 +22,8 @@ export const defaultSimpleModalOptions: SimpleModalOptions = {
   bodyClass: 'modal-open',
   wrapperDefaultClasses: 'modal fade-anim',
   wrapperClass: 'in',
+  draggableClass: 'draggable',
   animationDuration: 300,
-  autoFocus: false
+  autoFocus: false,
+  draggable: false,
 };

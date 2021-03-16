@@ -16,9 +16,10 @@ import {
   DefaultSimpleModalOptionConfig,
   SimpleModalOptions,
 } from './simple-modal-options';
+import { DraggableDirective } from './simple-modal-draggable.directive';
 
 @NgModule({
-  declarations: [SimpleModalHolderComponent, SimpleModalWrapperComponent],
+  declarations: [SimpleModalHolderComponent, SimpleModalWrapperComponent, DraggableDirective],
   providers: [
     SimpleModalService,
     {
@@ -46,7 +47,7 @@ export class SimpleModalModule {
         {
           provide: DefaultSimpleModalOptionConfig,
           useValue: defaultModalOptions || defaultSimpleModalOptions,
-        },
+        }
       ],
     };
   }

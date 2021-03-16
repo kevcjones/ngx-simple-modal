@@ -67,6 +67,8 @@ export class AppComponent {
       .addModal(PromptComponent, {
         title: 'Name dialog',
         question: 'What is your name?: ',
+      }, {
+        draggable: true
       })
       .subscribe(message => {
         // We get modal result

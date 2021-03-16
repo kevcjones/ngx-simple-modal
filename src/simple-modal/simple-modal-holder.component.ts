@@ -1,20 +1,9 @@
-import {
-  Component,
-  ComponentFactoryResolver,
-  ElementRef,
-  Inject,
-  Type,
-  ViewContainerRef,
-  ViewChild,
-} from '@angular/core';
+import { Component, ComponentFactoryResolver, ElementRef, Inject, Type, ViewContainerRef, ViewChild, Renderer2, ComponentRef, NgZone } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import {
-  DefaultSimpleModalOptionConfig,
-  SimpleModalOptions,
-  SimpleModalOptionsOverrides,
-} from './simple-modal-options';
+import { DefaultSimpleModalOptionConfig, SimpleModalOptions, SimpleModalOptionsOverrides } from './simple-modal-options';
 import { SimpleModalWrapperComponent } from './simple-modal-wrapper.component';
 import { SimpleModalComponent } from './simple-modal.component';
+import { DraggableDirective } from './simple-modal-draggable.directive';
 
 /**
  * View container manager which manages a list of modals currently active
@@ -44,11 +33,17 @@ export class SimpleModalHolderComponent {
   /**
    * Constructor
    * @param {ComponentFactoryResolver} resolver
+   * @param renderer
+   * @param ngZone
+   * @param defaultSimpleModalOptions
    */
   constructor(
     private resolver: ComponentFactoryResolver,
-    @Inject(DefaultSimpleModalOptionConfig) private defaultSimpleModalOptions: SimpleModalOptions
-  ) {}
+    private renderer: Renderer2,
+    private ngZone: NgZone,
+    @Inject(DefaultSimpleModalOptionConfig) private defaultSimpleModalOptions: SimpleModalOptions,
+  ) {
+  }
 
   /**
    * Configures then adds modal to the modals array, and populates with data passed in
@@ -60,7 +55,7 @@ export class SimpleModalHolderComponent {
   addModal<T, T1>(
     component: Type<SimpleModalComponent<T, T1>>,
     data?: T,
-    options?: SimpleModalOptionsOverrides
+    options?: SimpleModalOptionsOverrides,
   ): Observable<T1> {
     // create component
     if (!this.viewContainer) {
@@ -71,10 +66,10 @@ export class SimpleModalHolderComponent {
     const modalWrapper: SimpleModalWrapperComponent = <SimpleModalWrapperComponent>(
       componentRef.instance
     );
-    const _component: SimpleModalComponent<T, T1> = modalWrapper.addComponent(component);
+    const { ref: _componentRef, component: _component } = modalWrapper.addComponent(component);
 
     // assign options refs
-    _component.options = options = Object.assign({}, this.defaultSimpleModalOptions, options);
+    _component.options = options = Object.assign({}, this.defaultSimpleModalOptions, options) as SimpleModalOptions;
 
     // set base classes for wrapper
     modalWrapper.modalClasses = options.wrapperDefaultClasses;
@@ -86,6 +81,9 @@ export class SimpleModalHolderComponent {
     this.wait().then(() => {
       this.toggleWrapperClass(modalWrapper.wrapper, options.wrapperClass);
       this.toggleBodyClass(options.bodyClass);
+      if (options.draggable) {
+        this.setDraggable(_componentRef, options);
+      }
       this.wait(options.animationDuration).then(() => {
         this.autoFocusFirstElement(_component.wrapper, options.autoFocus);
         _component.markAsReady();
@@ -107,8 +105,8 @@ export class SimpleModalHolderComponent {
   /**
    * triggers components close function
    * to take effect
-   * @param {SimpleModalComponent} component
    * @returns {Promise<void>}
+   * @param closingModal
    */
   removeModal(closingModal: SimpleModalComponent<any, any>): Promise<any> {
     const options = closingModal.options;
@@ -131,7 +129,7 @@ export class SimpleModalHolderComponent {
    * Bind a body class 'modal-open' to a condition of modals in pool > 0
    * @param bodyClass - string to add and remove from body in document
    */
-  private toggleBodyClass(bodyClass: string) {
+  private toggleBodyClass(bodyClass: string): void {
     if (!bodyClass) {
       return;
     }
@@ -146,7 +144,6 @@ export class SimpleModalHolderComponent {
 
   /**
    * if the option to close on background click is set, then hook up a callback
-   * @param options
    * @param modalWrapper
    */
   private configureCloseOnClickOutside(modalWrapper: SimpleModalWrapperComponent) {
@@ -159,13 +156,13 @@ export class SimpleModalHolderComponent {
 
   /**
    * Auto focus o the first element if autofocus is on
-   * @param options
-   * @param modalWrapperEl
+   * @param componentWrapper
+   * @param autoFocus
    */
   private autoFocusFirstElement(componentWrapper: ElementRef, autoFocus: boolean) {
     if (autoFocus) {
       const focusable = componentWrapper.nativeElement.querySelectorAll(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
       );
       if (focusable && focusable.length) {
         this.previousActiveElement = document.activeElement;
@@ -186,10 +183,10 @@ export class SimpleModalHolderComponent {
 
   /**
    * Configure the adding and removal of a wrapper class - predominantly animation focused
-   * @param options
    * @param modalWrapperEl
+   * @param wrapperClass
    */
-  private toggleWrapperClass(modalWrapperEl: ElementRef, wrapperClass: string) {
+  private toggleWrapperClass(modalWrapperEl: ElementRef, wrapperClass: string): void {
     const wrapperClassList = modalWrapperEl.nativeElement.classList;
     const wrapperClassItems = wrapperClass.split(' ');
     if (wrapperClassList.toString().indexOf(wrapperClass) !== -1) {
@@ -200,10 +197,24 @@ export class SimpleModalHolderComponent {
   }
 
   /**
+   * Enables the drag option on the modal if the options have it enabled
+   * @param component
+   * @param options
+   * @private
+   */
+  private setDraggable(component: ComponentRef<SimpleModalComponent<any, any>>, options: SimpleModalOptionsOverrides): void {
+    const draggableDirective = new DraggableDirective(component.location, this.ngZone, this.renderer);
+    draggableDirective.dragTarget = component.location.nativeElement;
+    draggableDirective.dragHandle = component.instance.handle ? component.instance.handle.nativeElement : undefined;
+    draggableDirective.ngAfterViewInit();
+    component.location.nativeElement.classList.add(options.draggableClass);
+  }
+
+  /**
    * Helper function for a more readable timeout
    * @param ms
    */
-  private wait(ms: number = 0) {
+  private wait(ms: number = 0): Promise<unknown> {
     return new Promise((resolve, reject) => {
       setTimeout(() => resolve(), ms);
     });
@@ -214,7 +225,7 @@ export class SimpleModalHolderComponent {
    * removes this component from the collection
    * @param {SimpleModalComponent} component
    */
-  private removeModalFromArray(component) {
+  private removeModalFromArray(component): void {
     const index = this.modals.indexOf(component);
     if (index > -1) {
       this.viewContainer.remove(index);

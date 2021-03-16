@@ -5,4 +5,5 @@ export {
   DefaultSimpleModalOptionConfig,
   defaultSimpleModalOptions,
 } from './simple-modal/simple-modal-options';
+export { DraggableDirective } from './simple-modal/simple-modal-draggable.directive';
 export { SimpleModalService, SimpleModalServiceConfig } from './simple-modal/simple-modal.service';
