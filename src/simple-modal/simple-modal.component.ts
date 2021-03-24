@@ -20,6 +20,11 @@ export abstract class SimpleModalComponent<T, T1> {
   private observer: Observer<T1>;
 
   /**
+   * Drag handle
+   */
+  handle: ElementRef | undefined;
+
+  /**
    * Dialog result
    * @type {T1}
    */
@@ -89,7 +94,7 @@ export abstract class SimpleModalComponent<T, T1> {
 
   /**
    * Defines what happens when close is called - default this
-   * will just call the default remove modal process. If overriden
+   * will just call the default remove modal process. If overridden
    * must include
    * @param callback
    */

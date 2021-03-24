@@ -1,9 +1,22 @@
 # NGX Simple Modal [![Build Status](https://travis-ci.org/KevCJones/ngx-simple-modal.svg?branch=master)](https://travis-ci.org/KevCJones/ngx-simple-modal)
 
+## Features
+
 It is a library to makes modals easier in Angular (2+), has no dependencies, but plays well with bootstrap or other frameworks.
-- Create clear and reusable modal components.
-- It makes managing modals painless and clearer.
-- Extend the ModalComponent class and implement any content you want.
+
+✅  Create clear and reusable modal components.    
+✅  It makes managing modals painless and clearer.   
+✅  Draggable modals  
+✅  Extend the ModalComponent class and implement any content you want.
+
+## Table of Contents
+
+- [Worked on](#worked-on)
+- [Demo](#demo)
+- [Installation](#installation)
+- [Quick start](#quickstart)
+- [How to create a draggable modal](#)
+- [Bootstrap](#what-if-i-want-to-use-bootstrap-3-or-4)
 
 ## Worked on
 
@@ -19,8 +32,12 @@ You can have a play with this demo code here - [https://stackblitz.com/edit/ngx-
 NG9 Preliminary test can be found here - [https://codesandbox.io/s/ngx-simple-modal-ng9-durdl](https://codesandbox.io/s/ngx-simple-modal-ng9-durdl)
 
 ## Installation
-```npm
-npm install ngx-simple-modal
+```shell
+$ npm install ngx-simple-modal
+```
+or
+```shell
+$ yarn add ngx-simple-modal
 ```
 
 ## Quickstart
@@ -262,6 +279,52 @@ app.component.ts
             },10000);
         }
     }
+```
+
+## How to create a draggable modal
+
+So you want to be able to move the modal around. We got that too. It is as simple as adding `draggable: true` to the options. This will default to adding a drag handler to the entire modal. With this you can move the modal around.
+
+```typescript
+imports: [
+  SimpleModalModule.forRoot({...}, {
+      ...
+      draggable: true
+      ...
+    })
+],
+```
+or when adding the modal
+```typescript
+this.simpleModalService
+  .addModal(PromptComponent, {
+    title: 'Name dialog',
+  }, {
+    draggable: true
+  })
+```
+
+The `draggable` class with automatically be attached to the modal component. The class can be customized through the `draggableClass` option property.
+
+### Custom drag handler
+You can specify which element should be used as drag handler by using `ViewChild` and naming the property `handle`.
+```typescript
+@ViewChild('handle', {static: true}) handle: ElementRef;
+```
+Then in your view add `#handle` to the element you want to use as the drag handler. The `drag-handler` class will automatically be attached to this element.
+
+```angular2html
+<div class="modal-content">
+  <div class="modal-header" #handle>
+    <h4>Title</h4>
+  </div>
+  <div class="modal-body">
+    Bla bla bla
+  </div>
+  <div class="modal-footer">
+    Footer modal
+  </div>
+</div>
 ```
 
 ## What if i want to use Bootstrap 3 or 4?

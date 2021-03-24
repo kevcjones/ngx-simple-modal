@@ -36,6 +36,15 @@ $_constant-border: 1px solid #cecece;
   &.fade-anim.in {
       opacity: 1;
   }
+
+  .draggable {
+    display: block;
+    position: relative;
+
+    .handle {
+      cursor: move;
+    }
+  }
 }
 
 .modal-open {

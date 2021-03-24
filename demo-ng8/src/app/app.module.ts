@@ -30,6 +30,7 @@ import { PromptComponent } from './prompt/prompt.component';
           closeOnClickOutside: true,
           animationDuration: 0,
           autoFocus: true,
+          draggable: true
         },
       }
     ),

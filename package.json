@@ -46,7 +46,6 @@
     "url": "https://github.com/kevcjones/ngx-simple-modal/issues"
   },
   "homepage": "https://github.com/kevcjones/ngx-simple-modal#readme",
-  "dependencies": {},
   "devDependencies": {
     "@angular/animations": "8.0.3",
     "@angular/cli": "^8.0.6",
