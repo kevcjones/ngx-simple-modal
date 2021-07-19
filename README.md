@@ -31,6 +31,8 @@ You can have a play with this demo code here - [https://stackblitz.com/edit/ngx-
 
 NG9 Preliminary test can be found here - [https://codesandbox.io/s/ngx-simple-modal-ng9-durdl](https://codesandbox.io/s/ngx-simple-modal-ng9-durdl)
 
+Anglar 11 demo can be found here - [https://stackblitz.com/edit/ngx-simple-modal-ng11-demo?file=src/app/app.component.html](https://stackblitz.com/edit/ngx-simple-modal-ng11-demo?file=src/app/app.component.html)
+
 ## Installation
 ```shell
 $ npm install ngx-simple-modal
