@@ -134,9 +134,9 @@ imports: [
     SimpleModalModule.forRoot({container: 'modal-container'}, {...defaultSimpleModalOptions, ...{
       closeOnEscape: true,
       closeOnClickOutside: true,
-      wrapperDefaultClasses: 'o-modal o-modal--fade',
-      wrapperClass: 'o-modal--fade-in',
-      animationDuration: 300,
+      wrapperDefaultClasses: 'modal fade-anim',
+      wrapperClass: 'in',
+      animationDuration: 400,
       autoFocus: true
     }})
 
