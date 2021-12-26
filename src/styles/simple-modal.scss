@@ -18,23 +18,13 @@ $_constant-border: 1px solid #cecece;
   text-align: center;
 
   &.fade-anim {
-      opacity: 0;
-      will-change: opacity;
+    opacity: 0;
+    transition: opacity 400ms ease-in-out;
+    will-change: opacity;
 
-      .modal-content {
-          transform: translate(0, -25%);
-          will-change: transform;
-      }
-  }
-
-  &.in {
-      .modal-content {
-          transform: translate(0, 0);
-      }
-  }
-
-  &.fade-anim.in {
+    &.in {
       opacity: 1;
+    }
   }
 
   .draggable {
