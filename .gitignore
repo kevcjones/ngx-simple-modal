@@ -16,3 +16,4 @@ package-lock.json
 .npmrc
 /.vs
 .DS_Store
+.angular

@@ -1,34 +1,34 @@
 {
-"compilerOptions": {
-  "emitDecoratorMetadata": true,
-  "experimentalDecorators": true,
-  "target": "es5",
-  "module": "commonjs",
-  "moduleResolution": "node",
-  "removeComments": true,
-  "sourceMap": true,
-  "outDir": "dist",
-  "declarationDir": "dist",
-  "declaration": true,
-  "lib": [
-    "dom",
-    "es6"
-  ]
-},
-"compileOnSave": true,
-"include": [
-"src/**/*"
-],
-"exclude": [
-"demo-ng5",
-"demo_ng6",
-"index.d.ts",
-"node_modules",
-"dist"
-],
-"angularCompilerOptions": {
-"genDir": "dist/",
-"strictMetadataEmit": true,
-"skipTemplateCodegen": true
-}
+  "compileOnSave": true,
+  "compilerOptions": {
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "removeComments": true,
+    "sourceMap": true,
+    "outDir": "dist",
+    "declarationDir": "dist",
+    "declaration": true,
+    "target": "es2015",
+    "lib": [
+      "es2019",
+      "dom"
+    ]
+  },
+  "include": [
+    "src/**/*"
+, "tsconfig.spec.json"  ],
+  "exclude": [
+    "demo-ng5",
+    "demo_ng6",
+    "demo_ng16",
+    "index.d.ts",
+    "node_modules",
+    "dist"
+  ],
+  "angularCompilerOptions": {
+    "genDir": "dist/",
+    "strictMetadataEmit": true,
+    "skipTemplateCodegen": true
+  }
 }
