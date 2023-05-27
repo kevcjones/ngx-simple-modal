@@ -22,11 +22,11 @@ import { PromptComponent } from './prompt/prompt.component';
       {
         ...defaultSimpleModalOptions,
         ...{
-          closeOnEscape: true,
-          closeOnClickOutside: true,
+          closeOnEscape: false,
+          closeOnClickOutside: false,
           animationDuration: 0,
           autoFocus: true,
-          draggable: true
+          draggable: false
         },
       }
     ),

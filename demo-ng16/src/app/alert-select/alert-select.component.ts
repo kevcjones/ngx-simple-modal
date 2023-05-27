@@ -16,15 +16,15 @@ export interface AlertSelectModel {
       <h4>{{title || 'Alert!'}}</h4>
     </div>
     <div class="modal-body">
-      <h2>this ng-select didn't close on selection</h2>
+      <h2>this select didn't close on selection</h2>
       <p>
         Selected option: {{selectedCharacter}}
         <select [(ngModel)]="selectedCharacter">
           <option *ngFor="let option of characters" [value]="option.value">{{ option.label }}</option>
         </select>
         <button (click)="selectedCharacter='1'">
-                Select Art3mis
-            </button>
+          Select Art3mis
+        </button>
       </p>
     </div>
     <div class="modal-footer">
