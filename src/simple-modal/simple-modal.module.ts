@@ -27,8 +27,7 @@ import { DraggableDirective } from './simple-modal-draggable.directive';
       useValue: defaultSimpleModalOptions,
     },
   ],
-  imports: [CommonModule],
-  entryComponents: [SimpleModalHolderComponent, SimpleModalWrapperComponent],
+  imports: [CommonModule]
 })
 export class SimpleModalModule {
   static forRoot(

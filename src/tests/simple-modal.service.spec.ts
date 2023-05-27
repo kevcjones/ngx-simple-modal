@@ -1,16 +1,13 @@
 'use strict';
 
-import { ComponentFixture, TestBed, inject } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement, ComponentFactoryResolver, ApplicationRef, Injector } from '@angular/core';
+import { ApplicationRef, ComponentFactoryResolver, Injector } from '@angular/core';
+import { TestBed, inject } from '@angular/core/testing';
 
-import { Component } from '@angular/core';
+import { DefaultSimpleModalOptionConfig, defaultSimpleModalOptions } from '../simple-modal/simple-modal-options';
 import { SimpleModalServiceFactory } from '../simple-modal/simple-modal-service.factory';
 import { SimpleModalService, SimpleModalServiceConfig } from '../simple-modal/simple-modal.service';
 import { AlertComponent } from './mocks/basic-alert';
 import { SimpleModalHolderComponentMock } from './mocks/simple-modal-holder.compoenent.mock';
-import { SimpleModalHolderComponent } from '../simple-modal/simple-modal-holder.component';
-import { DefaultSimpleModalOptionConfig, defaultSimpleModalOptions } from '../simple-modal/simple-modal-options';
 
 
 const config: SimpleModalServiceConfig = {

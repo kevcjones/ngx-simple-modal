@@ -1,5 +1,5 @@
-import { ElementRef, HostListener, OnDestroy } from '@angular/core';
-import { Observable, Observer, Subject, BehaviorSubject } from 'rxjs';
+import { Component, ElementRef, HostListener } from '@angular/core';
+import { BehaviorSubject, Observable, Observer } from 'rxjs';
 
 import { SimpleModalOptions } from './simple-modal-options';
 
@@ -8,6 +8,7 @@ export interface OnDestroyLike {
   [key: string]: any;
 }
 
+@Component({ template: '' })
 /**
  * Abstract modal
  * @template T - modal data;

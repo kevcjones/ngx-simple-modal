@@ -2,7 +2,6 @@
   "compilerOptions": {
     "baseUrl": ".",
     "target": "es2015",
-    "module": "es2015",
     "moduleResolution": "node",
     "outDir": "../build",
     "stripInternal": true,
@@ -15,8 +14,8 @@
     "importHelpers": true,
     "types": [],
     "lib": [
-      "dom",
-      "es2015"
+      "es2019",
+      "dom"
     ]
   },
   "files": [
@@ -26,6 +25,7 @@
     "skipTemplateCodegen": true,
     "strictMetadataEmit": true,
     "fullTemplateTypeCheck": true,
-    "enableResourceInlining": true
+    "enableResourceInlining": true,
+    "compilationMode": "partial"
   }
 }
