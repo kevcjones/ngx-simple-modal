@@ -15,7 +15,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:ci": "jest --runInBand",
-    "release": "npm run build && cd dist && release-it"
+    "release": "npm run build && cd dist && npm publish --access=public"
   },
   "repository": {
     "type": "git",
