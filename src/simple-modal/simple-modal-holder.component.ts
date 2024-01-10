@@ -215,8 +215,8 @@ export class SimpleModalHolderComponent {
    * @param ms
    */
   private wait(ms: number = 0): Promise<unknown> {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => resolve(), ms);
+    return new Promise<unknown>((resolve, reject) => {
+      setTimeout(() => resolve(undefined), ms);
     });
   }
 

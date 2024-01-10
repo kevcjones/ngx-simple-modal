@@ -17,8 +17,7 @@ const config: SimpleModalServiceConfig = {
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [AlertComponent, SimpleModalWrapperComponent],
-  entryComponents: [AlertComponent, SimpleModalWrapperComponent]
+  declarations: [AlertComponent, SimpleModalWrapperComponent]
 })
 export class FakeTestAlertModule {}
 

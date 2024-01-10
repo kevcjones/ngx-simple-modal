@@ -1,6 +1,6 @@
 import { InjectionToken } from '@angular/core';
 
-export const DefaultSimpleModalOptionConfig = new InjectionToken<SimpleModalOptions>('default-simple-modal.config');
+export const DefaultSimpleModalOptionConfig = new InjectionToken<SimpleModalOptions>('default-simple-modal.config'); // eslint-disable-line
 
 export interface SimpleModalOptions {
   closeOnEscape: boolean;

@@ -204,8 +204,7 @@ export class ConfirmComponent extends SimpleModalComponent<ConfirmModel, boolean
 ```
 
 ### Step 3. Register created component to module
-Add component to **declarations** and **entryComponents** section, because the component
-will be created dynamically.
+Add component to **declarations** section.
 
 app.module.ts:
 ```typescript
@@ -224,10 +223,6 @@ app.module.ts:
         CommonModule,
         BrowserModule,
         SimpleModalModule
-      ],
-      //Don't forget to add the component to entryComponents section
-      entryComponents: [
-        ConfirmComponent
       ],
       bootstrap: [AppComponent]
     })

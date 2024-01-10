@@ -1,0 +1,49 @@
+{
+  "name": "demo-ng16",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e",
+    "freshcopy": "rm -rf node_modules/ngx-simple-modal && cp -rf ../dist node_modules/ngx-simple-modal",
+    "postinstall": "cd .. && npm i && npm run build && cd demo-ng16 && rm -rf node_modules/ngx-simple-modal && cp -rf ../dist node_modules/ngx-simple-modal",
+    "rebuild": "npm i && ng serve"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "16.0.2",
+    "@angular/cdk": "16.0.2",
+    "@angular/common": "16.0.2",
+    "@angular/compiler": "16.0.2",
+    "@angular/core": "16.0.2",
+    "@angular/forms": "16.0.2",
+    "@angular/platform-browser": "16.0.2",
+    "@angular/platform-browser-dynamic": "16.0.2",
+    "@angular/router": "16.0.2",
+    "core-js": "3.30.2",
+    "rxjs": "7.8.1",
+    "zone.js": "0.13.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "16.0.2",
+    "@angular/cli": "16.0.2",
+    "@angular/compiler-cli": "16.0.2",
+    "@angular/language-service": "16.0.2",
+    "@types/jasmine": "4.3.2",
+    "@types/jasminewd2": "2.0.10",
+    "@types/node": "20.2.4",
+    "jasmine-core": "4.0.0",
+    "jasmine-spec-reporter": "~4.2.1",
+    "karma": "6.4.2",
+    "karma-chrome-launcher": "3.2.0",
+    "karma-coverage-istanbul-reporter": "3.0.3",
+    "karma-jasmine": "4.0.2",
+    "karma-jasmine-html-reporter": "1.7.0",
+    "protractor": "7.0.0",
+    "tslib": "^2.5.2",
+    "typescript": "5.0.4"
+  }
+}
